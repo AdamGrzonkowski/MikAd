@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Shop.Model.Models;
+using Shop.Model.Models.Views;
 
 namespace Shop.Controllers
 {
@@ -51,6 +52,11 @@ namespace Shop.Controllers
 
         //
         // GET: /Account/Login
+        /// <summary>
+        /// Pobiera stronę, do której ma wrócić po zalogowaniu
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <returns>Widok strony.</returns>
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -60,6 +66,12 @@ namespace Shop.Controllers
 
         //
         // POST: /Account/Login
+        /// <summary>
+        /// Obsługa logowania użytkownika.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns>Zwraca widok strony z odpowiednim komunikatem.</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -67,12 +79,23 @@ namespace Shop.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                View(model);
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            // Wymaga od użytkownika potwierdzonego adresu email w celu zalogowania.
+            var user = await UserManager.FindByEmailAsync(model.Email);
+            if (user != null)
+            {
+                if (!await UserManager.IsEmailConfirmedAsync(user.Id))
+                {
+                    ViewBag.errorMessage = "Musisz potwierdzić e-mail, aby móc się zalogować.";
+                    return View("Error");
+                }
+            }
+
+            // Zlicza złe próby zalogowania w celu lockoutu
+            // Żeby wyłączyć, zmień shouldLockout na false
+            var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: true);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -80,8 +103,7 @@ namespace Shop.Controllers
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.RememberMe });
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
@@ -124,7 +146,6 @@ namespace Shop.Controllers
                     return RedirectToLocal(model.ReturnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
-                case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid code.");
                     return View(model);
@@ -311,7 +332,7 @@ namespace Shop.Controllers
             {
                 return View("Error");
             }
-            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
+            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, model.ReturnUrl, model.RememberMe });
         }
 
         //
@@ -335,7 +356,6 @@ namespace Shop.Controllers
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
-                case SignInStatus.Failure:
                 default:
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;

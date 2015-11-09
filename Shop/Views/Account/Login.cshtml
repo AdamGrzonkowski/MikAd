@@ -1,6 +1,5 @@
-﻿@using Shop.Model.Models
-@using Shop.Models
-@model Shop.Model.Models.LoginViewModel
+﻿@using Shop.Model.Models.Views
+@model LoginViewModel
 @{
     ViewBag.Title = "Log in";
 }
@@ -9,7 +8,7 @@
 <div class="row">
     <div class="col-md-8">
         <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @using (Html.BeginForm("Login", "Account", new {ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
                 <h4>Use a local account to log in.</h4>
@@ -43,12 +42,12 @@
                     </div>
                 </div>
                 <p>
-                    @Html.ActionLink("Register as a new user", "Register")
+                    @Html.ActionLink("Zarejestruj się.", "Register")
                 </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
+              
                     <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
+                        @Html.ActionLink("Zapomniałeś hasła?", "ForgotPassword")
+                    </p>
             }
         </section>
     </div>
