@@ -5,11 +5,15 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Shop;
 using Shop.Model.Models;
 using Shop.Model.Models.Views;
 
 namespace Shop.Controllers
 {
+    /// <summary>
+    /// Klasa obsługuje konto użytkownika
+    /// </summary>
     [Authorize]
     public class AccountController : Controller
     {
@@ -20,7 +24,7 @@ namespace Shop.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -32,9 +36,9 @@ namespace Shop.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -95,18 +99,27 @@ namespace Shop.Controllers
 
             // Zlicza złe próby zalogowania w celu lockoutu
             // Żeby wyłączyć, zmień shouldLockout na false
-            var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: true);
-            switch (result)
+            if (user != null)
             {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.RememberMe });
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: true);
+                switch (result)
+                {
+                    case SignInStatus.Success:
+                        return RedirectToLocal(returnUrl);
+                    case SignInStatus.LockedOut:
+                        return View("Lockout");
+                    case SignInStatus.RequiresVerification:
+                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    case SignInStatus.Failure:
+                    default:
+                        ModelState.AddModelError("", "Invalid login attempt.");
+                        return View(model);
+                }
+            }
+            else
+            {
+                ViewBag.errorMessage = "Tu się wyjebuje";
+                return View("Error");
             }
         }
 
@@ -115,7 +128,7 @@ namespace Shop.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
-            // Require that the user has already logged in via username/password or external login
+            // Wymaga zalogowanego użytkownika
             if (!await SignInManager.HasBeenVerifiedAsync())
             {
                 return View("Error");
@@ -125,6 +138,11 @@ namespace Shop.Controllers
 
         //
         // POST: /Account/VerifyCode
+        /// <summary>
+        /// Weryfikuje kod autentyfikacyjny.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Zwraca widok po zmianach.</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -135,17 +153,18 @@ namespace Shop.Controllers
                 return View(model);
             }
 
-            // The following code protects for brute force attacks against the two factor codes. 
-            // If a user enters incorrect codes for a specified amount of time then the user account 
-            // will be locked out for a specified amount of time. 
-            // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            // Zabezpieczenie przed atakami brute force na dwustopniową weryfikację.
+            // Jeżeli użytkownik wpisze nieodpowiednie kody w określonym przedziale czasu, to
+            // konto użytkownika będzie zablokowane przez dany, określony czas.
+            // Możesz konfigurować te ustawienia w IdentityConfig.
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
                     return RedirectToLocal(model.ReturnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
+                case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid code.");
                     return View(model);
@@ -162,6 +181,11 @@ namespace Shop.Controllers
 
         //
         // POST: /Account/Register
+        /// <summary>
+        /// Obsługa rejestracji nowego użytkownika.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Zwraca widok z komunikatem po rejestracji.</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -169,29 +193,38 @@ namespace Shop.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Email, Email = model.Email };
+                var user = new User { UserName = model.UserName, Email = model.Email, PhoneNumber = model.PhoneNumber, FirstName = model.FirstName, LastName = model.LastName, FlatNumber = model.FlatNumber, HomeNumber = model.HomeNumber, Street = model.Street, PostalCode = model.PostalCode, City = model.City };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    // Odkomentuj tę linię aby użytkownik był automatycznie logowany po rejestracji. 
+                    // await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
-                    return RedirectToAction("Index", "Home");
+                    // Wyślij maila z linkiem do potwierdzenia emaila.
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    await UserManager.SendEmailAsync(user.Id, "Potwierdzenie rejestracji ", "Potwierdź proszę swoją rejestracje w serwisie Sklep_MVC klikając <a href=\"" + callbackUrl + "\">tutaj.</a>");
+
+                    ViewBag.Message = "Na Twoją skrzynkę e-mail wysłany został kod potwierdzający. Musisz potwierdzić adres e-mail, zanim będziesz mógł korzystać z serwisu.";
+
+                    return View("Info");
+                    //return RedirectToAction("Index","Home");
                 }
                 AddErrors(result);
             }
 
-            // If we got this far, something failed, redisplay form
+            // Jeżeli dotarliśmy tutaj, to coś poszło nie tak. Wyświetl formularz jeszcze raz.
             return View(model);
         }
 
         //
         // GET: /Account/ConfirmEmail
+        /// <summary>
+        /// Sprawdza czy email danego użytkownika został potwierdzony.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="code"></param>
+        /// <returns>Widok z potwierdzeniem lub errorem.</returns>
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
@@ -213,6 +246,11 @@ namespace Shop.Controllers
 
         //
         // POST: /Account/ForgotPassword
+        /// <summary>
+        /// Obsługa mechanizmu przypominania hasła.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -220,22 +258,21 @@ namespace Shop.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
+                var user = await UserManager.FindByEmailAsync(model.Email);
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
-                    // Don't reveal that the user does not exist or is not confirmed
+                    // Nie ujawniaj, że użytkownik nie istnieje lub nie jest potwierdzony.
                     return View("ForgotPasswordConfirmation");
                 }
 
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                // Wyślij email, pod którym można zresetować hasła.
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                await UserManager.SendEmailAsync(user.Id, "Zmiana hasła.", "Zresetuj swoje hasło klikając <a href=\"" + callbackUrl + "\">tutaj.</a>");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
-            // If we got this far, something failed, redisplay form
+            // Jeżeli dotarliśmy tutaj, to coś poszło nie tak. Wyświetl formularz jeszcze raz.
             return View(model);
         }
 
@@ -257,6 +294,11 @@ namespace Shop.Controllers
 
         //
         // POST: /Account/ResetPassword
+        /// <summary>
+        /// Mechanizm obsługujący reset hasła
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Widok po zresetowaniu hasła.</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -266,10 +308,10 @@ namespace Shop.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await UserManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
-                // Don't reveal that the user does not exist
+                // Nie ujawniaj, że użytkownik nie istnieje.
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
@@ -291,12 +333,18 @@ namespace Shop.Controllers
 
         //
         // POST: /Account/ExternalLogin
+        /// <summary>
+        /// Obsługa zewnętrznego loginu.
+        /// </summary>
+        /// <param name="provider"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns>Zwraca link do strony zewnętrznego providera.</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
-            // Request a redirect to the external login provider
+            // Prośba o przekierowanie do strony logowania zewnętrznego dostawcy.
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
 
@@ -327,12 +375,12 @@ namespace Shop.Controllers
                 return View();
             }
 
-            // Generate the token and send it
+            // Wygeneruj token i go wyślij.
             if (!await SignInManager.SendTwoFactorCodeAsync(model.SelectedProvider))
             {
                 return View("Error");
             }
-            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, model.ReturnUrl, model.RememberMe });
+            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
 
         //
@@ -346,7 +394,7 @@ namespace Shop.Controllers
                 return RedirectToAction("Login");
             }
 
-            // Sign in the user with this external login provider if the user already has a login
+            // Zarejestruj usera za pomocą zewnętrznego loginu, jeżeli user ma już login.
             var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
             switch (result)
             {
@@ -356,8 +404,9 @@ namespace Shop.Controllers
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
+                case SignInStatus.Failure:
                 default:
-                    // If the user does not have an account, then prompt the user to create an account
+                    // Jeżeli użytkownik nie ma konta, to wyświetl użytkowniku komunikat o utworzenie konta.
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
                     return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
@@ -366,6 +415,12 @@ namespace Shop.Controllers
 
         //
         // POST: /Account/ExternalLoginConfirmation
+        /// <summary>
+        /// Potwierdzenie zewnętrznego loginu.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns>Zwraca widok z potwierdzeniem</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -378,7 +433,7 @@ namespace Shop.Controllers
 
             if (ModelState.IsValid)
             {
-                // Get the information about the user from the external login provider
+                // Zbierz informację o użytkowniku od zewnętrznego dostawcy. 
                 var info = await AuthenticationManager.GetExternalLoginInfoAsync();
                 if (info == null)
                 {
@@ -404,11 +459,15 @@ namespace Shop.Controllers
 
         //
         // POST: /Account/LogOff
+        /// <summary>
+        /// Wylogowuje użytkownika.
+        /// </summary>
+        /// <returns>Widok po wylogowaniu.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }
 
@@ -441,7 +500,7 @@ namespace Shop.Controllers
         }
 
         #region Helpers
-        // Used for XSRF protection when adding external logins
+        // Wykorzystywane dla ochrony XSRF kiedy dodawane są zewnętrzne loginy.
         private const string XsrfKey = "XsrfId";
 
         private IAuthenticationManager AuthenticationManager
