@@ -8,10 +8,8 @@
         <li>
             @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Manage"})
         </li>
-        <li>
-            >@Request.IsAuthenticated.ToString()
-        </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <li><a data-toggle="modal" href="#shoppingcart"><i class="fa fa-shopping-cart"></i></a></li>
     </ul>
     }
 }
@@ -20,5 +18,6 @@ else
     <ul class="nav navbar-nav navbar-right">
         <li>@Html.ActionLink("Rejestracja", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         <li>@Html.ActionLink("Zaloguj", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li><a data-toggle="modal" href="#shoppingcart"><i class="fa fa-shopping-cart"></i></a></li>
     </ul>
 }

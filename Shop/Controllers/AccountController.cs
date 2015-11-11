@@ -87,9 +87,13 @@ namespace Shop.Controllers
             }
 
             // Wymaga od użytkownika potwierdzonego adresu email w celu zalogowania.
+            string user_name = "";
             var user = await UserManager.FindByEmailAsync(model.Email);
+
             if (user != null)
             {
+                user_name = user.UserName;
+
                 if (!await UserManager.IsEmailConfirmedAsync(user.Id))
                 {
                     ViewBag.errorMessage = "Musisz potwierdzić e-mail, aby móc się zalogować.";
@@ -99,9 +103,9 @@ namespace Shop.Controllers
 
             // Zlicza złe próby zalogowania w celu lockoutu
             // Żeby wyłączyć, zmień shouldLockout na false
-            if (user != null)
-            {
-                var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: true);
+           // if (user != null)
+            //{
+                var result = await SignInManager.PasswordSignInAsync(user_name, model.Password, model.RememberMe, shouldLockout: true);
                 switch (result)
                 {
                     case SignInStatus.Success:
@@ -115,12 +119,12 @@ namespace Shop.Controllers
                         ModelState.AddModelError("", "Invalid login attempt.");
                         return View(model);
                 }
-            }
-            else
-            {
-                ViewBag.errorMessage = "Tu się wyjebuje";
-                return View("Error");
-            }
+       //     }
+         //   else
+           // {
+             //   ViewBag.errorMessage = "Tu się wyjebuje";
+               // return View("Error");
+            //}
         }
 
         //
