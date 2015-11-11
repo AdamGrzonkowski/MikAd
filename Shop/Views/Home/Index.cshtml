@@ -1,267 +1,31 @@
-﻿@using Shop.Properties;
-
-@{
+﻿@{
     ViewBag.Title = "Home Page";
 }
-    <div class="clearfix"></div>
 
-    <!-- Carousel starts -->
+<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
 
-    <div id="carousel-example-generic" class="carousel slide">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-        </ol>
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            <!-- Item -->
-            <div class="item active animated fadeInRight">
-                <img src="~/img/elektronika.jpg" alt="" class="img-responsive" />
-                <div class="carousel-caption">
-                    <h2 class="animated fadeInLeftBig">Elektronika</h2>
-                    <p class="animated fadeInRightBig">Elektronika to Nasza pasja. Dzięki wyselekcjonowanym ofertom, masz wgląd tylko do najlepszych ofert.</p>
-                </div>
-            </div>
-
-            <div class="item animated fadeInRight">
-                <img src="~/img/laptop.jpg" alt="" class="img-responsive" />
-                <div class="carousel-caption">
-                    <h2 class="animated fadeInLeftBig">Komputery</h2>
-                    <p class="animated fadeInRightBig">W swojej ofercie posiadamy komputery czołowych, światowych producentów.</p>
-                </div>
-            </div>
-
-            <div class="item animated fadeInRight">
-                <img src="~/img/smartfon.jpg" alt="" class="img-responsive" />
-                <div class="carousel-caption">
-                    <h2 class="animated fadeInLeftBig">Smartfony</h2>
-                    <p class="animated fadeInRightBig">W tym portalu udostępniane są jedynie telefony sprawne i zadbane.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Controls -->
-        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-            <span class="icon-prev"></span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-            <span class="icon-next"></span>
-        </a>
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+            enables a clean separation of concerns and gives you full control over markup
+            for enjoyable, agile development.
+        </p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
     </div>
-
-    <!-- carousel ends -->
-    <!-- Hero starts -->
-
-    <div class="hero">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Catchy title -->
-                    <h3>Najwyższa jakość - najniższe ceny</h3>
-                    <p>Dzięki ofertom setek klientów, masz unikalną możliwość wyboru najlepszej jakości sprzetu w odpowiedniej dla Ciebie cenie.</p>
-                </div>
-            </div>
-            <div class="sep-bor"></div>
-        </div>
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
     </div>
-
-    <!-- Hero ends -->
-    <!-- Items List starts -->
-
-    <div class="shop-items blocky">
-        <div class="container">
-
-            <div class="row">
-                <!-- Item #1 -->
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="item">
-                        <!-- Use the below link to put HOT icon -->
-                        <div class="item-icon"><span>HOT</span></div>
-                        <!-- Item image -->
-                        <div class="item-image">
-                            <a href="~/Home/SingleItem"><img src="~/img/items/2.png" alt="" class="img-responsive" /></a>
-                        </div>
-                        <!-- Item details -->
-                        <div class="item-details">
-                            <!-- Name -->
-                            <h5><a href="~/Home/SingleItem">HTC One V</a></h5>
-                            <div class="clearfix"></div>
-                            <!-- Para. Note more than 2 lines. -->
-                            <p>Coś o produkcie.</p>
-                            <hr />
-                            <!-- Price -->
-                            <div class="item-price pull-left">1010zł</div>
-                            <!-- Dodaj do koszyka -->
-                            <div class="pull-right"><a href="#" class="btn btn-danger btn-sm">Dodaj do koszyka</a></div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Item #2 -->
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="item">
-                        <!-- Item image -->
-                        <div class="item-image">
-                            <a href="~/Home/SingleItem"><img src="~/img/items/3.png" alt="" class="img-responsive" /></a>
-                        </div>
-                        <!-- Item details -->
-                        <div class="item-details">
-                            <!-- Name -->
-                            <h5><a href="~/Home/SingleItem">Dell One V</a></h5>
-                            <!-- Para. Note more than 2 lines. -->
-                            <p>Coś o produkcie.</p>
-                            <hr />
-                            <!-- Price -->
-                            <div class="item-price pull-left">764zł</div>
-                            <!-- Dodaj do koszyka -->
-                            <div class="pull-right"><a href="#" class="btn btn-danger btn-sm">Dodaj do koszyka</a></div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="item">
-                        <!-- Item image -->
-                        <div class="item-image">
-                            <a href="~/Home/SingleItem"><img src="~/img/items/4.png" alt="" class="img-responsive" /></a>
-                        </div>
-                        <!-- Item details -->
-                        <div class="item-details">
-                            <!-- Name -->
-                            <h5><a href="~/Home/SingleItem">Cannon One V</a></h5>
-                            <!-- Para. Note more than 2 lines. -->
-                            <p>Coś o produkcie.</p>
-                            <hr />
-                            <!-- Price -->
-                            <div class="item-price pull-left">480zł</div>
-                            <!-- Dodaj do koszyka -->
-                            <div class="pull-right"><a href="#" class="btn btn-danger btn-sm">Dodaj do koszyka</a></div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="item">
-                        <!-- Item image -->
-                        <div class="item-image">
-                            <a href="~/Home/SingleItem"><img src="~/img/items/5.png" alt="" class="img-responsive" /></a>
-                        </div>
-                        <!-- Item details -->
-                        <div class="item-details">
-                            <!-- Name -->
-                            <h5><a href="~/Home/SingleItem">Apple One V</a></h5>
-                            <!-- Para. Note more than 2 lines. -->
-                            <p>Coś o produkcie.</p>
-                            <hr />
-                            <!-- Price -->
-                            <div class="item-price pull-left">999zł</div>
-                            <!-- Dodaj do koszyka -->
-                            <div class="pull-right"><a href="#" class="btn btn-danger btn-sm">Dodaj do koszyka</a></div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            </div>
-        </div>
-
-    <!-- Items List ends -->
-    <!-- Catchy starts -->
-    <div class="catchy blocky">
-        <div class="catchy-inner1">
-            <div class="catchy-inner2">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="catchy-subscribe">
-                                <h3>Dołącz do Nas!</h3>
-                                <p>Dzięki subskrypcji, będziesz wiedzieć pierwszy o najnowszych produktach oraz promocjach. </p>
-                                <br />
-                                <form class="form-inline" role="form">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control " id="exampleInputEmail2" placeholder="Wpisz email">
-                                    </div>
-                                    <button type="submit" class="btn btn-danger">Subskrybuj</button>
-                                </form>
-
-                            </div>
-                        </div>
-                        <div class="col-md-7">
-
-                            <div class="report">
-                                <div class="report-bor">
-                                    <div class="row">
-                                        <!-- Report data starts -->
-                                        <div class="col-md-4 col-sm-4">
-                                            <div class="report-data">
-                                                <div class="row">
-                                                    <div class="col-md-4 col-sm-4 col-xs-4">
-                                                        <!-- Icon -->
-                                                        <div class="report-icon">
-                                                            <i class="fa fa-group color"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-8 col-md-8 col-xs-8">
-                                                        <!-- Details -->
-                                                        <span class="report-big color">0</span> <span>Klientów</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Report data ends -->
-                                        <!-- Report data starts -->
-                                        <div class="col-md-4 col-sm-4">
-                                            <div class="report-data">
-                                                <div class="row">
-                                                    <div class="col-md-4 col-sm-4 col-xs-4">
-                                                        <!-- Icon -->
-                                                        <div class="report-icon">
-                                                            <i class="fa fa-calendar color"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-8 col-md-8 col-xs-8">
-                                                        <!-- Details -->
-                                                        <span>Od roku</span><span class="report-big color">2015</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Report data ends -->
-                                        <!-- Report data starts -->
-                                        <div class="col-md-4 col-sm-4">
-                                            <div class="report-data">
-                                                <div class="row">
-                                                    <div class="col-md-4 col-sm-4 col-xs-4">
-                                                        <!-- Icon -->
-                                                        <div class="report-icon">
-                                                            <i class="fa fa-android color"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-8 col-md-8 col-xs-8">
-                                                        <!-- Details -->
-                                                        <span class="report-big color">2</span> <span>Pracowników</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Report data ends -->
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
-    <!-- Catchy ends -->
+</div>

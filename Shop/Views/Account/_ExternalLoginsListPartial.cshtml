@@ -1,5 +1,5 @@
-﻿@using Microsoft.Owin.Security
-@model Shop.Model.Models.Views.ExternalLoginListViewModel
+﻿@model Shop.Model.Models.ExternalLoginListViewModel
+@using Microsoft.Owin.Security
 
 <h4>Use another service to log in.</h4>
 <hr />
@@ -14,7 +14,7 @@
         </div>
     }
     else {
-        using (Html.BeginForm("ExternalLogin", "Account", new {Model.ReturnUrl })) {
+        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl })) {
             @Html.AntiForgeryToken()
             <div id="socialLoginList">
                 <p>

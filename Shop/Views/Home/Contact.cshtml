@@ -1,43 +1,17 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<!-- Page content -->
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
 
-<div class="contactus ">
-    <!-- Google maps -->
-    <div class="gmap">
-        <!-- Google Maps. Replace the below iframe with your Google Maps embed code -->
-        <!--<iframe height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.co.in/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Google+India+Bangalore,+Bennigana+Halli,+Bangalore,+Karnataka&amp;aq=0&amp;oq=google+&amp;sll=9.930582,78.12303&amp;sspn=0.192085,0.308647&amp;ie=UTF8&amp;hq=Google&amp;hnear=Bennigana+Halli,+Bangalore,+Bengaluru+Urban,+Karnataka&amp;t=m&amp;ll=12.993518,77.660294&amp;spn=0.012545,0.036006&amp;z=15&amp;output=embed"></iframe>-->
-        <iframe height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2400.1753791517444!2d18.600953315326926!3d53.01721020701486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470334fcab77f73f%3A0x34efc318d4d8c9e4!2sUniwersytet+Miko%C5%82aja+Kopernika+Wydzia%C5%82+Fizyki+Astronomii+i+Informatyki+Stosowanej!5e0!3m2!1spl!2sin!4v1444633709980"></iframe>
-    </div>
+<address>
+    One Microsoft Way<br />
+    Redmond, WA 98052-6399<br />
+    <abbr title="Phone">P:</abbr>
+    425.555.0100
+</address>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-sm-7">
-                <div class="cwell">
-                    <!-- Contact form -->
-                    <h5>Formularz kontaktowy</h5>
-
-                    <form role="form">
-                        <div class="form-group">
-                            <label for="name">Twoje imię</label>
-                            <input type="text" class="form-control" id="name" placeholder="Wpisz imię">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Adres mailowy</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Wpisz email">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Treść</label>
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-info">Wyślij</button>
-                        <button type="reset" class="btn btn-default">Wyczyść</button>
-                    </form>
-
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
+<address>
+    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+</address>
