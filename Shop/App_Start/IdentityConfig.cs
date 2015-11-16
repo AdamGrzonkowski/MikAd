@@ -8,16 +8,56 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Shop.Model.Models;
 using Shop.Models;
+using System.Net;
+using System.Configuration;
+using System.Diagnostics;
+using System.Net.Mail;
 
 namespace Shop
 {
+    /// <summary>
+    /// Klasa obsługująca usłguję mailową.
+    /// </summary>
     public class EmailService : IIdentityMessageService
     {
+        /// <summary>
+        /// Wysyła maila w oparciu o wpisane ustawienia.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns>Wiadomość.</returns>
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            // Adres nadawcy:
+            var sentFrom = "Sklep_MVC@wp.pl";
+
+            // Konfiguruj klienta:
+            System.Net.Mail.SmtpClient client =
+                new System.Net.Mail.SmtpClient("smtp.wp.pl");
+
+            client.Port = 587;
+            client.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+
+            // Stwórz uprawnienia:
+            System.Net.NetworkCredential credentials =
+                new System.Net.NetworkCredential(ConfigurationManager.AppSettings["emailService:Account"],
+                                                ConfigurationManager.AppSettings["emailService:Password"]);
+
+            client.EnableSsl = true;
+            client.Credentials = credentials;
+
+            // Stwórz wiadomość:
+            var mail =
+                new System.Net.Mail.MailMessage(sentFrom, message.Destination);
+
+            mail.IsBodyHtml = true;
+            mail.Subject = message.Subject;
+            mail.Body = message.Body;
+
+            // Wyślij:
+            return client.SendMailAsync(mail);
         }
+
     }
 
     public class SmsService : IIdentityMessageService

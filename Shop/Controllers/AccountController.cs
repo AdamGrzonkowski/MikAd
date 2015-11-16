@@ -96,6 +96,8 @@ namespace Shop.Controllers
 
                 if (!await UserManager.IsEmailConfirmedAsync(user.Id))
                 {
+                    string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, user.UserName + ", potwierdź swoją rejestrację - przypomnienie");
+
                     ViewBag.errorMessage = "Musisz potwierdzić e-mail, aby móc się zalogować.";
                     return View("Error");
                 }
@@ -205,12 +207,11 @@ namespace Shop.Controllers
                     // await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     // Wyślij maila z linkiem do potwierdzenia emaila.
-                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Potwierdzenie rejestracji ", "Potwierdź proszę swoją rejestracje w serwisie Sklep_MVC klikając <a href=\"" + callbackUrl + "\">tutaj.</a>");
+                    string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, user.UserName + ", potwierdź swoją rejestrację");
 
                     ViewBag.Message = "Na Twoją skrzynkę e-mail wysłany został kod potwierdzający. Musisz potwierdzić adres e-mail, zanim będziesz mógł korzystać z serwisu.";
 
+                    ViewBag.Link = callbackUrl;
                     return View("Info");
                     //return RedirectToAction("Index","Home");
                 }
@@ -559,6 +560,16 @@ namespace Shop.Controllers
                 }
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
+        }
+
+        private async Task<string> SendEmailConfirmationTokenAsync(string userID, string subject)
+        {
+            string code = await UserManager.GenerateEmailConfirmationTokenAsync(userID);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account",
+               new { userId = userID, code = code }, protocol: Request.Url.Scheme);
+            await UserManager.SendEmailAsync(userID, "Potwierdź swoją rejestrację", "Potwierdź proszę swoją rejestracje w serwisie Sklep_MVC klikając <a href=\"" + callbackUrl + "\">tutaj.</a> \n\n Pozdrawiamy,\nSklep_zespołowy");
+
+            return callbackUrl;
         }
         #endregion
     }
