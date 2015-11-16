@@ -122,7 +122,7 @@
     <comment>Instrukcja wyświetlana w footerze.</comment>
   </data>
   <data name="FooterONas" xml:space="preserve">
-    <value>Marketingowy tekst.</value>
+    <value>Dwójka studentów, która zapragnęła zjeść z zakazanego drzewa i nauczyć się MVC oraz Bootstrapa.</value>
     <comment>Opis O Nas w footerze.</comment>
   </data>
   <data name="Login" xml:space="preserve">
