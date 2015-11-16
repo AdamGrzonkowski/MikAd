@@ -7,7 +7,6 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Shop.Model.Models;
-using Shop.Models;
 
 namespace Shop
 {

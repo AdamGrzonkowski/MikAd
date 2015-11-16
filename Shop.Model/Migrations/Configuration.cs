@@ -7,7 +7,7 @@ namespace Shop.Model.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ShopContext>
+    public sealed class Configuration : DbMigrationsConfiguration<ShopContext>
     {
         public Configuration()
         {
@@ -16,6 +16,8 @@ namespace Shop.Model.Migrations
 
         protected override void Seed(ShopContext context)
         {
+
+            
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
