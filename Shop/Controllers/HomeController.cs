@@ -1,4 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System.Web;
+using System.Web.Mvc;
+using Microsoft.AspNet.Identity.Owin;
+using Shop.Model.Models;
 
 namespace Shop.Controllers
 {

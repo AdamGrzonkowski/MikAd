@@ -1,4 +1,6 @@
-﻿namespace Shop.Model.Models
+﻿using System.Collections.Generic;
+
+namespace Shop.Model.Models
 {
     public class Category
     {
@@ -7,5 +9,6 @@
         public int? BaseCategoryId { get; set; }
 
         public virtual Category BaseCategory { get; set; }
+        public virtual ICollection<Auction> Auctions { get; set; }
     }
 }

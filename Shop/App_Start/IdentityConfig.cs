@@ -7,11 +7,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Shop.Model.Models;
-using Shop.Models;
-using System.Net;
 using System.Configuration;
-using System.Diagnostics;
-using System.Net.Mail;
 
 namespace Shop
 {
