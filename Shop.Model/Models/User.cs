@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -14,6 +15,8 @@ namespace Shop.Model.Models
         public string Street { get; set; }
         public string PostalCode { get; set; }
         public string City { get; set; }
+
+        public virtual ICollection<Review> Reviews { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {
