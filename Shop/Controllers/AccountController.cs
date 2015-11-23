@@ -88,7 +88,7 @@ namespace Shop.Controllers
 
             // Wymaga od użytkownika potwierdzonego adresu email w celu zalogowania.
             string user_name = "";
-            var user = await UserManager.FindByEmailAsync(model.Email);
+            var user = await UserManager.FindByNameAsync(model.UserName);
 
             if (user != null)
             {

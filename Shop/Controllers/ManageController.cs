@@ -130,6 +130,38 @@ namespace Shop.Controllers
         }
 
         //
+        // GET: /Manage/ChangeData
+        public ActionResult ChangeData()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Manage/ChangeData
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangeData(Shop.Model.Models.User model)
+        {
+          //  if (!ModelState.IsValid)
+          //  {
+          //      return View(model);
+         //   }
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            UserManager.UpdateAsync(model);
+            /*user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.PhoneNumber = model.PhoneNumber;
+            user.HomeNumber = model.HomeNumber;
+            user.FlatNumber = model.FlatNumber;
+            user.Street = model.Street;
+            user.PostalCode = model.PostalCode;
+            user.City = model.City;*/
+
+            return RedirectToAction("Index","Manage");
+        }
+
+
+        //
         // POST: /Manage/EnableTwoFactorAuthentication
         [HttpPost]
         [ValidateAntiForgeryToken]
