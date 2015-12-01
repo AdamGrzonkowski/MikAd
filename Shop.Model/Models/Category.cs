@@ -10,5 +10,6 @@ namespace Shop.Model.Models
 
         public virtual Category BaseCategory { get; set; }
         public virtual ICollection<Auction> Auctions { get; set; }
+        public virtual ICollection<CategoryProperty> Properties { get; set; }
     }
 }

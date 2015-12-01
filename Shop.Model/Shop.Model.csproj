@@ -139,9 +139,15 @@
     <Compile Include="Migrations\201511231137134_ModelForShop.Designer.cs">
       <DependentUpon>201511231137134_ModelForShop.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511231226162_AddedProperties.cs" />
+    <Compile Include="Migrations\201511231226162_AddedProperties.Designer.cs">
+      <DependentUpon>201511231226162_AddedProperties.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Auction.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\AuctionProperty.cs" />
+    <Compile Include="Models\CategoryProperty.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\Views\AccountViewModels.cs" />
     <Compile Include="Models\ShopContext.cs" />
@@ -160,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511231137134_ModelForShop.resx">
       <DependentUpon>201511231137134_ModelForShop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511231226162_AddedProperties.resx">
+      <DependentUpon>201511231226162_AddedProperties.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
