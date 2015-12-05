@@ -140,7 +140,7 @@ namespace Shop.Controllers
         // POST: /Manage/ChangeData
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ChangeData(Shop.Model.Models.User model)
+        public async Task<ActionResult> ChangeData(Model.Models.User model)
         {
           //  if (!ModelState.IsValid)
           //  {
