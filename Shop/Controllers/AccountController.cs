@@ -5,9 +5,8 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Shop;
 using Shop.Model.Models;
-using Shop.Model.Models.Views;
+using Shop.Models;
 
 namespace Shop.Controllers
 {

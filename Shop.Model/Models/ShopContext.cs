@@ -5,11 +5,9 @@ namespace Shop.Model.Models
 {
     public class ShopContext : IdentityDbContext<User>
     {
-        public DbSet<Auction> Auctions { get; set; }
+        public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Review> Reviews { get; set; }
-        public DbSet<CategoryProperty> CategoryProperties { get; set; }
-        public DbSet<AuctionProperty> AuctionProperties { get; set; }
 
 
         public ShopContext()
@@ -20,33 +18,25 @@ namespace Shop.Model.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Auction>()
+            modelBuilder.Entity<Product>()
                 .HasRequired(x => x.Category)
-                .WithMany(x => x.Auctions)
+                .WithMany(x => x.Products)
                 .HasForeignKey(x => x.CategoryId)
                 .WillCascadeOnDelete(false);
             modelBuilder.Entity<Review>()
-                .HasRequired(x => x.Auction)
+                .HasRequired(x => x.Product)
                 .WithMany(x => x.Reviews)
-                .HasForeignKey(x => x.AuctionId);
+                .HasForeignKey(x => x.ProductId);
             modelBuilder.Entity<Review>()
                 .HasRequired(x => x.Author)
                 .WithMany(x => x.Reviews)
                 .HasForeignKey(x => x.AuthorId)
                 .WillCascadeOnDelete(false);
             modelBuilder.Entity<Category>()
-                .HasMany(x => x.Properties)
-                .WithRequired()
+                .HasOptional(x => x.BaseCategory)
+                .WithMany(x => x.SubCategories)
+                .HasForeignKey(x => x.BaseCategoryId)
                 .WillCascadeOnDelete(false);
-            modelBuilder.Entity<CategoryProperty>()
-                .HasRequired(x => x.Category)
-                .WithMany(x => x.Properties)
-                .HasForeignKey(x => x.CategoryId)
-                .WillCascadeOnDelete(false);
-            modelBuilder.Entity<AuctionProperty>()
-                .HasRequired(x => x.Auction)
-                .WithMany(x => x.Properties)
-                .HasForeignKey(x => x.AuctionId);
         }
 
         public static ShopContext Create()

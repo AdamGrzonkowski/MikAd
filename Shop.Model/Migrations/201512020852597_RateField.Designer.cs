@@ -7,13 +7,13 @@ namespace Shop.Model.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class ModelForShop : IMigrationMetadata
+    public sealed partial class RateField : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ModelForShop));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(RateField));
         
         string IMigrationMetadata.Id
         {
-            get { return "201511231137134_ModelForShop"; }
+            get { return "201512020852597_RateField"; }
         }
         
         string IMigrationMetadata.Source
