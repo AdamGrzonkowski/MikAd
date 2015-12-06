@@ -132,11 +132,17 @@
     <Compile Include="Migrations\201512061218317_cleaned.Designer.cs">
       <DependentUpon>201512061218317_cleaned.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512061556329_TransactionAndBasketModels.cs" />
+    <Compile Include="Migrations\201512061556329_TransactionAndBasketModels.Designer.cs">
+      <DependentUpon>201512061556329_TransactionAndBasketModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Basket.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\ShopContext.cs" />
+    <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
@@ -150,6 +156,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201512061218317_cleaned.resx">
       <DependentUpon>201512061218317_cleaned.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512061556329_TransactionAndBasketModels.resx">
+      <DependentUpon>201512061556329_TransactionAndBasketModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

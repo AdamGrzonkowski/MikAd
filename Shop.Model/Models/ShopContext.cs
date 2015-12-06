@@ -8,6 +8,8 @@ namespace Shop.Model.Models
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
 
 
         public ShopContext()
@@ -37,6 +39,11 @@ namespace Shop.Model.Models
                 .WithMany(x => x.SubCategories)
                 .HasForeignKey(x => x.BaseCategoryId)
                 .WillCascadeOnDelete(false);
+            modelBuilder.Entity<Basket>()
+                .HasKey(x => x.UserId);
+            modelBuilder.Entity<Basket>()
+                .HasRequired(x => x.User)
+                .WithOptional(x => x.Basket);
         }
 
         public static ShopContext Create()
