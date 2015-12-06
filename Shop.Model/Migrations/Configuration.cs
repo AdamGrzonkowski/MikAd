@@ -15,47 +15,50 @@ namespace Shop.Model.Migrations
 
         protected override void Seed(ShopContext context)
         {
+            _InitCategories(context);
+            _InitProducts(context);
+            
+        }
 
-
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+        private void _InitCategories(ShopContext context)
+        {
+            Category baseCategory = new Category
+            {
+                Name = "Wszystkie produkty",
+                Properties = new List<string> {"Producent", "Rok produkcji", "Model"}
+            };
+            context.Categories.AddOrUpdate(p => p.Name, baseCategory);
+            context.SaveChanges();
             context.Categories.AddOrUpdate(
                 p => p.Name,
-                new Category { Name = "Komputery", Properties = new List<string> { "Producent", "Rok produkcji", "Model"} },
-                new Category { Name = "Tablety", Properties = new List<string> { "Producent", "Rok produkcji", "Model",
-                    "Przek¹tna ekranu", "Szybkoœæ taktowania procesora(GHz)", "Rozmiar pamiêci RAM(MB)", "Pamiêæ wewnêtrzna(GB)" } },
-                new Category { Name = "Telefony", Properties = new List<string> { "Producent", "Rok produkcji", "Model" } });
+                new Category { Name = "Komputery", BaseCategory = baseCategory, Properties = baseCategory.Properties },
+                new Category { Name = "Tablety", BaseCategory = baseCategory, Properties = baseCategory.Properties.Concat(new List<string> { "Przek¹tna ekranu", "Szybkoœæ taktowania procesora(GHz)", "Rozmiar pamiêci RAM(MB)", "Pamiêæ wewnêtrzna(GB)" }).ToList() },
+                new Category { Name = "Telefony", BaseCategory = baseCategory, Properties = baseCategory.Properties });
             context.SaveChanges();
             Category computers = context.Categories.SingleOrDefault(x => x.Name == "Komputery");
-            //Category tablets = context.Categories.SingleOrDefault(x => x.Name == "Tablety");
             context.Categories.AddOrUpdate(
                 p => p.Name,
-                new Category { Name = "Procesory", BaseCategory = computers, Properties = new List<string> { "Producent", "Rok produkcji", "Model", "Czêstotliwoœæ taktowania", "Pamiêc cache(MB)" } },
-                new Category { Name = "Pamiêci RAM", BaseCategory = computers, Properties = new List<string> { "Producent", "Rok produkcji", "Model", "Czêstotliwoœæ taktowania", "Rozmiar(MB)", "Typ" } },
-                new Category { Name = "Monitory", BaseCategory = computers, Properties = new List<string> { "Producent", "Rok produkcji", "Model", "Przek¹tna ekranu" } });
+                new Category { Name = "Procesory", BaseCategory = computers, Properties = computers.Properties.Concat(new List<string> { "Czêstotliwoœæ taktowania", "Pamiêc cache(MB)" }).ToList() },
+                new Category { Name = "Pamiêci RAM", BaseCategory = computers, Properties = computers.Properties.Concat(new List<string> { "Czêstotliwoœæ taktowania", "Rozmiar(MB)", "Typ" }).ToList() },
+                new Category { Name = "Monitory", BaseCategory = computers, Properties = computers.Properties.Concat(new List<string> { "Przek¹tna ekranu" }).ToList() });
             context.SaveChanges();
             Category phones = context.Categories.SingleOrDefault(x => x.Name == "Telefony");
             context.Categories.AddOrUpdate(
                 p => p.Name,
-                new Category { Name = "Stacjonarne", BaseCategory = phones, Properties = new List<string> { "Producent", "Rok produkcji", "Model" } },
-                new Category { Name = "Komórkowe", BaseCategory = phones, Properties = new List<string> { "Producent", "Rok produkcji", "Model", "Przek¹tna ekranu" } });
+                new Category { Name = "Stacjonarne", BaseCategory = phones, Properties = phones.Properties },
+                new Category { Name = "Komórkowe", BaseCategory = phones, Properties = phones.Properties.Concat(new List<string> { "Przek¹tna ekranu" }).ToList() });
             context.SaveChanges();
             Category mobiles = context.Categories.SingleOrDefault(x => x.Name == "Komórkowe");
             context.Categories.AddOrUpdate(
                 p => p.Name,
-                new Category { Name = "Tradycyjne", BaseCategory = mobiles, Properties = new List<string> { "Producent", "Rok produkcji", "Model", "Przek¹tna ekranu", "Iloœæ mo¿liwych numerów" } },
-                new Category { Name = "Dotykowe", BaseCategory = mobiles, Properties = new List<string> { "Producent", "Rok produkcji", "Model", "Przek¹tna ekranu", "Wbudowana pamiêæ(MB)" } });
+                new Category { Name = "Tradycyjne", BaseCategory = mobiles, Properties = mobiles.Properties.Concat(new List<string> { "Przek¹tna ekranu", "Iloœæ mo¿liwych numerów" }).ToList() },
+                new Category { Name = "Dotykowe", BaseCategory = mobiles, Properties = mobiles.Properties.Concat(new List<string> { "Przek¹tna ekranu", "Wbudowana pamiêæ(MB)" }).ToList() });
             context.SaveChanges();
+        }
+
+        private void _InitProducts(ShopContext context)
+        {
+            
         }
     }
 }

@@ -7,13 +7,13 @@ namespace Shop.Model.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class userUpdate : IMigrationMetadata
+    public sealed partial class cleaned : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(userUpdate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(cleaned));
         
         string IMigrationMetadata.Id
         {
-            get { return "201510261227207_userUpdate"; }
+            get { return "201512061218317_cleaned"; }
         }
         
         string IMigrationMetadata.Source
