@@ -5,7 +5,6 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 using Shop.Model.Models;
-using Shop.Models;
 
 namespace Shop
 {

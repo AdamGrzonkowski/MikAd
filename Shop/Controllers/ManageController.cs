@@ -147,7 +147,7 @@ namespace Shop.Controllers
           //      return View(model);
          //   }
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            UserManager.UpdateAsync(model);
+            await UserManager.UpdateAsync(model);
             /*user.FirstName = model.FirstName;
             user.LastName = model.LastName;
             user.PhoneNumber = model.PhoneNumber;

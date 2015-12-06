@@ -160,6 +160,10 @@
     <Compile Include="Migrations\201512042356112_AddedSubCategoriesList.Designer.cs">
       <DependentUpon>201512042356112_AddedSubCategoriesList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512060051091_JsonPropertyCategory.cs" />
+    <Compile Include="Migrations\201512060051091_JsonPropertyCategory.Designer.cs">
+      <DependentUpon>201512060051091_JsonPropertyCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Category.cs" />
@@ -199,6 +203,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512042356112_AddedSubCategoriesList.resx">
       <DependentUpon>201512042356112_AddedSubCategoriesList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512060051091_JsonPropertyCategory.resx">
+      <DependentUpon>201512060051091_JsonPropertyCategory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

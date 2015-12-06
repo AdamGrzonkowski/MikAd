@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Shop.Model.Helpers
+﻿namespace Shop.Model.Helpers
 {
     public static class ProductHelper
     {

@@ -8,15 +8,15 @@ namespace Shop.Model.Models
     {
         public int Id { get; set; }
         public int CategoryId { get; set; }
-        public string Content { get; set; }
+        public string Description { get; set; }
         public int Amount { get; set; }
         public decimal Price { get; set; }
-        public string JSONProperties { get; set; }
+        public string JsonProperties { get; set; }
         [NotMapped]
         public Dictionary<string, string> Properties
         {
-            get { return JsonConvert.DeserializeObject<Dictionary<string, string>>(JSONProperties); }
-            set { JSONProperties = JsonConvert.SerializeObject(value); }
+            get { return JsonConvert.DeserializeObject<Dictionary<string, string>>(JsonProperties); }
+            set { JsonProperties = JsonConvert.SerializeObject(value); }
         }
 
         public virtual Category Category { get; set; }

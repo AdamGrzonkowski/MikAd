@@ -41,7 +41,7 @@ namespace Shop.Model.Repositories
             dbProduct.Category = entity.Category;
             dbProduct.CategoryId = entity.CategoryId;
             dbProduct.Amount = entity.Amount;
-            dbProduct.Content = entity.Content;
+            dbProduct.Description = entity.Description;
             dbProduct.Price = entity.Price;
             dbProduct.Properties = entity.Properties;
         }

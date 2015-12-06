@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Shop.Model.Models;
 
 namespace Shop.Model.Repositories
