@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Shop.Model.Interfaces
 {
-    interface IRepository<TEntity, TKey> : IDisposable where TEntity : class
+    public interface IRepository<TEntity, TKey> : IDisposable where TEntity : class
     {
         IQueryable<TEntity> GetAll();
         TEntity GetById(TKey id);
