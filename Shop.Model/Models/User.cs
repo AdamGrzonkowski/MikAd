@@ -15,11 +15,10 @@ namespace Shop.Model.Models
         public string Street { get; set; }
         public string PostalCode { get; set; }
         public string City { get; set; }
-        public int BasketId { get; set; }
-
-        public Basket Basket { get; set; }
 
         public virtual ICollection<Review> Reviews { get; set; }
+        public virtual ICollection<Basket> ProductsInBasket { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {

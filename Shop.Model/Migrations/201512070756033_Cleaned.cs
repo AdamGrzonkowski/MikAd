@@ -1,12 +1,42 @@
 namespace Shop.Model.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
     
-    public partial class cleaned : DbMigration
+    public partial class Cleaned : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.Baskets",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        ProductId = c.Int(nullable: false),
+                        Amount = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Products", t => t.ProductId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.ProductId);
+            
+            CreateTable(
+                "dbo.Products",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        CategoryId = c.Int(nullable: false),
+                        Name = c.String(),
+                        Description = c.String(),
+                        Amount = c.Int(nullable: false),
+                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        JsonProperties = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Categories", t => t.CategoryId)
+                .Index(t => t.CategoryId);
+            
             CreateTable(
                 "dbo.Categories",
                 c => new
@@ -21,19 +51,16 @@ namespace Shop.Model.Migrations
                 .Index(t => t.BaseCategoryId);
             
             CreateTable(
-                "dbo.Products",
+                "dbo.Images",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        CategoryId = c.Int(nullable: false),
-                        Description = c.String(),
-                        Amount = c.Int(nullable: false),
-                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        JsonProperties = c.String(),
+                        ProductId = c.Int(nullable: false),
+                        Url = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Categories", t => t.CategoryId)
-                .Index(t => t.CategoryId);
+                .ForeignKey("dbo.Products", t => t.ProductId)
+                .Index(t => t.ProductId);
             
             CreateTable(
                 "dbo.Reviews",
@@ -105,6 +132,35 @@ namespace Shop.Model.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
+                "dbo.Orders",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        TotalPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        OrderDate = c.DateTime(nullable: false),
+                        IsPaid = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.Transactions",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        OrderId = c.Int(nullable: false),
+                        ProductId = c.Int(nullable: false),
+                        Amount = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Orders", t => t.OrderId, cascadeDelete: true)
+                .ForeignKey("dbo.Products", t => t.ProductId, cascadeDelete: true)
+                .Index(t => t.OrderId)
+                .Index(t => t.ProductId);
+            
+            CreateTable(
                 "dbo.AspNetUserRoles",
                 c => new
                     {
@@ -132,31 +188,47 @@ namespace Shop.Model.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Baskets", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Baskets", "ProductId", "dbo.Products");
             DropForeignKey("dbo.Reviews", "ProductId", "dbo.Products");
             DropForeignKey("dbo.Reviews", "AuthorId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Orders", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Transactions", "ProductId", "dbo.Products");
+            DropForeignKey("dbo.Transactions", "OrderId", "dbo.Orders");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Images", "ProductId", "dbo.Products");
             DropForeignKey("dbo.Products", "CategoryId", "dbo.Categories");
             DropForeignKey("dbo.Categories", "BaseCategoryId", "dbo.Categories");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
+            DropIndex("dbo.Transactions", new[] { "ProductId" });
+            DropIndex("dbo.Transactions", new[] { "OrderId" });
+            DropIndex("dbo.Orders", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Reviews", new[] { "AuthorId" });
             DropIndex("dbo.Reviews", new[] { "ProductId" });
-            DropIndex("dbo.Products", new[] { "CategoryId" });
+            DropIndex("dbo.Images", new[] { "ProductId" });
             DropIndex("dbo.Categories", new[] { "BaseCategoryId" });
+            DropIndex("dbo.Products", new[] { "CategoryId" });
+            DropIndex("dbo.Baskets", new[] { "ProductId" });
+            DropIndex("dbo.Baskets", new[] { "UserId" });
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.AspNetUserRoles");
+            DropTable("dbo.Transactions");
+            DropTable("dbo.Orders");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.Reviews");
-            DropTable("dbo.Products");
+            DropTable("dbo.Images");
             DropTable("dbo.Categories");
+            DropTable("dbo.Products");
+            DropTable("dbo.Baskets");
         }
     }
 }

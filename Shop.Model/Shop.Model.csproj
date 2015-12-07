@@ -128,16 +128,14 @@
   <ItemGroup>
     <Compile Include="Helpers\MigrationHelper.cs" />
     <Compile Include="Helpers\ProductHelper.cs" />
-    <Compile Include="Migrations\201512061218317_cleaned.cs" />
-    <Compile Include="Migrations\201512061218317_cleaned.Designer.cs">
-      <DependentUpon>201512061218317_cleaned.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201512061556329_TransactionAndBasketModels.cs" />
-    <Compile Include="Migrations\201512061556329_TransactionAndBasketModels.Designer.cs">
-      <DependentUpon>201512061556329_TransactionAndBasketModels.cs</DependentUpon>
+    <Compile Include="Migrations\201512070756033_Cleaned.cs" />
+    <Compile Include="Migrations\201512070756033_Cleaned.Designer.cs">
+      <DependentUpon>201512070756033_Cleaned.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Basket.cs" />
+    <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Review.cs" />
@@ -154,11 +152,8 @@
     <Compile Include="Repositories\ReviewRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201512061218317_cleaned.resx">
-      <DependentUpon>201512061218317_cleaned.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512061556329_TransactionAndBasketModels.resx">
-      <DependentUpon>201512061556329_TransactionAndBasketModels.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201512070756033_Cleaned.resx">
+      <DependentUpon>201512070756033_Cleaned.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

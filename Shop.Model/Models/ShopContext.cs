@@ -8,8 +8,10 @@ namespace Shop.Model.Models
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Review> Reviews { get; set; }
-        public DbSet<Basket> Baskets { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Image> Images { get; set; }
 
 
         public ShopContext()
@@ -40,10 +42,35 @@ namespace Shop.Model.Models
                 .HasForeignKey(x => x.BaseCategoryId)
                 .WillCascadeOnDelete(false);
             modelBuilder.Entity<Basket>()
-                .HasKey(x => x.UserId);
-            modelBuilder.Entity<Basket>()
                 .HasRequired(x => x.User)
-                .WithOptional(x => x.Basket);
+                .WithMany(x => x.ProductsInBasket)
+                .HasForeignKey(x => x.UserId)
+                .WillCascadeOnDelete(true);
+            modelBuilder.Entity<Basket>()
+                .HasRequired(x => x.Product)
+                .WithMany(x => x.Baskets)
+                .HasForeignKey(x => x.ProductId)
+                .WillCascadeOnDelete(true);
+            modelBuilder.Entity<Image>()
+                .HasRequired(x => x.Product)
+                .WithMany(x => x.Images)
+                .HasForeignKey(x => x.ProductId)
+                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<Transaction>()
+                .HasRequired(x => x.Order)
+                .WithMany(x => x.Transactions)
+                .HasForeignKey(x => x.OrderId)
+                .WillCascadeOnDelete(true);
+            modelBuilder.Entity<Transaction>()
+                .HasRequired(x => x.Product)
+                .WithMany(x => x.Transactions)
+                .HasForeignKey(x => x.ProductId)
+                .WillCascadeOnDelete(true);
+            modelBuilder.Entity<Order>()
+                .HasRequired(x => x.User)
+                .WithMany(x => x.Orders)
+                .HasForeignKey(x => x.UserId);
+
         }
 
         public static ShopContext Create()
