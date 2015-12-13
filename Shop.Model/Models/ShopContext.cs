@@ -11,6 +11,7 @@ namespace Shop.Model.Models
         public DbSet<Detail> Details { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Image> Images { get; set; }
+        public DbSet<Payment> Payments { get; set; }
 
 
         public ShopContext()
@@ -59,6 +60,9 @@ namespace Shop.Model.Models
                 .HasRequired(x => x.User)
                 .WithMany(x => x.Orders)
                 .HasForeignKey(x => x.UserId);
+            modelBuilder.Entity<Order>()
+                .HasOptional(x => x.Payment)
+                .WithRequired(x => x.Order);
 
         }
 
