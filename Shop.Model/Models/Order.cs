@@ -11,7 +11,7 @@ namespace Shop.Model.Models
         public decimal TotalPrice { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime SendDate { get; set; }
-        public bool IsPaid { get; set; }
+        public bool IsFinished { get; set; }
         public bool IsSent { get; set; }
 
         public Payment Payment { get; set; }
