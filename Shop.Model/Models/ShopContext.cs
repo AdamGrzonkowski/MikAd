@@ -8,8 +8,7 @@ namespace Shop.Model.Models
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Review> Reviews { get; set; }
-        public DbSet<Transaction> Transactions { get; set; }
-        public DbSet<Basket> Baskets { get; set; }
+        public DbSet<Detail> Details { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Image> Images { get; set; }
 
@@ -41,29 +40,19 @@ namespace Shop.Model.Models
                 .WithMany(x => x.SubCategories)
                 .HasForeignKey(x => x.BaseCategoryId)
                 .WillCascadeOnDelete(false);
-            modelBuilder.Entity<Basket>()
-                .HasRequired(x => x.User)
-                .WithMany(x => x.ProductsInBasket)
-                .HasForeignKey(x => x.UserId)
-                .WillCascadeOnDelete(true);
-            modelBuilder.Entity<Basket>()
-                .HasRequired(x => x.Product)
-                .WithMany(x => x.Baskets)
-                .HasForeignKey(x => x.ProductId)
-                .WillCascadeOnDelete(true);
             modelBuilder.Entity<Image>()
                 .HasRequired(x => x.Product)
                 .WithMany(x => x.Images)
                 .HasForeignKey(x => x.ProductId)
                 .WillCascadeOnDelete(false);
-            modelBuilder.Entity<Transaction>()
+            modelBuilder.Entity<Detail>()
                 .HasRequired(x => x.Order)
-                .WithMany(x => x.Transactions)
+                .WithMany(x => x.Details)
                 .HasForeignKey(x => x.OrderId)
                 .WillCascadeOnDelete(true);
-            modelBuilder.Entity<Transaction>()
+            modelBuilder.Entity<Detail>()
                 .HasRequired(x => x.Product)
-                .WithMany(x => x.Transactions)
+                .WithMany(x => x.Details)
                 .HasForeignKey(x => x.ProductId)
                 .WillCascadeOnDelete(true);
             modelBuilder.Entity<Order>()

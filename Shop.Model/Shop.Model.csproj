@@ -128,12 +128,7 @@
   <ItemGroup>
     <Compile Include="Helpers\MigrationHelper.cs" />
     <Compile Include="Helpers\ProductHelper.cs" />
-    <Compile Include="Migrations\201512070756033_Cleaned.cs" />
-    <Compile Include="Migrations\201512070756033_Cleaned.Designer.cs">
-      <DependentUpon>201512070756033_Cleaned.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Basket.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Product.cs" />
@@ -150,11 +145,6 @@
     <Compile Include="Interfaces\IReviewRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Repositories\ReviewRepository.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201512070756033_Cleaned.resx">
-      <DependentUpon>201512070756033_Cleaned.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,6 +1,6 @@
 ﻿namespace Shop.Model.Models
 {
-    public class Transaction
+    public class Detail
     {
         public int Id { get; set; }
         public int OrderId { get; set; }

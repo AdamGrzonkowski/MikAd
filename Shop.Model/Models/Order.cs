@@ -14,6 +14,6 @@ namespace Shop.Model.Models
         public bool IsSent { get; set; }
 
         public User User { get; set; }
-        public virtual ICollection<Transaction> Transactions { get; set; }
+        public virtual ICollection<Detail> Details { get; set; }
     }
 }
