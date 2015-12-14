@@ -299,6 +299,10 @@
       <Project>{bf480e4d-b041-4dec-ad44-73385e56c1c8}</Project>
       <Name>Shop.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Shop.Repository\Shop.Repository.csproj">
+      <Project>{e6cce1f4-7824-458b-8840-22e10e9b12be}</Project>
+      <Name>Shop.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -56,7 +56,6 @@ namespace Shop.Models
 
         [Required]
         [Display(Name = "Nazwa użytkownika")]
-
         public string UserName { get; set; }
 
         [Required]
