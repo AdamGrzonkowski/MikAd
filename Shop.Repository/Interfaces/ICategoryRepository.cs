@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Shop.Model.Models;
 
-namespace Shop.Model.Interfaces
+namespace Shop.Repository.Interfaces
 {
     interface ICategoryRepository : IRepository<Category, int>
     {

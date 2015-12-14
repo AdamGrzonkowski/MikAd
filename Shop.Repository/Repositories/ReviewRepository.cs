@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using Shop.Model.Interfaces;
 using Shop.Model.Models;
+using Shop.Repository.Interfaces;
 
-namespace Shop.Model.Repositories
+namespace Shop.Repository.Repositories
 {
     class ReviewRepository : IReviewRepository
     {

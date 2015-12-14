@@ -1,8 +1,7 @@
 ﻿using System.Linq;
 using Shop.Model.Models;
-using Shop.Model.Interfaces;
 
-namespace Shop.Model.Interfaces
+namespace Shop.Repository.Interfaces
 {
     interface IReviewRepository : IRepository<Review, int>
     {

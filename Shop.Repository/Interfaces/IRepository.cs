@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Shop.Model.Interfaces
+namespace Shop.Repository.Interfaces
 {
     public interface IRepository<TEntity, TKey> : IDisposable where TEntity : class
     {
