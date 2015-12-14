@@ -2,7 +2,7 @@
 
 namespace Shop.Model.Interfaces
 {
-    public interface IOrderRepository : IRepository<Order, int>
+    interface IOrderRepository : IRepository<Order, int>
     {
     }
 }

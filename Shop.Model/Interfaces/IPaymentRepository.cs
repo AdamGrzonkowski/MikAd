@@ -2,7 +2,7 @@
 
 namespace Shop.Model.Interfaces
 {
-    public interface IBasketRepository : IRepository<Basket, int>
+    interface IPaymentRepository : IRepository<Payment, int>
     {
     }
 }
