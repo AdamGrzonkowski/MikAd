@@ -12,7 +12,9 @@ namespace Shop.Model.Models
         public DateTime OrderDate { get; set; }
         public DateTime SendDate { get; set; }
         public bool IsFinished { get; set; }
+        public bool IsReadyToSend { get; set; }
         public bool IsSent { get; set; }
+        public string Notes { get; set; }
 
         public Payment Payment { get; set; }
         public User User { get; set; }
