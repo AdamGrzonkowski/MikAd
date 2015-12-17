@@ -7,7 +7,7 @@ using Shop.Repository.Interfaces;
 
 namespace Shop.Repository.Repositories
 {
-    class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class
+    public class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class
     {
         protected readonly DbContext Context;
 
@@ -16,7 +16,7 @@ namespace Shop.Repository.Repositories
             Context = context;
         }
 
-        public TEntity Get(int id)
+        public TEntity Get(TKey id)
         {
             return Context.Set<TEntity>().Find(id);
         }
