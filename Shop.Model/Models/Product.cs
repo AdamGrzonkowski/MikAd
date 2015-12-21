@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.WebPages;
 using Newtonsoft.Json;
 
 namespace Shop.Model.Models
@@ -16,7 +17,12 @@ namespace Shop.Model.Models
         [NotMapped]
         public Dictionary<string, string> Properties
         {
-            get { return JsonConvert.DeserializeObject<Dictionary<string, string>>(JsonProperties); }
+            get
+            {
+                if (JsonProperties.IsEmpty())
+                    return null;
+                return JsonConvert.DeserializeObject<Dictionary<string, string>>(JsonProperties);
+            }
             set { JsonProperties = JsonConvert.SerializeObject(value); }
         }
 
