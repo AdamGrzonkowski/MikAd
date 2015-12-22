@@ -1,16 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 using System.Web.WebPages;
 using Newtonsoft.Json;
 
 namespace Shop.Model.Models
 {
+    [DataContract]
     public class Category
     {
+        [DataMember]
         public int Id { get; set; }
+
+        [DataMember]
         public string Name { get; set; }
+
+        [DataMember]
         public int? BaseCategoryId { get; set; }
+
         public string JsonProperties { get; set; }
+
+        [DataMember]
         [NotMapped]
         public List<string> Properties
         {
