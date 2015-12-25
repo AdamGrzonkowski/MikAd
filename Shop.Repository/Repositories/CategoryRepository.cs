@@ -17,7 +17,7 @@ namespace Shop.Repository.Repositories
 
         public IEnumerable<Category> GetAllRootCategories()
         {
-            throw new System.NotImplementedException();
+            return FindMany(x => x.BaseCategory == null);
         }
     }
 }
