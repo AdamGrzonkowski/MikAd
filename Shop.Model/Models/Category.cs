@@ -34,7 +34,9 @@ namespace Shop.Model.Models
         }
 
         public virtual Category BaseCategory { get; set; }
+
         public virtual ICollection<Product> Products { get; set; }
+
         public virtual ICollection<Category> SubCategories { get; set; }
     }
 }

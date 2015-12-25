@@ -1,4 +1,5 @@
-﻿using Shop.Model.Models;
+﻿using System.Collections.Generic;
+using Shop.Model.Models;
 using Shop.Repository.Interfaces;
 
 namespace Shop.Repository.Repositories
@@ -12,6 +13,11 @@ namespace Shop.Repository.Repositories
         public ShopContext ShopContext
         {
             get { return Context as ShopContext; }
+        }
+
+        public IEnumerable<Category> GetAllRootCategories()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
