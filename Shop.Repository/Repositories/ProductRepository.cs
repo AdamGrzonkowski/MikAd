@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Shop.Model.Models;
 using Shop.Repository.Interfaces;
 
@@ -17,12 +18,22 @@ namespace Shop.Repository.Repositories
 
         public IEnumerable<Product> GetAllProductsFromCategory(Category category)
         {
-            throw new System.NotImplementedException();
-        }
+            List<Product> products = new List<Product>();
 
-        public IEnumerable<Product> GetAllProductsFromCategory(int categoryId)
-        {
-            throw new System.NotImplementedException();
+            if (category.Products != null)
+            {
+                products = (List<Product>) products.Concat(category.Products);
+            }
+
+            if (category.SubCategories != null)
+            {
+                foreach (var subCategory in category.SubCategories)
+                {
+                    products = (List<Product>) products.Concat(GetAllProductsFromCategory(subCategory));
+                }
+            }
+
+            return products;
         }
     }
 }
