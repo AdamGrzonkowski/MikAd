@@ -5,13 +5,13 @@ namespace Shop.Model.Models
 {
     public class ShopContext : IdentityDbContext<User>
     {
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Review> Reviews { get; set; }
-        public DbSet<Detail> Details { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<Image> Images { get; set; }
-        public DbSet<Payment> Payments { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Review> Reviews { get; set; }
+        public virtual DbSet<Detail> Details { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Image> Images { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
 
 
         public ShopContext()

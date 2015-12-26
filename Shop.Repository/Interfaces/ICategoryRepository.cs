@@ -5,6 +5,8 @@ namespace Shop.Repository.Interfaces
 {
     public interface ICategoryRepository : IRepository<Category, int>
     {
-        IEnumerable<Category> GetAllRootCategories();
+        IEnumerable<Category> GetRootCategories();
+        IEnumerable<Category> GetTopCategories();
+        IEnumerable<Category> GetTopCategories(Category category);
     }
 }
