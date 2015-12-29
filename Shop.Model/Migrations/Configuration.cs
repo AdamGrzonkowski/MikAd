@@ -16,8 +16,7 @@ namespace Shop.Model.Migrations
         protected override void Seed(ShopContext context)
         {
             //_InitCategories(context);
-            //_InitProducts(context);
-            
+            //_InitProducts(context);   
         }
 
         private void _InitCategories(ShopContext context)

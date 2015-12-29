@@ -17,5 +17,7 @@ namespace Shop.Repository.Interfaces
 
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
+
+        void Save();
     }
 }

@@ -56,9 +56,15 @@ namespace Shop.Repository.Repositories
             Context.Set<TEntity>().RemoveRange(entities);
         }
 
+        public void Save()
+        {
+            Context.SaveChanges();
+        }
+
 
         public void Dispose()
         {
+            Save();
             Context.Dispose();
         }
     }
