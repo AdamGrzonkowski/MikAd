@@ -16,7 +16,7 @@ namespace Shop.Model.Migrations
         protected override void Seed(ShopContext context)
         {
             _InitCategories(context);
-            _InitProducts(context);
+           // _InitProducts(context);
             
         }
 
@@ -56,7 +56,7 @@ namespace Shop.Model.Migrations
             context.SaveChanges();
         }
 
-        private void _InitProducts(ShopContext context)
+        /*private void _InitProducts(ShopContext context)
         {
             // Category ramMemories = context.Categories.SingleOrDefault(x => x.Name.Equals("Pamiêci RAM"));
             Category normalMobiles = context.Categories.SingleOrDefault(x => x.Name.Equals("Komórkowe tradycyjne"));
@@ -91,6 +91,6 @@ namespace Shop.Model.Migrations
                     Category = normalMobiles
                 });
             context.SaveChanges();
-        }
+        } */
     }
 }
