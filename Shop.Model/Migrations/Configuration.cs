@@ -15,8 +15,8 @@ namespace Shop.Model.Migrations
 
         protected override void Seed(ShopContext context)
         {
-            _InitCategories(context);
-            _InitProducts(context);
+            //_InitCategories(context);
+            //_InitProducts(context);
             
         }
 
@@ -48,7 +48,7 @@ namespace Shop.Model.Migrations
                 new Category { Name = "Telefony stacjonarne", BaseCategory = phones, Properties = phones.Properties },
                 new Category { Name = "Telefony komórkowe", BaseCategory = phones, Properties = phones.Properties.Concat(new List<string> { "Przek¹tna ekranu" }).ToList() });
             context.SaveChanges();
-            Category mobiles = context.Categories.SingleOrDefault(x => x.Name.Equals("Komórkowe"));
+            Category mobiles = context.Categories.SingleOrDefault(x => x.Name.Equals("Telefony komórkowe"));
             context.Categories.AddOrUpdate(
                 p => p.Name,
                 new Category { Name = "Komórkowe tradycyjne", BaseCategory = mobiles, Properties = mobiles.Properties.Concat(new List<string> { "Przek¹tna ekranu(cale)", "Iloœæ mo¿liwych numerów" }).ToList() },

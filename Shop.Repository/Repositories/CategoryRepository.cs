@@ -26,15 +26,17 @@ namespace Shop.Repository.Repositories
             return FindMany(x => x.SubCategories == null);
         }
 
-        public IEnumerable<Category> GetTopCategories(Category category)
+        public IEnumerable<Category> GetTopCategories(Category _category)
         {
+            // NIE DZIAŁA. Problem z rekurwą. Do obadania.
+            Category category = Get(_category.Id);
             List<Category> categories = new List<Category>();
 
-            if (category.SubCategories != null)
+            if (category.SubCategories.Count != 0)
             {
                 foreach (var subCategory in category.SubCategories)
                 {
-                    if (subCategory.SubCategories == null)
+                    if (subCategory.SubCategories.Count == 0)
                     {
                         categories.Add(subCategory);
                     }
