@@ -139,6 +139,7 @@
     <Compile Include="Models\ShopContext.cs" />
     <Compile Include="Models\Detail.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <PropertyGroup>

@@ -5,10 +5,8 @@ using System.Runtime.Serialization;
 namespace Shop.Model.Models
 {
     [DataContract]
-    public class Order
+    public class Order : BaseEntity
     {
-        [DataMember]
-        public int Id { get; set; }
 
         [DataMember]
         public string UserId { get; set; }

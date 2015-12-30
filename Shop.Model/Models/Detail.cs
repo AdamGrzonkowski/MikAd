@@ -3,10 +3,8 @@
 namespace Shop.Model.Models
 {
     [DataContract]
-    public class Detail
+    public class Detail : BaseEntity
     {
-        [DataMember]
-        public int Id { get; set; }
 
         [DataMember]
         public int OrderId { get; set; }

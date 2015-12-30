@@ -10,10 +10,8 @@ namespace Shop.Model.Models
     }
 
     [DataContract]
-    public class Review
+    public class Review : BaseEntity
     {
-        [DataMember]
-        public int Id { get; set; }
 
         [DataMember]
         public string ReviewText { get; set; }

@@ -7,10 +7,8 @@ using Newtonsoft.Json;
 namespace Shop.Model.Models
 {
     [DataContract]
-    public class Category
+    public class Category : BaseEntity
     {
-        [DataMember]
-        public int Id { get; set; }
 
         [DataMember]
         public string Name { get; set; }

@@ -4,10 +4,8 @@ using System.Runtime.Serialization;
 namespace Shop.Model.Models
 {
     [DataContract]
-    public class Payment
+    public class Payment : BaseEntity
     {
-        [DataMember]
-        public int Id { get; set; }
 
         [DataMember]
         public int OrderId { get; set; }

@@ -3,10 +3,8 @@
 namespace Shop.Model.Models
 {
     [DataContract]
-    public class Image
+    public class Image : BaseEntity
     {
-        [DataMember]
-        public int Id { get; set; }
 
         [DataMember]
         public int ProductId { get; set; }
