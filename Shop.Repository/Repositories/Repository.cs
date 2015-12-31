@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using Shop.Model.Models;
 using Shop.Repository.Interfaces;
 
 namespace Shop.Repository.Repositories
 {
-    public class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class
+    public class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : BaseEntity
     {
         protected readonly DbContext Context;
 
@@ -38,11 +39,16 @@ namespace Shop.Repository.Repositories
 
         public void Add(TEntity entity)
         {
+            entity.AddedDate = DateTime.Now;
             Context.Set<TEntity>().Add(entity);
         }
 
         public void AddRange(IEnumerable<TEntity> entities)
         {
+            foreach (var entity in entities)
+            {
+                entity.AddedDate = DateTime.Now;
+            }
             Context.Set<TEntity>().AddRange(entities);
         }
 

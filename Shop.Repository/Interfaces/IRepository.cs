@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Shop.Model.Models;
 
 namespace Shop.Repository.Interfaces
 {
-    public interface IRepository<TEntity, TKey> : IDisposable where TEntity : class
+    public interface IRepository<TEntity, TKey> : IDisposable where TEntity : BaseEntity
     {
         TEntity Get(TKey id);
         IEnumerable<TEntity> GetAll();

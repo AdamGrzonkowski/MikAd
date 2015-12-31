@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Shop.Model.Models;
+﻿using Shop.Model.Models;
 using Shop.Repository.Interfaces;
 
 namespace Shop.Repository.Repositories
