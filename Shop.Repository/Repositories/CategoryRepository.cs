@@ -23,7 +23,7 @@ namespace Shop.Repository.Repositories
 
         public IEnumerable<Category> GetTopCategories()
         {
-            return FindMany(x => x.SubCategories == null);
+            return FindMany(x => !x.SubCategories.Any());
         }
 
         public IEnumerable<Category> GetTopCategories(Category _category)
@@ -42,7 +42,7 @@ namespace Shop.Repository.Repositories
                     }
                     else
                     {
-                        categories = (List<Category>) categories.Concat(GetTopCategories(subCategory));
+                        categories = categories.Concat(GetTopCategories(subCategory)).ToList();
                     }
                 }
             }
