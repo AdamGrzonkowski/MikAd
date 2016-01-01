@@ -26,10 +26,10 @@ namespace Shop.Repository.Repositories
             return FindMany(x => !x.SubCategories.Any());
         }
 
-        public IEnumerable<Category> GetTopCategories(Category _category)
+        public IEnumerable<Category> GetTopCategories(Category baseCategory)
         {
             // NIE DZIAŁA. Problem z rekurwą. Do obadania.
-            Category category = Get(_category.Id);
+            Category category = Get(baseCategory.Id);
             List<Category> categories = new List<Category>();
 
             if (category.SubCategories.Count != 0)

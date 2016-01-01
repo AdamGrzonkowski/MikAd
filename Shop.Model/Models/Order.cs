@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
 namespace Shop.Model.Models
@@ -18,7 +19,8 @@ namespace Shop.Model.Models
         public decimal TotalPrice { get; set; }
 
         [DataMember]
-        public DateTime OrderDate { get; set; }
+        [NotMapped]
+        public DateTime OrderDate { get { return AddedDate; } }
 
         [DataMember]
         public DateTime SendDate { get; set; }

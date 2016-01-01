@@ -28,15 +28,12 @@ namespace Shop.Api.Controllers
         }
 
         [HttpPost]
-        public Image Post([FromBody] ImageViewModel _image)
+        public void Post([FromBody] ImageViewModel newImage)
         {
             ProductRepository products = new ProductRepository(_context);
-            Product product = products.Get(_image.ProductId);
-            Image image = new Image {Product = product, Url = _image.Url};
+            Product product = products.Get(newImage.ProductId);
+            Image image = new Image {Product = product, Url = newImage.Url};
             Repository.Add(image);
-            Repository.Save();
-
-            return image;
         }
     }
 }
