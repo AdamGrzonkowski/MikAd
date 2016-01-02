@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
+using System.Web;
 using System.Web.WebPages;
 using Newtonsoft.Json;
 
@@ -26,6 +27,12 @@ namespace Shop.Model.Models
         public decimal Price { get; set; }
 
         public string JsonProperties { get; set; }
+
+        [DataMember]
+        public string Photo { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase PhotoUpload { get; set; }
 
         [DataMember]
         [NotMapped]

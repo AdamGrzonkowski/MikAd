@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using Shop.Model.Models;
 using PagedList;
 
@@ -94,8 +97,22 @@ namespace Shop.Controllers
         //public async Task<ActionResult> Create([Bind(Include = "Id,CategoryId,Name,Description,Amount,Price,JsonProperties")] Product product)
         public async Task<ActionResult> Create(Product product)
         {
+            var validTypes = new[] { "image/jpeg", "image/pjpeg", "image/png", "image/gif" };
+            if (!validTypes.Contains(product.PhotoUpload.ContentType))
+            {
+                ModelState.AddModelError("PhotoUpload", "Please upload either a JPG, GIF, or PNG image.");
+            }
             if (ModelState.IsValid)
             {
+                if (product.PhotoUpload.ContentLength > 0)
+                {
+                    // A file was uploaded
+                    string uploadPath = "~/Images/Products/";
+                    var fileName = Path.GetFileName(product.PhotoUpload.FileName);
+                    var path = Path.Combine(Server.MapPath(uploadPath), fileName);
+                    product.PhotoUpload.SaveAs(path);
+                    product.Photo = uploadPath + fileName;
+                }
                 product.AddedDate = DateTime.Now;
                 product.ModifiedDate = DateTime.Now;
                 product.IP = Request.UserHostAddress;
@@ -176,5 +193,7 @@ namespace Shop.Controllers
             }
             base.Dispose(disposing);
         }
+
+      
     }
 }
