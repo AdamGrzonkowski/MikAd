@@ -180,6 +180,12 @@ namespace Shop.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Product product = await db.Products.FindAsync(id);
+            var photoPath = "";
+            photoPath = Request.MapPath(product.Photo);
+            if (System.IO.File.Exists(photoPath))
+            {
+                System.IO.File.Delete(photoPath);
+            }
             db.Products.Remove(product);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
