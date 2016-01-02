@@ -1,5 +1,7 @@
 ﻿@model PagedList.IPagedList<Shop.Model.Models.Product>
+@using System.Drawing
 @using PagedList.Mvc;
+@using Shop.Model.Helpers
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
@@ -50,8 +52,8 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Images)
+            <td width ="100">
+                @Html.ActionImage("Details", new { id = item.Id }, item.Photo, "Details")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
