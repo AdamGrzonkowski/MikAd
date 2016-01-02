@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Runtime.Serialization;
 
 namespace Shop.Model.Models
@@ -16,7 +17,13 @@ namespace Shop.Model.Models
         public int PaymentId { get; set; }
 
         [DataMember]
-        public decimal TotalPrice { get; set; }
+        [NotMapped]
+        public decimal TotalPrice {
+            get
+            {
+                return Details.Sum(detail => detail.Product.Price*detail.Amount);
+            }
+        }
 
         [DataMember]
         [NotMapped]
@@ -38,7 +45,9 @@ namespace Shop.Model.Models
         public string Notes { get; set; }
 
         public Payment Payment { get; set; }
+
         public User User { get; set; }
+
         public virtual ICollection<Detail> Details { get; set; }
     }
 }

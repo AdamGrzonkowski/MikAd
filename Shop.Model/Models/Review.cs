@@ -28,6 +28,7 @@ namespace Shop.Model.Models
         public string AuthorId { get; set; }
 
         public Product Product { get; set; }
+
         public User Author { get; set; }
     }
 }
