@@ -33,7 +33,8 @@ namespace Shop.Model.Models
         public DateTime SendDate { get; set; }
 
         [DataMember]
-        public bool IsFinished { get; set; }
+        [NotMapped]
+        public bool IsPaid { get { return Payment == null || Payment.Amount < TotalPrice ? false : true; } }
 
         [DataMember]
         public bool IsReadyToSend { get; set; }
