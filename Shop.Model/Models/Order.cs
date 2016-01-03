@@ -48,6 +48,7 @@ namespace Shop.Model.Models
 
         public User User { get; set; }
 
+        [DataMember]
         public virtual ICollection<Detail> Details { get; set; }
     }
 }

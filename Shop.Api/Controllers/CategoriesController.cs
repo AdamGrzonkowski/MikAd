@@ -15,27 +15,33 @@ namespace Shop.Api.Controllers
 
         public CategoryRepository Repository { get { return _repository as CategoryRepository; } }
 
-        public IEnumerable<Category> GetAll()
+        [Route("api/categories/")]
+        public IEnumerable<Category> GetAllCategories()
         {
             return Repository.GetAll();
         }
 
-        public Category Get(int id)
+        [Route("api/categories/{id}")]
+        public Category GetCategory(int id)
         {
             return Repository.Get(id);
         }
 
-        [Route("api/categories/topcategories")]
-        public IEnumerable<Category> GetTopCategories()
+        [Route("api/categories/rootcategories/")]
+        public IEnumerable<Category> GetRootCategories()
         {
-            // NIE DZIAŁA. Problem z metodą GetTopCategories z repozytorium.
+            return Repository.GetRootCategories();
+        }
+
+        [Route("api/categories/topcategories")]
+        public IEnumerable<Category> GetAllTopCategories()
+        {
             return Repository.GetTopCategories();
         }
 
         [Route("api/categories/{id}/topcategories")]
         public IEnumerable<Category> GetTopCategories(int id)
         {
-            // NIE DZIAŁA. Problem z metodą GetTopCategories z repozytorium.
             Category category = Repository.Get(id);
             return Repository.GetTopCategories(category);
         }

@@ -1,9 +1,8 @@
-﻿using System.Data.Entity.Migrations;
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Shop.Model.Migrations;
+using Newtonsoft.Json;
 
 namespace Shop.Api
 {
@@ -16,8 +15,8 @@ namespace Shop.Api
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            var dbmigrator = new DbMigrator(new Configuration());
-            dbmigrator.Update();
+            JsonConvert.SerializeObject(Formatting.Indented,
+                new JsonSerializerSettings {ReferenceLoopHandling = ReferenceLoopHandling.Ignore});
         }
     }
 }

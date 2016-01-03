@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Web.WebPages;
 using Newtonsoft.Json;
@@ -36,5 +37,12 @@ namespace Shop.Model.Models
         public virtual ICollection<Product> Products { get; set; }
 
         public virtual ICollection<Category> SubCategories { get; set; }
+
+        [DataMember]
+        [NotMapped]
+        public ICollection<int> SubCategoryIds
+        {
+            get { return SubCategories == null ? null : SubCategories.Select(x => x.Id).ToList(); }
+        }
     }
 }
