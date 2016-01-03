@@ -86,8 +86,15 @@
                             <tbody>
                             <tr>
                                 <td><strong>@Html.DisplayNameFor(model => model.Name)</strong></td>
-                                <td>@Html.DisplayFor(model => model.Description)</td>
+                                <td>@Html.DisplayFor(model => model.Name)</td>
                             </tr>
+                            @foreach (var property in Model.Properties)
+                            {
+                                <tr>
+                                    <td><strong>@property.Key</strong></td>
+                                    <td>@property.Value</td>
+                                </tr>
+                            }
                             </tbody>
                         </table>
 
