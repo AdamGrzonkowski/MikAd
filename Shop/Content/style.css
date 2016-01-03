@@ -517,14 +517,14 @@ strong{
 
 .kart-links{
    text-align:center;
-   margin-top:20px;
+   margin-top:10px;
 }
 
 .kart-links a{
    font-size:13px;
    color:#fff;
    font-weight:bold;
-   margin:0px 1px;
+   margin:0px 3px;
    display:inline-block;
    padding:2px 7px;
    border-radius:5px;

@@ -17,31 +17,37 @@
 
 @using (Html.BeginForm("Index", "Products", FormMethod.Get))
 {
-    <p>
-        Wyszukaj po nazwie: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+    <h3 align="center">
+        Czego szukasz?: @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Wyszukaj" />
-    </p>
+    </h3>
 }
-
+@foreach (var item in Model)
+{
+    @Html.DisplayFor(modelItem => item.Category.Name)
+}
 <table class="table">
     <tr>
+        <td>
+            
+        </td>
         <th>
             Obraz
         </th>
         <th>
-            @Html.ActionLink("Nazwa produktu", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Nazwa produktu", "Index", new {sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter})
         </th>
         <th>
-            @Html.ActionLink("Kategoria", "Index", new { sortOrder = ViewBag.CategoryNameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Kategoria", "Index", new {sortOrder = ViewBag.CategoryNameSortParm, currentFilter = ViewBag.CurrentFilter})
         </th>
         <th>
             Opis
         </th>
         <th>
-            @Html.ActionLink("Ilość", "Index", new { sortOrder = ViewBag.QuantitySortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Ilość", "Index", new {sortOrder = ViewBag.QuantitySortParm, currentFilter = ViewBag.CurrentFilter})
         </th>
         <th>
-            @Html.ActionLink("Cena", "Index", new { sortOrder = ViewBag.PriceSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Cena", "Index", new {sortOrder = ViewBag.PriceSortParm, currentFilter = ViewBag.CurrentFilter})
         </th>
         <th>
             JsonProperties
