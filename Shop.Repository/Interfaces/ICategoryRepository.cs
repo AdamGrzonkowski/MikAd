@@ -8,5 +8,6 @@ namespace Shop.Repository.Interfaces
         IEnumerable<Category> GetRootCategories();
         IEnumerable<Category> GetTopCategories();
         IEnumerable<Category> GetTopCategories(Category category);
+        IEnumerable<Category> GetBaseCategories(Category category);
     }
 }

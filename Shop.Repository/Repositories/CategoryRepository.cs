@@ -49,5 +49,18 @@ namespace Shop.Repository.Repositories
 
             return categories;
         }
+
+        public IEnumerable<Category> GetBaseCategories(Category category)
+        {
+            var categories = new List<Category> {category};
+
+            while (category.BaseCategory != null)
+            {
+                category = category.BaseCategory;
+                categories.Add(category);
+            }
+
+            return categories;
+        }
     }
 }
