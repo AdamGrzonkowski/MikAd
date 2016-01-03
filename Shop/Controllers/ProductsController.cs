@@ -110,6 +110,10 @@ namespace Shop.Controllers
                     string uploadPath = "~/Images/Products/";
                     var fileName = Path.GetFileName(product.PhotoUpload.FileName);
                     var path = Path.Combine(Server.MapPath(uploadPath), fileName);
+                    if (!System.IO.Directory.Exists(uploadPath))
+                    {
+                        ModelState.AddModelError("PhotoUpload", "The directory of products images doesn't seem to exits. Contact administrator.");
+                    }
                     product.PhotoUpload.SaveAs(path);
                     product.Photo = uploadPath + fileName;
                 }
