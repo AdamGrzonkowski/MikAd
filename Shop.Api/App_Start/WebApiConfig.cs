@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using System.Web.Http.OData.Extensions;
 using Microsoft.Owin.Security.OAuth;
 
 namespace Shop.Api
@@ -20,6 +21,7 @@ namespace Shop.Api
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            config.AddODataQueryFilter();
         }
     }
 }
