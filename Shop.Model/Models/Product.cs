@@ -22,6 +22,10 @@ namespace Shop.Model.Models
         public string Name { get; set; }
 
         [DataMember]
+        [Display(Name = "Producent")]
+        public string Producer { get; set; }
+
+        [DataMember]
         [Display(Name = "Opis")]
         public string Description { get; set; }
 
