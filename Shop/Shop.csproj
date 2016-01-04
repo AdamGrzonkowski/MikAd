@@ -296,6 +296,8 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\basket.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Images\Products\Gand-Alf.jpg" />
     <Content Include="Scripts\bootstrap.js" />
@@ -309,6 +311,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\ngStorage.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
