@@ -86,6 +86,7 @@ namespace Shop.Controllers
         }
 
         // GET: Products/Create
+        [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
@@ -97,7 +98,7 @@ namespace Shop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public async Task<ActionResult> Create([Bind(Include = "Id,CategoryId,Name,Description,Amount,Price,JsonProperties")] Product product)
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Create(Product product)
         {
             var validTypes = new[] { "image/jpeg", "image/pjpeg", "image/png", "image/gif" };
@@ -134,6 +135,7 @@ namespace Shop.Controllers
         }
 
         // GET: Products/Edit/5
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -152,6 +154,7 @@ namespace Shop.Controllers
         // POST: Products/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,CategoryId,Name,Description,Amount,Price,JsonProperties")] Product product)
@@ -168,6 +171,7 @@ namespace Shop.Controllers
         }
 
         // GET: Products/Delete/5
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -183,6 +187,7 @@ namespace Shop.Controllers
         }
 
         // POST: Products/Delete/5
+        [Authorize(Roles = "admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)

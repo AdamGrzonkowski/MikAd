@@ -1,0 +1,20 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Panel administracyjny";
+    Layout = "~/Views/AdminPanel/_LayoutAdminPanel.cshtml";
+}
+
+</br>
+<h2>Panel administracyjny</h2>
+<ul>
+    <li>
+        @Html.ActionLink("Zarządzaj produktami", "IndexAdmin", "Products")
+    </li>
+    <li>
+        @Html.ActionLink("Zarządzaj kategoriami", "Index", "Categories")
+    </li>
+    <li>
+        @Html.ActionLink("Zarządzaj użytkownikami", "Index", "Users")
+    </li>
+</ul>

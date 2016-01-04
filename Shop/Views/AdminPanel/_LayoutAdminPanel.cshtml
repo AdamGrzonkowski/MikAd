@@ -1,0 +1,187 @@
+﻿@using Shop.Properties;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- Title here -->
+    <title>MikAd - elektronika dla Ciebie</title>
+    <!-- Description, Keywords and Author -->
+    <meta name="description" content="Sprzedaż urządzeń elektronicznych w okazyjnych cenach.">
+    <meta name="keywords" content="PC,Komputery,Telefony,Smartfony,Netbooki,Ultrabooki,Gadżety,Elektronika">
+    <meta name="author" content="Adam S. Grzonkowski & Mikołaj Trawiński">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Styles -->
+    <!-- Bootstrap CSS -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <!-- Animate css -->
+    <link href="~/Content/animate.min.css" rel="stylesheet">
+    <!-- Dropdown menu -->
+    <link href="~/Content/ddlevelsmenu-base.css" rel="stylesheet">
+    <link href="~/Content/ddlevelsmenu-topbar.css" rel="stylesheet">
+    <!-- Countdown -->
+    <link href="~/Content/jquery.countdown.css" rel="stylesheet">
+    <!-- Font awesome CSS -->
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="~/Content/style.css" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="#">
+
+</head>
+<body>
+    <!-- Koszyk -->
+    <div class="modal fade" id="shoppingcart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Koszyk</h4>
+                </div>
+                <div class="modal-body">
+
+                    <!-- Items table -->
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nazwa</th>
+                                <th>Ilość</th>
+                                <th>Cena</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="~/Home/SingleItem">HTC One</a></td>
+                                <td>2</td>
+                                <td>750zł</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Kontynuuj zakupy</button>
+                    <button type="button" class="btn btn-info">Przejdź do płatności</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- Logo & Navigation starts -->
+
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2 col-sm-2">
+                    <!-- Logo -->
+                    <div class="logo">
+                        <h1><a href="~/Home/Index">MikAd</a></h1>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-5">
+                    <!-- Navigation menu -->
+                    <div class="navi">
+                        <div id="ddtopmenubar" class="mattblackmenu">
+                            <ul>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("admin"))
+                                    {
+                                        <li>
+                                            @Html.ActionLink("Panel admininistracyjny", "IndexAdminPanel", "AdminPanel", new{ @rel="adminPanelSubmenus"})
+                                            <ul id="adminPanelSubmenus" class="ddsubmenustyle">
+                                                <li>
+                                                    @Html.ActionLink("Zarządzaj produktami", "IndexAdmin", "Products")
+                                                </li>
+                                                <li>
+                                                    @Html.ActionLink("Zarządzaj kategoriami", "Index", "Categories")
+                                                </li>
+                                                <li>
+                                                    @Html.ActionLink("Zarządzaj użytkownikami", "Index", "Users")
+                                                </li>
+                                            </ul>
+
+                                        </li>
+                                    }
+                                }
+
+                                <li>
+                                    @Html.ActionLink("SKLEP", "Index", "Products")
+                                </li>
+                                <li>
+                                    <a href="#" rel="ddsubmenu1">Konto</a>
+                                    <ul id="ddsubmenu1" class="ddsubmenustyle">
+                                        <li><a href="#">Moje konto</a></li>
+                                        <li><a href="#">Zobacz koszyk</a></li>
+                                        <li><a href="#">Płać</a></li>
+                                        <li><a href="#">Historia zamówień</a></li>
+                                        <li><a href="#">Edytuj profil</a></li>
+                                        <li><a href="#">Potwierdzenie</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="faq.html">FAQ</a>
+                                </li>
+                                <li>
+                                    <a href="#" rel="ddsubmenu1">Elektronika</a>
+                                    <ul id="ddsubmenu1" class="ddsubmenustyle">
+                                        <li><a href="#">PC</a></li>
+                                        <li><a href="#">Laptopy</a></li>
+                                        <li><a href="#">NetBooki</a></li>
+                                        <li><a href="#">Smartfony</a></li>
+                                        <li><a href="#">Monitory</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="~/Home/Contact">Kontakt</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Dropdown NavBar -->
+                    <div class="navis"></div>
+                </div>
+
+                <div class="col-md-4 col-sm-5">
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logo & Navigation ends -->
+    <!-- Render body of a page -->
+<div class="container">
+    <div class="row">
+        @RenderBody()
+    </div>
+</div>
+    <div class="copy text-center">
+        Copyright 2015 &copy; - UMK WFAiIS students
+    </div>
+    <!-- Footer ends -->
+    <!-- Scroll to top -->
+    <span class="totop"><a href="#"><i class="fa fa-chevron-up"></i></a></span>
+
+    <!-- Javascript files -->
+    <!-- jQuery -->
+    <script src="~/Scripts/jquery.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!-- Dropdown menu -->
+    <script src="~/Scripts/ddlevelsmenu.js"></script>
+    <!-- Countdown -->
+    <script src="~/Scripts/jquery.plugin.min.js"></script>
+    <script src="~/Scripts/jquery.countdown.min.js"></script>
+    <!-- jQuery Navco -->
+    <script src="~/Scripts/jquery.navgoco.min.js"></script>
+    <!-- Filter for support page -->
+    <script src="~/Scripts/filter.js"></script>
+    <!-- Respond JS for IE8 -->
+    <script src="~/Scripts/respond.min.js"></script>
+    <!-- HTML5 Support for IE -->
+    <script src="~/Scripts/html5shiv.js"></script>
+    <!-- Custom JS -->
+    <script src="~/Scripts/custom.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

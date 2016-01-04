@@ -5,11 +5,11 @@
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Lista przedmiotów";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Panel produktów";
+    Layout = "~/Views/AdminPanel/_LayoutAdminPanel.cshtml";
 }
-
-<h2>Index</h2>
+<br/>
+<h2>Panel produktów</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -39,6 +39,9 @@
         <th>
             @Html.ActionLink("Cena", "Index", new { sortOrder = ViewBag.PriceSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
+        <th>
+            Data dodania
+        </th>
         <th></th>
     </tr>
 
@@ -58,7 +61,10 @@
                 @Html.DisplayFor(modelItem => item.Amount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item.Price)zł
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddedDate)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
