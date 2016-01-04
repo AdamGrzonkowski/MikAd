@@ -5,9 +5,10 @@
         <li>
             <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> &nbsp; Strona główna</a>
         </li>
-        @foreach (var category in Model)
+        @foreach (var category in Model.Where(category => category.BaseCategoryId.Equals(6)))
         {
             <li>
+         
                 @Html.ActionLink(category.Name, "Index", new {currentFilter = category.Name})
                 <ul>
                     @foreach (var sub in Model)
