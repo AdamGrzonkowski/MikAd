@@ -85,6 +85,16 @@
                     <div class="navi">
                         <div id="ddtopmenubar" class="mattblackmenu">
                             <ul>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("admin"))
+                                    {
+                                        <li>
+                                            @Html.ActionLink("Zarządzaj produktami", "IndexAdmin", "Products")
+                                        </li>
+                                    }
+                                }
+                                
                                 <li>
                                     @Html.ActionLink("SKLEP", "Index", "Products")
                                 </li>

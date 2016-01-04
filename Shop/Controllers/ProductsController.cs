@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using System.Web.UI.WebControls;
 using Microsoft.Ajax.Utilities;
 using Shop.Model.Models;
 using Shop.Repository.Repositories;
@@ -206,6 +208,7 @@ namespace Shop.Controllers
         // ADMIN Methods
 
         // GET: Products - returns view to product admin page
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> IndexAdmin(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
