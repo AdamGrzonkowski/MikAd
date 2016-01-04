@@ -119,6 +119,7 @@ namespace Shop
             }
             return manager;
         }
+
     }
 
     // Configure the application sign-in manager which is used in this application.
@@ -139,4 +140,6 @@ namespace Shop
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
     }
+
+
 }

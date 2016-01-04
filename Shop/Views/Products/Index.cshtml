@@ -9,72 +9,128 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<!-- Page title -->
+<div class="page-title">
+    <div class="container">
+        <h2 style="float: left;">
+            <i class="fa fa-desktop color"></i> Sklep MikAd <small>lista produktów &nbsp;&nbsp;&nbsp; </small>
+        </h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+        <!-- Search bar-->
+        @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+        {
+            <h3>
+                @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { @class = "searchBar", @placeholder = "Czego szukasz?" })
+                <input type="submit" value="Wyszukaj" />
+            </h3>
+        }
+        <hr />
+    </div>
+</div>
+<!-- Page title -->
+<!-- Page content -->
 
-@using (Html.BeginForm("Index", "Products", FormMethod.Get))
-{
-    <h3 align="center">
-        Czego szukasz?: @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Wyszukaj" />
-    </h3>
-}
-@foreach (var item in Model)
-{
-    @Html.DisplayFor(modelItem => item.Category.Name)
-}
-<table class="table">
-    <tr>
-        <th>
-            Obraz
-        </th>
-        <th>
-            @Html.ActionLink("Nazwa produktu", "Index", new {sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter})
-        </th>
-        <th>
-            @Html.ActionLink("Kategoria", "Index", new {sortOrder = ViewBag.CategoryNameSortParm, currentFilter = ViewBag.CurrentFilter})
-        </th>
-        <th>
-            @Html.ActionLink("Ilość", "Index", new {sortOrder = ViewBag.QuantitySortParm, currentFilter = ViewBag.CurrentFilter})
-        </th>
-        <th>
-            @Html.ActionLink("Cena", "Index", new {sortOrder = ViewBag.PriceSortParm, currentFilter = ViewBag.CurrentFilter})
-        </th>
-        <th></th>
-    </tr>
+<div class="shop-items">
+    <div class="container">
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td width ="100">
-                @Html.ActionImage("Details", new { id = item.Id }, item.Photo, "Details")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
+        <div class="row">
 
-</table>
-<br />
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            <div class="col-md-9 col-md-push-3">
 
-@Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                <!-- Breadcrumb -->
+                <ul class="breadcrumb">
+                    <li>@Html.ActionLink("MikAd", "Index", "Home") <span class="divider"></span></li>
+                    <li> @Html.ActionLink("Produkty", "Index")<span class="divider"></span></li>
+                    <li class="active">
+                        @Model.TotalItemCount produktów
+                    </li>
+                </ul>
+
+                <!-- Wyświetlanie produktów -->
+                @foreach (var item in Model)
+                {
+                    // Jeżeli wyświetlone trzy produkty, to przejdź do nowego wiersza
+                    var i = 0;
+                    i++;
+                    if (i % 3 == 0)
+                    {
+                        <div class="row">
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="item">
+                                    <!-- Obraz przedmiotu -->
+                                    <div class="item-image">
+                                        @Html.ActionImage("Details", new { id = item.Id }, item.Photo, "Details")
+                                    </div>
+                                    <!-- Szczegóły przedmiotu -->
+                                    <div class="item-details">
+                                        <!-- Name -->
+                                        <h5>@Html.ActionLink(item.Name, "Details", new { id = item.Id })</h5>
+                                        <div class="clearfix"></div>
+                                        <!-- Krótki opis, po dwóch liniach ucinany -->
+                                        <p style="overflow: hidden">@Html.DisplayFor(modelItem => item.Description)</p>
+                                        <hr />
+                                        <!-- Cena -->
+                                        <div class="item-price pull-left">@Html.DisplayFor(modelItem => item.Price)</div>
+                                        <!-- Dodaj do koszyka -->
+                                        <div class="pull-right">
+                                            <a href="#" class="btn btn-danger btn-sm">Dodaj do koszyka</a>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="item">
+                                <!-- Obraz przedmiotu -->
+                                <div class="item-image">
+                                    @Html.ActionImage("Details", new { id = item.Id }, item.Photo, "Details")
+                                </div>
+                                <!-- Szczegóły przedmiotu -->
+                                <div class="item-details">
+                                    <!-- Name -->
+                                    <h5>@Html.ActionLink(item.Name, "Details", new { id = item.Id })</h5>
+                                    <div class="clearfix"></div>
+                                    <!-- Krótki opis, po dwóch liniach ucinany -->
+                                    <p style="overflow: hidden">@Html.DisplayFor(modelItem => item.Description)</p>
+                                    <hr />
+                                    <!-- Cena -->
+                                    <div class="item-price pull-left">@Html.DisplayFor(modelItem => item.Price)zł</div>
+                                    <!-- Dodaj do koszyka -->
+                                    <div class="pull-right">
+                                        <a href="#" class="btn btn-danger btn-sm">Dodaj do koszyka</a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Paginacja -->
+                        <ul class="pagination">
+                            Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
+                            @Html.PagedListPager(Model, page => Url.Action("Index",
+                            new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Kategorie -->
+            <div class="col-md-3 col-md-pull-9">
+                <div class="sidey">
+                    @{
+                        Html.RenderAction("_CategoriesPartial");
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="sep-bor"></div>
+    </div>
+</div>

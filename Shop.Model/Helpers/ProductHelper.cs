@@ -11,6 +11,7 @@ namespace Shop.Model.Helpers
             // build the <img> tag
             var imgBuilder = new TagBuilder("img");
             imgBuilder.MergeAttribute("src", url.Content(imagePath));
+            imgBuilder.MergeAttribute("class", "img-responsive");
             imgBuilder.MergeAttribute("width", "100");
             imgBuilder.MergeAttribute("height", "100");
             imgBuilder.MergeAttribute("alt", alt);

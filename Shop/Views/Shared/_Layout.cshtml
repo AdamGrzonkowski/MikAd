@@ -90,6 +90,28 @@
                     <div class="navi">
                         <div id="ddtopmenubar" class="mattblackmenu">
                             <ul>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("admin"))
+                                    {
+                                        <li>
+                                            @Html.ActionLink("Panel admininistracyjny", "IndexAdminPanel", "AdminPanel")
+                                            <ul id="adminPanelSubmenus" class="ddsubmenustyle">
+                                                <li>
+                                                    @Html.ActionLink("Zarządzaj produktami", "IndexAdmin", "Products")
+                                                </li>
+                                                <li>
+                                                    @Html.ActionLink("Zarządzaj kategoriami", "Index", "Categories")
+                                                </li>
+                                                <li>
+                                                    @Html.ActionLink("Zarządzaj użytkownikami", "Index", "Users")
+                                                </li>
+                                            </ul>
+
+                                        </li>
+                                    }
+                                }
+                                
                                 <li>
                                     @Html.ActionLink("SKLEP", "Index", "Products")
                                 </li>

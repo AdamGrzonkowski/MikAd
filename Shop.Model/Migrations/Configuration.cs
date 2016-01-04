@@ -1,6 +1,11 @@
 using System.Collections.Generic;
+using System.Data.Entity.Core.Common.CommandTrees;
 using System.Linq;
+using System.Web.UI.WebControls;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Shop.Model.Models;
+
 
 namespace Shop.Model.Migrations
 {
@@ -15,9 +20,44 @@ namespace Shop.Model.Migrations
         }
 
         protected override void Seed(ShopContext context)
-        {
+        {   
+            
+            _InitAdminUser(context);
             //_InitCategories(context);
             //_InitProducts(context);   
+        }
+
+        private void _InitAdminUser(ShopContext context)
+        {
+            //Stwórz rolê admina
+            if (!context.Roles.Any(r => r.Name == "admin"))
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var role = new IdentityRole { Name = "admin" };
+
+                manager.Create(role);
+            }
+
+            if (!context.Users.Any(u => u.UserName == "admin"))
+            {
+                var store = new UserStore<User>(context);
+                var manager = new UserManager<User>(store);
+                var user = new User();
+
+                user.Email = "Sklep_MVC@wp.pl";
+                user.EmailConfirmed = true;
+                user.UserName = "admin";
+                var password = "admin";
+
+                var hash = new PasswordHasher();
+                user.PasswordHash = hash.HashPassword(password);
+                user.SecurityStamp = "blabla";
+
+                manager.Create(user);
+
+                manager.AddToRole(user.Id, "admin");
+            }
         }
 
         private void _InitCategories(ShopContext context)
