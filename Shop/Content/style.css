@@ -976,11 +976,11 @@ strong{
 	height: 0;
 	display: inline-block;
 	vertical-align: top;
-	border-top: 4px solid #fff;
-	border-right: 4px solid transparent;
-	border-left: 4px solid transparent;
-	content: "";
-   margin-top: 8px;
+	border-top: 6px solid #fff;
+	border-right: 6px solid transparent;
+	border-left: 6px solid transparent;
+    content: "";
+    margin-top: 8px;
 	margin-left: 2px;
 }
 
@@ -1156,6 +1156,9 @@ strong{
 .shop-items .item-details h5 a{
 	color: #777;
 }
+.shop-items .item-details h5 {
+	color: #777;
+}
 
 .shop-items .item-details h5 a:hover{
    color:#555;
@@ -1182,7 +1185,7 @@ strong{
 	font-weight: bold;
    background:#16cbe6;
    color:#fff;
-   width:40px;
+   width:65px;
    text-align:center;
 }
 
@@ -1740,6 +1743,11 @@ strong{
 
 .sitemap ul{
    padding-left:15px;
+}
+
+/* Search bar*/
+.searchBar {
+    width: 50%;
 }
 
 /* Components */

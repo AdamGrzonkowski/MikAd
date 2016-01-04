@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -38,6 +39,8 @@ namespace Shop.Model.Models
         public virtual ICollection<Product> Products { get; set; }
 
         public virtual ICollection<Category> SubCategories { get; set; }
+
+        public virtual ICollection<Category> BaseCategoryCategories{ get; set; }
 
         //[DataMember]
         //[NotMapped]

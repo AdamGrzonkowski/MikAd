@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.Ajax.Utilities;
 using Shop.Model.Models;
+using Shop.Repository.Repositories;
 using PagedList;
 
 namespace Shop.Controllers
@@ -62,7 +63,7 @@ namespace Shop.Controllers
                     break;
             }
 
-            int pageSize = 25;
+            int pageSize = 12;
             int pageNumber = (page ?? 1);
             return View(products.ToPagedList(pageNumber, pageSize));
         }
@@ -123,7 +124,7 @@ namespace Shop.Controllers
                 db.Products.Add(product);
 
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexAdmin");
             }
 
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", product.CategoryId);
@@ -156,6 +157,7 @@ namespace Shop.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(product).State = EntityState.Modified;
+                product.ModifiedDate = DateTime.Now;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -192,7 +194,66 @@ namespace Shop.Controllers
             }
             db.Products.Remove(product);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("IndexAdmin");
+        }
+
+        public PartialViewResult _CategoriesPartial()
+        {
+            var categories = db.Categories;
+            return PartialView(categories);
+        }
+
+        // ADMIN Methods
+
+        // GET: Products - returns view to product admin page
+        public async Task<ActionResult> IndexAdmin(string sortOrder, string currentFilter, string searchString, int? page)
+        {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.CategoryNameSortParm = String.IsNullOrEmpty(sortOrder) ? "cat_name_desc" : "";
+            ViewBag.QuantitySortParm = String.IsNullOrEmpty(sortOrder) ? "quantity_desc" : "";
+            ViewBag.PriceSortParm = String.IsNullOrEmpty(sortOrder) ? "price_desc" : "";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var products = db.Products.Include(p => p.Category);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.Name.Contains(searchString)
+                                       || s.Category.Name.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    products = products.OrderByDescending(s => s.Name);
+                    break;
+                case "cat_name_desc":
+                    products = products.OrderByDescending(s => s.Category.Name);
+                    break;
+                case "quantity_desc":
+                    products = products.OrderByDescending(s => s.Amount);
+                    break;
+                case "price_desc":
+                    products = products.OrderByDescending(s => s.Price);
+                    break;
+                default:
+                    products = products.OrderBy(s => s.Name);
+                    break;
+            }
+
+            int pageSize = 50;
+            int pageNumber = (page ?? 1);
+            return View(products.ToPagedList(pageNumber, pageSize));
         }
 
         protected override void Dispose(bool disposing)
@@ -203,7 +264,5 @@ namespace Shop.Controllers
             }
             base.Dispose(disposing);
         }
-
-      
     }
 }

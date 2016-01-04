@@ -354,6 +354,8 @@
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="swagger.json" />
     <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Products\IndexAdmin.cshtml" />
+    <None Include="Views\Products\_CategoriesPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

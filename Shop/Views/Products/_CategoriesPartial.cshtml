@@ -1,0 +1,26 @@
+﻿@using Microsoft.Ajax.Utilities
+@using Shop.Model.Models
+@model IEnumerable<Shop.Model.Models.Category>
+<ul class="nav">
+        <li>
+            <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> &nbsp; Strona główna</a>
+        </li>
+        @foreach (var category in Model)
+        {
+            <li>
+                @Html.ActionLink(category.Name, "Index", new {currentFilter = category.Name})
+                <ul>
+                    @foreach (var sub in Model)
+                    {
+                        <li>
+                            @if (sub.BaseCategoryId == category.Id)
+                            {
+                                @Html.ActionLink(sub.Name, "Index", new {currentFilter = sub.Name})
+                            }
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+</ul>   
+    
