@@ -318,6 +318,9 @@ namespace Shop.Controllers
                 // Nie ujawniaj, że użytkownik nie istnieje.
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
+            var hashedPassword = new PasswordHasher();
+            model.Password = hashedPassword.HashPassword(model.Password);
+
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {

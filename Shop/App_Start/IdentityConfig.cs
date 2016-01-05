@@ -24,7 +24,7 @@ namespace Shop
         public Task SendAsync(IdentityMessage message)
         {
             // Adres nadawcy:
-            var sentFrom = "Sklep_MVC@wp.pl";
+            const string sentFrom = "Sklep_MVC@wp.pl";
 
             // Konfiguruj klienta:
             System.Net.Mail.SmtpClient client =

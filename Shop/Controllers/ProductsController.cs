@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.UI.WebControls;
 using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity;
 using Shop.Model.Models;
 using Shop.Repository.Repositories;
 using PagedList;
@@ -272,5 +273,10 @@ namespace Shop.Controllers
             }
             base.Dispose(disposing);
         }
+
+        #region Helpers
+
+
+        #endregion
     }
 }
