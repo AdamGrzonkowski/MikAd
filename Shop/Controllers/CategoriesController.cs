@@ -98,6 +98,7 @@ namespace Shop.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(category).State = EntityState.Modified;
+                category.ModifiedDate = DateTime.Now;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
