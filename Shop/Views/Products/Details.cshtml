@@ -31,7 +31,7 @@
                 </li>
             </ul>
 
-            <div class="single-item">
+            <div class="single-item" ng-controller="OrdersController">
                 <div class="row">
                     <div class="col-md-4 col-xs-5">
 
@@ -52,9 +52,9 @@
 
                         <!-- Dodaj do koszyka -->
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="1">
+                            <input type="text" class="form-control" placeholder="1" value="1" ng-model="amount">
                             <span class="input-group-btn">
-                                    <button class="btn btn-info" type="button">Kup</button>
+                                    <button class="btn btn-info" type="button" target="_self" ng-click="addProductToOrder(@Model.Id, amount)">Kup</button>
                                 </span>
                         </div>
 

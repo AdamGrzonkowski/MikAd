@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Net.Http.Formatting;
+using System.Web.Http;
 using System.Web.Http.OData.Extensions;
 using Microsoft.Owin.Security.OAuth;
 
@@ -22,6 +23,9 @@ namespace Shop.Api
                 defaults: new { id = RouteParameter.Optional }
             );
             config.AddODataQueryFilter();
+
+            config.Formatters.Clear();
+            config.Formatters.Add(new JsonMediaTypeFormatter());
         }
     }
 }
