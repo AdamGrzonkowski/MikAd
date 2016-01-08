@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
@@ -12,6 +13,8 @@ using Microsoft.Ajax.Utilities;
 using Shop.Model.Models;
 using Shop.Repository.Repositories;
 using PagedList;
+using Shop.Models;
+using Product = Shop.Model.Models.Product;
 
 namespace Shop.Controllers
 {
@@ -262,6 +265,22 @@ namespace Shop.Controllers
             int pageSize = 50;
             int pageNumber = (page ?? 1);
             return View(products.ToPagedList(pageNumber, pageSize));
+        }
+
+        public ActionResult Data(int id)
+        {
+            Product product = db.Products.SingleOrDefault(x => x.Id == id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return Json(new ProductViewModel
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Amount = product.Amount,
+                Price = product.Price
+            } , JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
