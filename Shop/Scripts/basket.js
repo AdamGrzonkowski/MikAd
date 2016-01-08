@@ -27,7 +27,7 @@ app.controller("OrdersController", function ($scope, $http, $localStorage, $sess
     $scope.isProductInBasket = function (id) {
         // jeśli produkt jest w bazie, zwraca jego indeks, w innym wypadku -1.
         for (var i in $scope.$storage.products) {
-            if ($scope.$storage.products[i].id == id) {
+            if ($scope.$storage.products[i].Id === id) {
                 return i;
             }
         }
@@ -35,11 +35,13 @@ app.controller("OrdersController", function ($scope, $http, $localStorage, $sess
     }
 
     $scope.getProduct = function (id, amount) {
+        console.log("amount type: " + typeof amount);
+        console.log("id type: " + typeof id);
         return $http({
             method: "get",
             url: productsUrl + id
         }).success(function (data, status, headers, config) {
-            if (data.Amount < amount) {
+            if (data.Stock < amount) {
                 $scope.message = "Nie możesz zamówić więcej produktów, niż ich liczba w magazynie";
             } else {
                 var i = $scope.isProductInBasket(id);
@@ -48,7 +50,7 @@ app.controller("OrdersController", function ($scope, $http, $localStorage, $sess
                     cleanedData.Amount = amount;
                     $scope.$storage.products.push(cleanedData);
                 } else {
-                    if ($scope.$storage.products[i].Amount + amount > data.Amount) {
+                    if ($scope.$storage.products[i].Amount + amount > data.Stock) {
                         $scope.message = "Nie możesz zamówić więcej produktów, niż ich liczba w magazynie";
                     } else {
                         $scope.$storage.products[i].Amount += amount;
@@ -62,21 +64,6 @@ app.controller("OrdersController", function ($scope, $http, $localStorage, $sess
 
     $scope.addProductToOrder = function (id, amount) {
         $scope.getProduct(id, amount, $scope.setCurrentProduct).then(function (data, status, headers, config) {
-            //if (data.Amount < amount) {
-            //    $scope.message = "Nie możesz zamówić więcej produktów, niż ich liczba w magazynie";
-            //} else {
-            //    var i = $scope.isProductInBasket(id);
-            //    if (i < 0) {
-            //        $scope.$storage.products.push(data);
-            //    } else {
-            //        if ($scope.$storage.products[i].Amount + amount > data.Amount) {
-            //            $scope.message = "Nie możesz zamówić więcej produktów, niż ich liczba w magazynie";
-            //        } else {
-            //            $scope.$storage.products[i].Amount += amount;
-            //            $scope.message = "";
-            //        }
-            //    }
-            //}
         });
     }
 });

@@ -278,8 +278,9 @@ namespace Shop.Controllers
             {
                 Id = product.Id,
                 Name = product.Name,
-                Amount = product.Amount,
-                Price = product.Price
+                Amount = 0,
+                Price = product.Price,
+                Stock = product.Amount
             } , JsonRequestBehavior.AllowGet);
         }
 
