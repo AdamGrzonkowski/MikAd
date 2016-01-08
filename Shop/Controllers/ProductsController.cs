@@ -5,11 +5,13 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.UI.WebControls;
 using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity;
 using Shop.Model.Models;
 using Shop.Repository.Repositories;
 using PagedList;
@@ -104,26 +106,9 @@ namespace Shop.Controllers
         [Authorize(Roles = "admin")]
         public async Task<ActionResult> Create(Product product)
         {
-            var validTypes = new[] { "image/jpeg", "image/pjpeg", "image/png", "image/gif" };
-            if (!validTypes.Contains(product.PhotoUpload.ContentType))
-            {
-                ModelState.AddModelError("PhotoUpload", "Please upload either a JPG, GIF, or PNG image.");
-            }
             if (ModelState.IsValid)
             {
-                if (product.PhotoUpload.ContentLength > 0)
-                {
-                    // A file was uploaded
-                    string uploadPath = "~/Images/Products/";
-                    var fileName = Path.GetFileName(product.PhotoUpload.FileName);
-                    var path = Path.Combine(Server.MapPath(uploadPath), fileName);
-                    if (!System.IO.Directory.Exists(uploadPath))
-                    {
-                        ModelState.AddModelError("PhotoUpload", "The directory of products images doesn't seem to exits. Contact administrator.");
-                    }
-                    product.PhotoUpload.SaveAs(path);
-                    product.Photo = uploadPath + fileName;
-                }
+                await AddPhoto(product);
                 product.AddedDate = DateTime.Now;
                 product.ModifiedDate = DateTime.Now;
                 product.IP = Request.UserHostAddress;
@@ -160,14 +145,18 @@ namespace Shop.Controllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,CategoryId,Name,Description,Amount,Price,JsonProperties")] Product product)
+        public async Task<ActionResult> Edit(Product product)
         {
             if (ModelState.IsValid)
             {
+                await AddPhoto(product);
                 db.Entry(product).State = EntityState.Modified;
                 product.ModifiedDate = DateTime.Now;
-                await db.SaveChangesAsync();
+
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
+
             }
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", product.CategoryId);
             return View(product);
@@ -292,5 +281,58 @@ namespace Shop.Controllers
             }
             base.Dispose(disposing);
         }
+
+        #region Helpers
+
+        private async Task<string> SendOrderConfirmationAsync()
+        {
+            var msg = new MailMessage();
+            msg.To.Add("adam.grzonkowski@wp.pl");
+            
+            msg.Subject = "Potwierdzenie zamówienie nr -> wstawić nr zamówienia <- ";
+            msg.Body = "<h3>Drogi -> username <- </h3>" +
+                       "<p>Dziękujemy za zakupy w sklepie MikAd! </br>" +
+                       "Zakupiłeś następujące przedmioty -> wylistować przedmioty <- </p>" +
+                       "<p>Wpłaty za zakupy dokonaj na konto:</p>" +
+                       "<small>00 1111 2222 3333 4444 5555 6666 </br>" +
+                       "Tytuł przelewu: ->> wstawić numer zamówienia <-- </br>" +
+                       "Sklep MikAd, ul. Grudziądzka 5, 87-100 Toruń </small></br>" +
+                       "<p>Dziękujemy za zakupy, </br>" +
+                       "Sklep MikAd</p>";
+            msg.IsBodyHtml = true;
+            
+
+            var smtpClient = new SmtpClient();
+            smtpClient.Send(msg);
+
+            var callbackUrl = Url.Action("IndexAdmin", "Products");
+            return callbackUrl;
+        }
+
+        private async Task<string> AddPhoto(Product productWithoutPhoto)
+        {
+            var validTypes = new[] { "image/jpeg", "image/pjpeg", "image/png", "image/gif" };
+            if (!validTypes.Contains(productWithoutPhoto.PhotoUpload.ContentType))
+            {
+                ModelState.AddModelError("PhotoUpload", "Please upload either a JPG, GIF, or PNG image.");
+            }
+            if (productWithoutPhoto.PhotoUpload.ContentLength > 0)
+            {
+                    // A file was uploaded
+                    string uploadPath = "~/Images/Products/";
+                    var fileName = Path.GetFileName(productWithoutPhoto.PhotoUpload.FileName);
+                    var path = Path.Combine(Server.MapPath(uploadPath), fileName);
+                    if (!System.IO.Directory.Exists(uploadPath))
+                    {
+                        ModelState.AddModelError("PhotoUpload", "The directory of products images doesn't seem to exits. Contact administrator.");
+                    }
+                    productWithoutPhoto.PhotoUpload.SaveAs(path);
+                    productWithoutPhoto.Photo = uploadPath + fileName;  
+            }
+
+            return productWithoutPhoto.Photo;
+        }
+
+        #endregion
     }
 }
