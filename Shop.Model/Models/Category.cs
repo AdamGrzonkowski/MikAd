@@ -12,7 +12,7 @@ namespace Shop.Model.Models
     [DataContract]
     public class Category : BaseEntity
     {
-
+        
         [DataMember]
         public string Name { get; set; }
 

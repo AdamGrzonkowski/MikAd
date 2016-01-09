@@ -149,7 +149,10 @@ namespace Shop.Controllers
         {
             if (ModelState.IsValid)
             {
-                await AddPhoto(product);
+                if (product.PhotoUpload != null)
+                {
+                    await AddPhoto(product);
+                }              
                 db.Entry(product).State = EntityState.Modified;
                 product.ModifiedDate = DateTime.Now;
 
@@ -194,12 +197,6 @@ namespace Shop.Controllers
             db.Products.Remove(product);
             await db.SaveChangesAsync();
             return RedirectToAction("IndexAdmin");
-        }
-
-        public PartialViewResult _CategoriesPartial()
-        {
-            var categories = db.Categories;
-            return PartialView(categories);
         }
 
         // ADMIN Methods
@@ -271,6 +268,20 @@ namespace Shop.Controllers
                 Price = product.Price,
                 Stock = product.Amount
             } , JsonRequestBehavior.AllowGet);
+        }
+
+        public PartialViewResult _RecentProductsPartial()
+        {
+            var recentProducts = db.Products.OrderByDescending(x => x.AddedDate).Take(8);
+            
+            return PartialView(recentProducts);
+        }
+
+        public PartialViewResult _MainPageProductsPartial()
+        {
+            var recentProducts = db.Products.OrderByDescending(x => x.ModifiedDate).Take(4);
+
+            return PartialView(recentProducts);
         }
 
         protected override void Dispose(bool disposing)

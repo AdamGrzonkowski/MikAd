@@ -40,46 +40,8 @@
 </head>
 <body ng-app="shop">
     <!-- Koszyk -->
-<div class="modal fade" id="shoppingcart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
-     ng-controller="BasketController">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Koszyk</h4>
-                </div>
-                <div class="modal-body">
-
-                    <!-- Items table -->
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Nazwa</th>
-                                <th>Ilość</th>
-                                <th>Cena</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="product in $storage.products"> 
-                                <td><a href="/Products/Details/{{product.id}}">{{product.Name}}</a></td>
-                                <td>{{product.Amount}}</td>
-                                <td>{{product.Price}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <strong>Cena całkowita:</strong> {{getTotalPrice()}}
-                </div>
-                <div class="modal-footer">
-                    
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Kontynuuj zakupy</button>
-                    <button type="button" class="btn btn-info" target="_self" ng-click="confirmOrder()">Potwierdź zamówienie</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
-    <!-- Logo & Navigation starts -->
-
+    @Html.Partial("_CartPartial")
+    <!-- Logo & nawigacja -->
     <div class="header">
         <div class="container">
             <div class="row">
@@ -133,16 +95,6 @@
                                 <li>
                                     <a href="faq.html">FAQ</a>
                                 </li>
-                                <li>
-                                    <a href="#" rel="ddsubmenu1">Elektronika</a>
-                                    <ul id="ddsubmenu1" class="ddsubmenustyle">
-                                        <li><a href="#">PC</a></li>
-                                        <li><a href="#">Laptopy</a></li>
-                                        <li><a href="#">NetBooki</a></li>
-                                        <li><a href="#">Smartfony</a></li>
-                                        <li><a href="#">Monitory</a></li>
-                                    </ul>
-                                </li>
                                 <li><a href="~/Home/Contact">Kontakt</a></li>
                             </ul>
                         </div>
@@ -168,137 +120,9 @@
 </div>
 
     <!-- Recent posts Starts -->
-
-    <div class="recent-posts blocky">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Section title -->
-                    <div class="section-title">
-                        <h4><i class="fa fa-desktop color"></i> &nbsp;Nowości</h4>
-                    </div>
-
-                    <div id="item-carousel" class="carousel slide" data-ride="carousel">
-
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <div class="row">
-                                    <div class="col-md-3 col-sm-6">
-                                        <!-- single item -->
-                                        <div class="s-item">
-                                            <!-- Image link -->
-                                            <a href="~/Home/SingleItem">
-                                                <img src="~/img/items/2.png" class="img-responsive" alt="" />
-                                            </a>
-                                            <!-- portfolio caption -->
-                                            <div class="s-caption">
-                                                <!-- heading and paragraph -->
-                                                <h4><a href="#">Jakiś produkt</a></h4>
-                                                <p>Coś o produkcie.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="s-item">
-                                            <a href="~/Home/SingleItem">
-                                                <img src="~/img/items/3.png" class="img-responsive" alt="" />
-                                            </a>
-                                            <div class="s-caption">
-                                                <h4><a href="#">Jakiś produkt</a></h4>
-                                                <p>Coś o produkcie.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="s-item">
-                                            <a href="~/Home/SingleItem">
-                                                <img src="~/img/items/4.png" class="img-responsive" alt="" />
-                                            </a>
-                                            <div class="s-caption">
-                                                <h4><a href="#">Jakiś produkt</a></h4>
-                                                <p>Coś o produkcie.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="s-item">
-                                            <a href="~/Home/SingleItem">
-                                                <img src="~/img/items/5.png" class="img-responsive" alt="" />
-                                            </a>
-                                            <div class="s-caption">
-                                                <h4><a href="#">Jakiś produkt</a></h4>
-                                                <p>Coś o produkcie.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="row">
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="s-item">
-                                            <a href="~/Home/SingleItem">
-                                                <img src="~/img/items/6.png" class="img-responsive" alt="" />
-                                            </a>
-                                            <div class="s-caption">
-                                                <h4><a href="#">Jakiś produkt</a></h4>
-                                                <p>Coś o produkcie.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="s-item">
-                                            <a href="~/Home/SingleItem">
-                                                <img src="~/img/items/7.png" class="img-responsive" alt="" />
-                                            </a>
-                                            <div class="s-caption">
-                                                <h4><a href="#">Jakiś produkt</a></h4>
-                                                <p>Coś o produkcie.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="s-item">
-                                            <a href="~/Home/SingleItem">
-                                                <img src="~/img/items/8.png" class="img-responsive" alt="" />
-                                            </a>
-                                            <div class="s-caption">
-                                                <h4><a href="#">Jakiś produkt</a></h4>
-                                                <p>Coś o produkcie.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="s-item">
-                                            <a href="~/Home/SingleItem">
-                                                <img src="~/img/items/9.png" class="img-responsive" alt="" />
-                                            </a>
-                                            <div class="s-caption">
-                                                <h4><a href="#">Jakiś produkt</a></h4>
-                                                <p>Coś o produkcie.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Controls -->
-                        <a class="left c-control" href="#item-carousel" data-slide="prev">
-                            <i class="fa fa-chevron-left"></i>
-                        </a>
-                        <a class="right c-control" href="#item-carousel" data-slide="next">
-                            <i class="fa fa-chevron-right"></i>
-                        </a>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
+    @{
+        Html.RenderAction("_RecentProductsPartial", "Products");
+    }
     <!-- Recent posts Ends -->
 
 <!-- Footer starts -->

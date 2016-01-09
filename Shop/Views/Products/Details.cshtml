@@ -53,9 +53,9 @@
                         <!-- Dodaj do koszyka -->
                         <div class="input-group">
                             <strong>{{message}}</strong>
-                            <input type="number" class="form-control" placeholder="1" value="{{1}}" ng-model="amount">
+                            <input type="number" class="form-control" placeholder="Ile?" min="1" ng-init="amount = 1" ng-model="amount">
                             <span class="input-group-btn">
-                                    <button class="btn btn-info" type="button" target="_self" ng-click="addProductToOrder(@Model.Id, amount)">Kup</button>
+                                    <button class="btn btn-info" type="button" target="_self" ng-disabled="" ng-click="addProductToOrder(@Model.Id, amount)">Kup</button>
                                 </span>
                         </div>
 
@@ -163,7 +163,7 @@
             <div class="col-md-3 col-md-pull-9">
                 <div class="sidey">
                     @{
-                        Html.RenderAction("_CategoriesPartial");
+                        Html.RenderAction("_CategoriesPartial","Categories");
                     }
                 </div>
 
