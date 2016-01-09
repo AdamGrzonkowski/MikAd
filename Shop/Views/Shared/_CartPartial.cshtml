@@ -1,0 +1,37 @@
+﻿<div class="modal fade" id="shoppingcart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+     ng-controller="BasketController">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Koszyk</h4>
+            </div>
+            <div class="modal-body">
+
+                <!-- Items table -->
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nazwa</th>
+                            <th>Ilość</th>
+                            <th>Cena</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="product in $storage.products">
+                            <td><a href="/Products/Details/{{product.id}}">{{product.Name}}</a></td>
+                            <td>{{product.Amount}}</td>
+                            <td>{{product.Price}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <strong>Cena całkowita:</strong> {{getTotalPrice()}}
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">Kontynuuj zakupy</button>
+                <button type="button" class="btn btn-info">Przejdź do płatności</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

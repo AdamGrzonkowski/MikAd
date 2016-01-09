@@ -149,7 +149,10 @@ namespace Shop.Controllers
         {
             if (ModelState.IsValid)
             {
-                await AddPhoto(product);
+                if (product.PhotoUpload != null)
+                {
+                    await AddPhoto(product);
+                }              
                 db.Entry(product).State = EntityState.Modified;
                 product.ModifiedDate = DateTime.Now;
 
@@ -271,6 +274,13 @@ namespace Shop.Controllers
         {
             var recentProducts = db.Products.OrderByDescending(x => x.AddedDate).Take(8);
             
+            return PartialView(recentProducts);
+        }
+
+        public PartialViewResult _MainPageProductsPartial()
+        {
+            var recentProducts = db.Products.OrderByDescending(x => x.ModifiedDate).Take(4);
+
             return PartialView(recentProducts);
         }
 

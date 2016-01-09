@@ -40,46 +40,9 @@
 </head>
 <body ng-app="shop">
     <!-- Koszyk -->
-<div class="modal fade" id="shoppingcart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
-     ng-controller="BasketController">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Koszyk</h4>
-                </div>
-                <div class="modal-body">
+    @Html.Partial("_CartPartial")
 
-                    <!-- Items table -->
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Nazwa</th>
-                                <th>Ilość</th>
-                                <th>Cena</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="product in $storage.products"> 
-                                <td><a href="/Products/Details/{{product.id}}">{{product.Name}}</a></td>
-                                <td>{{product.Amount}}</td>
-                                <td>{{product.Price}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <strong>Cena całkowita:</strong> {{getTotalPrice()}}
-                </div>
-                <div class="modal-footer">
-                    
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Kontynuuj zakupy</button>
-                    <button type="button" class="btn btn-info">Przejdź do płatności</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
-    <!-- Logo & Navigation starts -->
-
+    <!-- Logo & nawigacja -->
     <div class="header">
         <div class="container">
             <div class="row">
@@ -132,16 +95,6 @@
                                 </li>
                                 <li>
                                     <a href="faq.html">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="#" rel="ddsubmenu1">Elektronika</a>
-                                    <ul id="ddsubmenu1" class="ddsubmenustyle">
-                                        <li><a href="#">PC</a></li>
-                                        <li><a href="#">Laptopy</a></li>
-                                        <li><a href="#">NetBooki</a></li>
-                                        <li><a href="#">Smartfony</a></li>
-                                        <li><a href="#">Monitory</a></li>
-                                    </ul>
                                 </li>
                                 <li><a href="~/Home/Contact">Kontakt</a></li>
                             </ul>

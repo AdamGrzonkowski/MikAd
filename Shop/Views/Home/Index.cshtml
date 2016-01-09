@@ -62,7 +62,7 @@
                 <div class="col-md-12">
                     <!-- Catchy title -->
                     <h3>Najwyższa jakość - najniższe ceny</h3>
-                    <p>Dzięki ofertom setek klientów, masz unikalną możliwość wyboru najlepszej jakości sprzetu w odpowiedniej dla Ciebie cenie.</p>
+                    <p>Dzięki naszej starannej selekcji sprzętu, masz unikalną możliwość wyboru najlepszej jakości elektroniki w odpowiedniej dla Ciebie cenie.</p>
                 </div>
             </div>
             <div class="sep-bor"></div>
@@ -70,110 +70,11 @@
     </div>
 
     <!-- Hero ends -->
-    <!-- Items List starts -->
+    <!-- Lista do 4 przedmiotów z najnowszą datą modyfikacji -->
+    @{
+        Html.RenderAction("_MainPageProductsPartial", "Products");
+    }
 
-    <div class="shop-items blocky">
-        <div class="container">
-
-            <div class="row">
-                <!-- Item #1 -->
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="item">
-                        <!-- Use the below link to put HOT icon -->
-                        <div class="item-icon"><span>HOT</span></div>
-                        <!-- Item image -->
-                        <div class="item-image">
-                            <a href="~/Home/SingleItem"><img src="~/img/items/2.png" alt="" class="img-responsive" /></a>
-                        </div>
-                        <!-- Item details -->
-                        <div class="item-details">
-                            <!-- Name -->
-                            <h5><a href="~/Home/SingleItem">HTC One V</a></h5>
-                            <div class="clearfix"></div>
-                            <!-- Para. Note more than 2 lines. -->
-                            <p>Coś o produkcie.</p>
-                            <hr />
-                            <!-- Price -->
-                            <div class="item-price pull-left">1010zł</div>
-                            <!-- Dodaj do koszyka -->
-                            <div class="pull-right"><a href="#" class="btn btn-danger btn-sm">Dodaj do koszyka</a></div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Item #2 -->
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="item">
-                        <!-- Item image -->
-                        <div class="item-image">
-                            <a href="~/Home/SingleItem"><img src="~/img/items/3.png" alt="" class="img-responsive" /></a>
-                        </div>
-                        <!-- Item details -->
-                        <div class="item-details">
-                            <!-- Name -->
-                            <h5><a href="~/Home/SingleItem">Dell One V</a></h5>
-                            <!-- Para. Note more than 2 lines. -->
-                            <p>Coś o produkcie.</p>
-                            <hr />
-                            <!-- Price -->
-                            <div class="item-price pull-left">764zł</div>
-                            <!-- Dodaj do koszyka -->
-                            <div class="pull-right"><a href="#" class="btn btn-danger btn-sm">Dodaj do koszyka</a></div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="item">
-                        <!-- Item image -->
-                        <div class="item-image">
-                            <a href="~/Home/SingleItem"><img src="~/img/items/4.png" alt="" class="img-responsive" /></a>
-                        </div>
-                        <!-- Item details -->
-                        <div class="item-details">
-                            <!-- Name -->
-                            <h5><a href="~/Home/SingleItem">Cannon One V</a></h5>
-                            <!-- Para. Note more than 2 lines. -->
-                            <p>Coś o produkcie.</p>
-                            <hr />
-                            <!-- Price -->
-                            <div class="item-price pull-left">480zł</div>
-                            <!-- Dodaj do koszyka -->
-                            <div class="pull-right"><a href="#" class="btn btn-danger btn-sm">Dodaj do koszyka</a></div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="item">
-                        <!-- Item image -->
-                        <div class="item-image">
-                            <a href="~/Home/SingleItem"><img src="~/img/items/5.png" alt="" class="img-responsive" /></a>
-                        </div>
-                        <!-- Item details -->
-                        <div class="item-details">
-                            <!-- Name -->
-                            <h5><a href="~/Home/SingleItem">Apple One V</a></h5>
-                            <!-- Para. Note more than 2 lines. -->
-                            <p>Coś o produkcie.</p>
-                            <hr />
-                            <!-- Price -->
-                            <div class="item-price pull-left">999zł</div>
-                            <!-- Dodaj do koszyka -->
-                            <div class="pull-right"><a href="#" class="btn btn-danger btn-sm">Dodaj do koszyka</a></div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            </div>
-        </div>
-
-    <!-- Items List ends -->
     <!-- Catchy starts -->
     <div class="catchy blocky">
         <div class="catchy-inner1">
