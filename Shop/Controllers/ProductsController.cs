@@ -196,12 +196,6 @@ namespace Shop.Controllers
             return RedirectToAction("IndexAdmin");
         }
 
-        public PartialViewResult _CategoriesPartial()
-        {
-            var categories = db.Categories;
-            return PartialView(categories);
-        }
-
         // ADMIN Methods
 
         // GET: Products - returns view to product admin page
@@ -271,6 +265,13 @@ namespace Shop.Controllers
                 Price = product.Price,
                 Stock = product.Amount
             } , JsonRequestBehavior.AllowGet);
+        }
+
+        public PartialViewResult _RecentProductsPartial()
+        {
+            var recentProducts = db.Products.OrderByDescending(x => x.AddedDate).Take(8);
+            
+            return PartialView(recentProducts);
         }
 
         protected override void Dispose(bool disposing)

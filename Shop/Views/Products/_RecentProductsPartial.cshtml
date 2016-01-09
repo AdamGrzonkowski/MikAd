@@ -1,0 +1,75 @@
+﻿@using Shop.Model.Helpers
+@model IEnumerable<Shop.Model.Models.Product>
+
+<div class="recent-posts blocky">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Section title -->
+                <div class="section-title">
+                    <h4><i class="fa fa-desktop color"></i> &nbsp;Nowości</h4>
+                </div>
+
+                <div id="item-carousel" class="carousel slide" data-ride="carousel">
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div class="row">
+                            @foreach (var item in Model)
+                            {
+                                // Jeżeli wyświetlone trzy produkty, to przejdź do nowego wiersza
+                                var i = 0;
+                                i++;
+                                if (i % 4 != 0)
+                                {
+
+                                    <div class="item active">
+
+                                        <div class="col-md-3 col-sm-6">
+                                            <!-- single item -->
+                                            <div class="s-item">
+                                                <!-- Image link -->
+                                                @Html.ActionImage("Details", new { id = item.Id }, item.Photo, "Details")
+                                                <!-- portfolio caption -->
+                                                <div class="s-caption">
+                                                    <!-- heading and paragraph -->
+                                                    <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
+                                                    <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="item">
+                                        <div class="col-md-3 col-sm-6">
+                                            <!-- single item -->
+                                            <div class="s-item">
+                                                <!-- Image link -->
+                                                @Html.ActionImage("Details", new { id = item.Id }, item.Photo, "Details")
+                                                <!-- portfolio caption -->
+                                                <div class="s-caption">
+                                                    <!-- heading and paragraph -->
+                                                    <h4>Html.DisplayFor(modelItem => item.Name)</h4>
+                                                    <p>Html.DisplayFor(modelItem => item.Description</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <!-- Controls -->
+                    <a class="left c-control" href="#item-carousel" data-slide="prev">
+                        <i class="fa fa-chevron-left"></i>
+                    </a>
+                    <a class="right c-control" href="#item-carousel" data-slide="next">
+                        <i class="fa fa-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
