@@ -62,10 +62,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201601101220107_Initial.cs" />
-    <Compile Include="Migrations\201601101220107_Initial.Designer.cs">
-      <DependentUpon>201601101220107_Initial.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShopContext.cs" />
@@ -79,11 +75,6 @@
       <Project>{bf480e4d-b041-4dec-ad44-73385e56c1c8}</Project>
       <Name>Shop.Model</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601101220107_Initial.resx">
-      <DependentUpon>201601101220107_Initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

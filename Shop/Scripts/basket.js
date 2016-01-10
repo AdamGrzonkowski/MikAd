@@ -15,6 +15,17 @@ app.controller("BasketController", function ($scope, $http, $localStorage, $sess
         }
         return price;
     };
+
+    $scope.confirmOrder = function () {
+
+        $http({
+            method: "post",
+            url: "/Orders/Confirm",
+            data: $scope.$storage.products
+        }).success(function (data) {
+            console.log("Success POST: " + data);
+        });
+    }
 });
 
 app.controller("OrdersController", function ($scope, $http, $localStorage, $sessionStorage) {
@@ -63,15 +74,5 @@ app.controller("OrdersController", function ($scope, $http, $localStorage, $sess
     $scope.addProductToOrder = function (id, amount) {
         $scope.getProduct(id, amount, $scope.setCurrentProduct).then(function (data, status, headers, config) {
         });
-    }
-
-    $scope.confirmOrder = function() {
-        $http({
-            method: "post",
-            url: "/Orders/Confirm",
-            data: $scope.$storage.products
-        }).success(function(data) {
-            console.log("Success POST: " + data);
-        })
     }
 });
