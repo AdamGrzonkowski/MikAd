@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
 namespace Shop.Model.Models
@@ -22,7 +23,8 @@ namespace Shop.Model.Models
 
         [Display(Name = "Twoje imię")]
         [DataMember]
-        public string AuthorName { get; set; }
+        [NotMapped]
+        public string AuthorName { get { return Author.UserName; } }
 
         [DataMember]
         public int ProductId { get; set; }

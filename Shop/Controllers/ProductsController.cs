@@ -1,32 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
-using System.Web.UI.WebControls;
-using Microsoft.Ajax.Utilities;
-using Microsoft.AspNet.Identity;
 using Shop.Model.Models;
 using Shop.Repository.Repositories;
 using PagedList;
 using Shop.DataEntry;
 using Shop.Model.ViewModels;
-using Shop.Models;
-using Product = Shop.Model.Models.Product;
-using Review = Shop.Model.Models.Review;
 
 namespace Shop.Controllers
 {
     public class ProductsController : Controller
     {
         private ShopContext db = new ShopContext();
-        protected Repository<Shop.Model.Models.Product, int> _repository;
+        protected Repository<Product, int> _repository;
 
         public ProductsController()
         {
