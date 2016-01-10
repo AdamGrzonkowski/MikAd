@@ -62,6 +62,9 @@ namespace Shop.Controllers
         {
             if (ModelState.IsValid)
             {
+                category.AddedDate = DateTime.Now;
+                category.ModifiedDate = DateTime.Now;
+                category.IP = Request.UserHostAddress;
                 db.Categories.Add(category);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
