@@ -138,11 +138,6 @@ namespace Shop.Controllers
             return RedirectToAction("Index");
         }
 
-        public PartialViewResult _CategoriesPartial()
-        {
-            var categories = db.Categories;
-            return PartialView(categories);
-        }
 
         protected override void Dispose(bool disposing)
         {

@@ -48,6 +48,9 @@ namespace Shop.Model.Models
         [Display(Name = "Zdjęcie produktu")]
         public HttpPostedFileBase PhotoUpload { get; set; }
 
+        [Display(Name = "Polecane")]
+        public bool Featured { get; set; }
+
         [DataMember]
         [NotMapped]
         public Dictionary<string, string> Properties

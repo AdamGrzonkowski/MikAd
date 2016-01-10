@@ -9,7 +9,7 @@
                 // Jeżeli wyświetlone trzy produkty, to przejdź do nowego wiersza
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="item">
-                        @if (item.ModifiedDate.Date == DateTime.Today)
+                        @if (item.Featured)
                         {
                             <div class="item-icon"><span>HOT</span></div>
                         }

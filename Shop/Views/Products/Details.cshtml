@@ -46,10 +46,6 @@
                         <h4><strong>@Html.DisplayFor(model => model.Name)</strong></h4>
                         <p><strong>@Html.DisplayNameFor(model => model.Price)</strong> : @Html.DisplayFor(model => model.Price)zł</p>
                         <p><strong>@Html.DisplayNameFor(model => model.Amount)</strong> : @Html.DisplayFor(model => model.Amount)</p>
-                        @foreach (var property in Model.Properties)
-                        {
-                            <p><strong>@property.Key</strong> : @property.Value</p>
-                        }
 
                         <!-- Dodaj do koszyka -->
                         <div class="input-group">
@@ -138,34 +134,14 @@
             <div class="col-md-3 col-md-pull-9">
                 <div class="sidey">
                     @{
-                        Html.RenderAction("_CategoriesPartial","Categories");
+                        Html.RenderAction("_CategoriesPartial","Products");
                     }
                 </div>
 
-                <!-- Sidebar items (featured items)-->
-
-                <div class="sidebar-items">
-
-                    <h5>Polecane</h5>
-
-                    <!-- Item #1 -->
-                    <div class="sitem">
-                        <div class="onethree-left">
-                            <!-- Image -->
-                            <a href=""><img src="" alt="" class="img-responsive" /></a>
-                        </div>
-                        <div class="onethree-right">
-                            <!-- Title -->
-                            <a href="single-item.html">HTC One V</a>
-                            <!-- Para -->
-                            <p>Aenean ullamcorper justo tincidunt justo aliquet.</p>
-                            <!-- Price -->
-                            <p class="bold">$199</p>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-
-                </div>
+                <!-- Sidebar - polecane produkty -->
+                @{
+                    Html.RenderAction("_FeaturedProductsPartial", "Products");
+                }
             </div>
         </div>
     </div>
