@@ -21,11 +21,6 @@ namespace Shop.Model.Models
         [DataMember]
         public Rate Rate { get; set; }
 
-        [Display(Name = "Twoje imię")]
-        [DataMember]
-        [NotMapped]
-        public string AuthorName { get { return Author.UserName; } }
-
         [DataMember]
         public int ProductId { get; set; }
 

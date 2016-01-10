@@ -6,7 +6,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Shop.Model.ViewModels;
-using Shop.Models;
 
 namespace Shop.Controllers
 {

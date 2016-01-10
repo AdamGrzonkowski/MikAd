@@ -23,10 +23,10 @@
             }
             ]
         </dd>
-        <dt>Logowanie z zewnętrznych usług:</dt>
+        <!--<dt>Logowanie z zewnętrznych usług:</dt>
         <dd>
-            @Model.Logins.Count [
-            @Html.ActionLink("Zarządzaj", "ManageLogins") ]
+            @@Model.Logins.Count [
+            @@Html.ActionLink("Zarządzaj", "ManageLogins") ]
         </dd>
         @*
             Phone Numbers can used as a second factor of verification in a two-factor authentication system.
@@ -38,24 +38,26 @@
         *@ 
             <dt>Numer telefonu:</dt>
             <dd>
-                @(Model.PhoneNumber ?? "None") [
-                @if (Model.PhoneNumber != null)
+                @@(Model.PhoneNumber ?? "None") [
+                @@if (Model.PhoneNumber != null)
                 {
-                    @Html.ActionLink("Zmień", "AddPhoneNumber")
-                    @: &nbsp;|&nbsp;
-                    @Html.ActionLink("Usuń", "RemovePhoneNumber")
+                    @@Html.ActionLink("Zmień", "AddPhoneNumber")
+                    @@: &nbsp;|&nbsp;
+                    @@Html.ActionLink("Usuń", "RemovePhoneNumber")
                 }
                 else
                 {
-                    @Html.ActionLink("Dodaj", "AddPhoneNumber")
+                    @@Html.ActionLink("Dodaj", "AddPhoneNumber")
                 }
                 ]
             </dd>
-        
+        -->
             <dt>Zmiana danych:</dt>
-            <dd>
-                @Html.ActionLink("Zmień dane","ChangeData")
-            </dd>
+        <dd>
+            [
+            @Html.ActionLink("Zmień dane", "ChangeData")
+            ]
+        </dd>
         <!--
         <dt>Dwustopniowa weryfikacja:</dt>
         <dd>
