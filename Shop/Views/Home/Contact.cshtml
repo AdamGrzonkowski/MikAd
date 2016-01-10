@@ -1,4 +1,6 @@
-﻿@{
+﻿
+@using System.Net.Mail
+@{
     ViewBag.Title = "Contact";
 }
 <!-- Page content -->
@@ -17,7 +19,7 @@
                 <div class="cwell">
                     <!-- Contact form -->
                     <h5>Formularz kontaktowy</h5>
-
+                   
                     <form role="form">
                         <div class="form-group">
                             <label for="name">Twoje imię</label>
@@ -31,7 +33,7 @@
                             <label for="exampleInputEmail1">Treść</label>
                             <textarea class="form-control" rows="3"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-info">Wyślij</button>
+                        <button type="submit" class="btn btn-success">Wyślij</button>
                         <button type="reset" class="btn btn-default">Wyczyść</button>
                     </form>
 

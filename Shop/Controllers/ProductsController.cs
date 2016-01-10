@@ -1,16 +1,16 @@
-﻿using System;
+﻿using PagedList;
+using Shop.DataEntry;
+using Shop.Model.Models;
+using Shop.Model.ViewModels;
+using Shop.Repository.Repositories;
+using System;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using Shop.Model.Models;
-using Shop.Repository.Repositories;
-using PagedList;
-using Shop.DataEntry;
-using Shop.Model.ViewModels;
 
 namespace Shop.Controllers
 {

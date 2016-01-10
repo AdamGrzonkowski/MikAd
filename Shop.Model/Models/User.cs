@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Shop.Model.Models
 {
@@ -11,24 +12,31 @@ namespace Shop.Model.Models
     public class User : IdentityUser
     {
         [DataMember]
+        [Display(Name = "Imię")]
         public string FirstName { get; set; }
 
         [DataMember]
+        [Display(Name = "Nazwisko")]
         public string LastName { get; set; }
 
         [DataMember]
+        [Display(Name = "Telefon domowy")]
         public string HomeNumber { get; set; }
 
         [DataMember]
+        [Display(Name = "Numer mieszkania")]
         public string FlatNumber { get; set; }
 
         [DataMember]
+        [Display(Name = "Ulica")]
         public string Street { get; set; }
 
         [DataMember]
+        [Display(Name = "Kod pocztowy")]
         public string PostalCode { get; set; }
-
+        
         [DataMember]
+        [Display(Name = "Miasto")]
         public string City { get; set; }
 
         public virtual ICollection<Review> Reviews { get; set; }

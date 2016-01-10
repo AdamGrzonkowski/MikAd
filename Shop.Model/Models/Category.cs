@@ -1,11 +1,9 @@
-﻿using System.Collections;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.Web.WebPages;
-using Newtonsoft.Json;
 
 namespace Shop.Model.Models
 {
@@ -14,11 +12,14 @@ namespace Shop.Model.Models
     {
         
         [DataMember]
+        [Display(Name = "Nazwa kategorii")]
         public string Name { get; set; }
 
         [DataMember]
+        [Display(Name = "Kategoria nadrzędna")]
         public int? BaseCategoryId { get; set; }
 
+        [Display(Name = "Zserializowane cechy produktu")]
         public string JsonProperties { get; set; }
 
         [DataMember]
