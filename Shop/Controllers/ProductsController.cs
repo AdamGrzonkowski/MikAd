@@ -24,6 +24,17 @@ namespace Shop.Controllers
     public class ProductsController : Controller
     {
         private ShopContext db = new ShopContext();
+        protected Repository<Shop.Model.Models.Product, int> _repository;
+
+        public ProductsController()
+        {
+            _repository = new ProductRepository(ShopContext.Create());
+        }
+
+        public ProductRepository Repository
+        {
+            get { return _repository as ProductRepository; }
+        }
 
         // GET: Products
         public async Task<ActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)
@@ -110,12 +121,11 @@ namespace Shop.Controllers
             if (ModelState.IsValid)
             {
                 await AddPhoto(product);
-                product.AddedDate = DateTime.Now;
-                product.ModifiedDate = DateTime.Now;
                 product.IP = Request.UserHostAddress;
-                db.Products.Add(product);
 
-                await db.SaveChangesAsync();
+                _repository.Add(product);
+                _repository.Save();
+
                 return RedirectToAction("IndexAdmin");
             }
 
