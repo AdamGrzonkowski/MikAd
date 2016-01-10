@@ -33,7 +33,7 @@
 <div class="shop-items">
     <div class="container">
 
-        <div class="row">
+        <div class="row" ng-controller="OrdersController">
 
             <div class="col-md-9 col-md-push-3">
 
@@ -73,7 +73,7 @@
                                         <div class="item-price pull-left">@Html.DisplayFor(modelItem => item.Price)</div>
                                         <!-- Dodaj do koszyka -->
                                         <div class="pull-right">
-                                            <a href="#" class="btn btn-danger btn-sm">Dodaj do koszyka</a>
+                                            <button type="button" class="btn btn-danger btn-sm" ng-click="addProductToOrder(@item.Id, 1)">Dodaj do koszyka</button>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
@@ -101,7 +101,7 @@
                                     <div class="item-price pull-left">@Html.DisplayFor(modelItem => item.Price)zł</div>
                                     <!-- Dodaj do koszyka -->
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-danger btn-sm">Dodaj do koszyka</a>
+                                        <button type="button" class="btn btn-danger btn-sm" ng-click="addProductToOrder(@item.Id, 1)">Dodaj do koszyka</button>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>

@@ -23,8 +23,7 @@ namespace Shop.Model.Models
 
         [Display(Name = "Twoje imię")]
         [DataMember]
-        [NotMapped]
-        public string AuthorName { get { return Author.UserName; } }
+        public string AuthorName { get; set; }
 
         [DataMember]
         public int ProductId { get; set; }

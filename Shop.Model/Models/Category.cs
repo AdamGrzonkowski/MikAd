@@ -14,11 +14,14 @@ namespace Shop.Model.Models
     {
         
         [DataMember]
+        [Display(Name = "Nazwa")]
         public string Name { get; set; }
 
         [DataMember]
+        [Display(Name = "Kategoria bazowa")]
         public int? BaseCategoryId { get; set; }
 
+        [Display(Name = "Zserializowane cechy")]
         public string JsonProperties { get; set; }
 
         [DataMember]
