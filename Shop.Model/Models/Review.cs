@@ -1,25 +1,28 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
 namespace Shop.Model.Models
 {
     public enum Rate
     {
-        VeryBad = 1, Bad, Average, Good, VeryGood
+        NieKupować = 1, Kiepski, Przeciętny, Dobry, BardzoDobry
     }
 
     [DataContract]
     public class Review : BaseEntity
     {
-
+        [Display(Name = "Recenzja")]
         [DataMember]
         public string ReviewText { get; set; }
 
-        [DataMember]
-        public DateTime ReviewTime { get; set; }
-
+        [Display(Name = "Ocena")]
         [DataMember]
         public Rate Rate { get; set; }
+
+        [Display(Name = "Twoje imię")]
+        [DataMember]
+        public string AuthorName { get; set; }
 
         [DataMember]
         public int ProductId { get; set; }

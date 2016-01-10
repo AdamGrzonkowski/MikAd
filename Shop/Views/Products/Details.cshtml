@@ -113,48 +113,16 @@
                     @foreach (var item in Model.Reviews)
                     {
                         <div class="item-review">
-                            <h5>@Html.DisplayFor(modelItem => item.Author) - <span class="color">@Html.DisplayFor(modelItem => item.Rate)</span></h5>
+                            <h5>@Html.DisplayFor(modelItem => item.AuthorName) - <span class="color">@Html.DisplayFor(modelItem => item.Rate)</span></h5>
                             <p class="rmeta">@Html.DisplayFor(modelItem => item.AddedDate)</p>
                             <p>@Html.DisplayFor(modelItem => item.ReviewText)</p>
                         </div>
                     }
                     <hr/>
-
-                    <!-- Formularz dodawania recenzji-->
-                    @using (Html.BeginForm("CreateReview", "Products", FormMethod.Post))
-                    {
-                        @Html.AntiForgeryToken()
-                        <h5><strong>Napisz recenzję:</strong></h5>
-                        <hr/>
-                        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="name">Twoje imię</label>
-                                <input type="text" class="form-control" id="name" placeholder="Enter Name">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Twój adres e-mail</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                            </div>
-                            <div class="form-group">
-                                <label for="rating">Ocena</label>
-                                <select class="form-control">
-                                    <option>Ocena</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Recenzja</label>
-                                <textarea class="form-control" rows="3"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-info">Wyślij</button>
-                            <button type="reset" class="btn btn-default">Wyczyść</button>
-                        </form>
+                    @{
+                        Html.RenderAction("_ReviewsPartial");
                     }
+                    <!-- Formularz dodawania recenzji-->
                 </div>
             </div>
         </div>

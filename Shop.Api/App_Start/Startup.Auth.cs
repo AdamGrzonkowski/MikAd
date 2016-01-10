@@ -5,6 +5,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Shop.Api.Providers;
+using Shop.DataEntry;
 using Shop.Model.Models;
 
 namespace Shop.Api

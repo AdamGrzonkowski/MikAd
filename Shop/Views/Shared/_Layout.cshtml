@@ -30,13 +30,6 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="#">
 
-    <!-- Angular.js -->
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <!-- ngStorage-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
-    <!-- Shop basket logic -->
-    <script src="~/Scripts/basket.js"></script>
-
 </head>
 <body ng-app="shop">
     <!-- Koszyk -->
@@ -123,7 +116,9 @@
     @{
         Html.RenderAction("_RecentProductsPartial", "Products");
     }
-    <!-- Recent posts Ends -->
+
+
+<!-- Recent posts Ends -->
 
 <!-- Footer starts -->
     <footer>
@@ -202,6 +197,12 @@
     <script src="~/Scripts/html5shiv.js"></script>
     <!-- Custom JS -->
     <script src="~/Scripts/custom.js"></script>
+    <!-- Angular.js -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <!-- ngStorage-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+    <!-- Shop basket logic -->
+    <script src="~/Scripts/basket.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

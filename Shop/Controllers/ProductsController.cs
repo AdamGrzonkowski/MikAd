@@ -15,14 +15,28 @@ using Microsoft.AspNet.Identity;
 using Shop.Model.Models;
 using Shop.Repository.Repositories;
 using PagedList;
+using Shop.DataEntry;
+using Shop.Model.ViewModels;
 using Shop.Models;
 using Product = Shop.Model.Models.Product;
+using Review = Shop.Model.Models.Review;
 
 namespace Shop.Controllers
 {
     public class ProductsController : Controller
     {
         private ShopContext db = new ShopContext();
+        protected Repository<Shop.Model.Models.Product, int> _repository;
+
+        public ProductsController()
+        {
+            _repository = new ProductRepository(ShopContext.Create());
+        }
+
+        public ProductRepository Repository
+        {
+            get { return _repository as ProductRepository; }
+        }
 
         // GET: Products
         public async Task<ActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)
@@ -109,12 +123,11 @@ namespace Shop.Controllers
             if (ModelState.IsValid)
             {
                 await AddPhoto(product);
-                product.AddedDate = DateTime.Now;
-                product.ModifiedDate = DateTime.Now;
                 product.IP = Request.UserHostAddress;
-                db.Products.Add(product);
 
-                await db.SaveChangesAsync();
+                _repository.Add(product);
+                _repository.Save();
+
                 return RedirectToAction("IndexAdmin");
             }
 
@@ -158,7 +171,7 @@ namespace Shop.Controllers
 
                 db.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexAdmin");
 
             }
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", product.CategoryId);
@@ -277,11 +290,19 @@ namespace Shop.Controllers
             return PartialView(recentProducts);
         }
 
+
         public PartialViewResult _MainPageProductsPartial()
         {
-            var recentProducts = db.Products.OrderByDescending(x => x.ModifiedDate).Take(4);
+            var recentProducts = db.Products.OrderByDescending(x => x.ModifiedDate).Take(3);
 
             return PartialView(recentProducts);
+        }
+
+        public PartialViewResult _ReviewsPartial()
+        {
+            var reviews = new Review();
+
+            return PartialView(reviews);
         }
 
         protected override void Dispose(bool disposing)

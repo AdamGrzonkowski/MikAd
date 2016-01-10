@@ -7,9 +7,9 @@
     <div class="kart-links">
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Manage"})
+            @Html.ActionLink("Cześć " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Manage"})
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a></li>
         <li><a data-toggle="modal" href="#shoppingcart"><i class="fa fa-shopping-cart"></i></a></li>
     </ul>
         </div>

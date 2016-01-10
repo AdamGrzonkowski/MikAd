@@ -1,16 +1,13 @@
 using System.Collections.Generic;
-using System.Data.Entity.Core.Common.CommandTrees;
+using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Shop.DataEntry;
 using Shop.Model.Models;
 
-
-namespace Shop.Model.Migrations
+namespace Shop.DataEntry.Migrations
 {
-    using System.Data.Entity.Migrations;
-
     public sealed class Configuration : DbMigrationsConfiguration<ShopContext>
     {
         public Configuration()

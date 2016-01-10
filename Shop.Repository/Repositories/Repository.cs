@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Shop.Model.Models;
 using Shop.Repository.Interfaces;
 
@@ -40,14 +42,17 @@ namespace Shop.Repository.Repositories
         public void Add(TEntity entity)
         {
             entity.AddedDate = DateTime.Now;
+            entity.ModifiedDate = DateTime.Now;
             Context.Set<TEntity>().Add(entity);
         }
+
 
         public void AddRange(IEnumerable<TEntity> entities)
         {
             foreach (var entity in entities)
             {
                 entity.AddedDate = DateTime.Now;
+                entity.ModifiedDate = DateTime.Now;
             }
             Context.Set<TEntity>().AddRange(entities);
         }

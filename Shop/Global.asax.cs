@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Shop.Model.Migrations;
+using Shop.DataEntry.Migrations;
 
 namespace Shop
 {

@@ -137,4 +137,7 @@
     <value>MikAd</value>
     <comment>Nazwa sklepu, wyświetlana na logo.</comment>
   </data>
+  <data name="ChangePasswordViewModel_NewPassword" xml:space="preserve">
+    <value>{0} musi mieć długość co najmniej {2} znaków.</value>
+  </data>
 </root>

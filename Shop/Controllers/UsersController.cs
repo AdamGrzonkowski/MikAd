@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Shop.DataEntry;
 using Shop.Model.Models;
 
 namespace Shop.Controllers

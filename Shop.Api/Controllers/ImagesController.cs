@@ -2,6 +2,7 @@
 using System.Web.Http;
 using Shop.Api.Classes;
 using Shop.Api.Models;
+using Shop.DataEntry;
 using Shop.Model.Models;
 using Shop.Repository.Repositories;
 

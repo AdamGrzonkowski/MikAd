@@ -4,6 +4,7 @@ using Shop.Repository.Repositories;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Shop.DataEntry;
 using Shop.Model.Models;
 
 namespace Shop.Api.Classes

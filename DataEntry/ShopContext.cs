@@ -1,7 +1,8 @@
 ﻿using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Shop.Model.Models;
 
-namespace Shop.Model.Models
+namespace Shop.DataEntry
 {
     public class ShopContext : IdentityDbContext<User>
     {
@@ -30,7 +31,7 @@ namespace Shop.Model.Models
             modelBuilder.Entity<Review>()
                 .HasRequired(x => x.Product)
                 .WithMany(x => x.Reviews)
-                .HasForeignKey(x => x.ProductId);
+                .HasForeignKey(x => x.ProductId); 
             modelBuilder.Entity<Review>()
                 .HasRequired(x => x.Author)
                 .WithMany(x => x.Reviews)
