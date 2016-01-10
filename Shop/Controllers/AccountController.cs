@@ -199,6 +199,7 @@ namespace Shop.Controllers
             if (ModelState.IsValid)
             {
                 var user = new User { UserName = model.UserName, Email = model.Email, PhoneNumber = model.PhoneNumber, FirstName = model.FirstName, LastName = model.LastName, FlatNumber = model.FlatNumber, HomeNumber = model.HomeNumber, Street = model.Street, PostalCode = model.PostalCode, City = model.City };
+               // var user = new User {UserName = model.UserName, Email = model.Email};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -318,8 +319,6 @@ namespace Shop.Controllers
                 // Nie ujawniaj, że użytkownik nie istnieje.
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
-            var hashedPassword = new PasswordHasher();
-            model.Password = hashedPassword.HashPassword(model.Password);
 
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)

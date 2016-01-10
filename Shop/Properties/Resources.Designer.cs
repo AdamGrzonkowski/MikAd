@@ -61,6 +61,15 @@ namespace Shop.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} musi mieć długość co najmniej {2} znaków..
+        /// </summary>
+        internal static string ChangePasswordViewModel_NewPassword {
+            get {
+                return ResourceManager.GetString("ChangePasswordViewModel_NewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Jakaś instrukcja do sklicenia..
         /// </summary>
         internal static string FooterInstrukcja {
