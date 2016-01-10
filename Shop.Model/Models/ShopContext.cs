@@ -30,7 +30,7 @@ namespace Shop.Model.Models
             modelBuilder.Entity<Review>()
                 .HasRequired(x => x.Product)
                 .WithMany(x => x.Reviews)
-                .HasForeignKey(x => x.ProductId);
+                .HasForeignKey(x => x.ProductId); 
             modelBuilder.Entity<Review>()
                 .HasRequired(x => x.Author)
                 .WithMany(x => x.Reviews)
