@@ -2,9 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
-using Shop.Properties;
 
-namespace Shop.Models
+namespace Shop.Model.ViewModels
 {
     public class IndexViewModel
     {
@@ -94,7 +93,7 @@ namespace Shop.Models
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessageResourceType = typeof (Resources), ErrorMessageResourceName = "ChangePasswordViewModel_NewPassword", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} musi mieć co najmniej {2} znaków.", MinimumLength = 6)] 
         [DataType(DataType.Password)]
         [Display(Name = "Nowe hasło")]
         public string NewPassword { get; set; }
