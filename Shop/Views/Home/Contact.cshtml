@@ -19,23 +19,23 @@
                 <div class="cwell">
                     <!-- Contact form -->
                     <h5>Formularz kontaktowy</h5>
-                   
-                    <form role="form">
-                        <div class="form-group">
-                            <label for="name">Twoje imię</label>
-                            <input type="text" class="form-control" id="name" placeholder="Wpisz imię">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Adres mailowy</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Wpisz email">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Treść</label>
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-success">Wyślij</button>
-                        <button type="reset" class="btn btn-default">Wyczyść</button>
-                    </form>
+                    <!-- Search bar-->
+                    @using (Html.BeginForm("SubmitContactForm", "Home", FormMethod.Post))
+                    {
+                        <h3>
+                            <div class="form-group">
+                                @Html.TextBox("msgTitle", ViewBag.msgTitle as string, new {@placeholder = "Tytuł wiadomości", @class="form-control"})
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBox("msgEmailAddress", ViewBag.msgEmailAddress as string, new { @placeholder = "Email", @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextArea("msgBody", ViewBag.msgBody as string, new {@placeholder = "Treść wiadomości", @class="form-control", @rows = 3})
+                            </div>
+                            <button type="submit" class="btn btn-success">Wyślij</button>
+                            <button type="reset" class="btn btn-default">Wyczyść</button>
+                        </h3>
+                    }
 
                 </div>
             </div>
