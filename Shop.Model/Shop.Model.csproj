@@ -128,14 +128,12 @@
   <ItemGroup>
     <Compile Include="Helpers\MigrationHelper.cs" />
     <Compile Include="Helpers\ProductHelper.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Review.cs" />
-    <Compile Include="Models\ShopContext.cs" />
     <Compile Include="Models\Detail.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\BaseEntity.cs" />

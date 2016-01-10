@@ -1,7 +1,8 @@
 ﻿using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Shop.Model.Models;
 
-namespace Shop.Model.Models
+namespace Shop.DataEntry
 {
     public class ShopContext : IdentityDbContext<User>
     {

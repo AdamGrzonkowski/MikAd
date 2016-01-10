@@ -15,6 +15,7 @@ using Microsoft.AspNet.Identity;
 using Shop.Model.Models;
 using Shop.Repository.Repositories;
 using PagedList;
+using Shop.DataEntry;
 using Shop.Model.ViewModels;
 using Shop.Models;
 using Product = Shop.Model.Models.Product;

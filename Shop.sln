@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Api", "Shop.Api\Shop.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Repository", "Shop.Repository\Shop.Repository.csproj", "{E6CCE1F4-7824-458B-8840-22E10E9B12BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataEntry", "DataEntry\DataEntry.csproj", "{70FE23D7-5EE1-42D0-8364-EDECC15E158C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.DataEntry", "DataEntry\Shop.DataEntry.csproj", "{70FE23D7-5EE1-42D0-8364-EDECC15E158C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

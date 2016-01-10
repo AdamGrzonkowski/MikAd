@@ -76,6 +76,10 @@
     <Compile Include="Repositories\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataEntry\Shop.DataEntry.csproj">
+      <Project>{70FE23D7-5EE1-42D0-8364-EDECC15E158C}</Project>
+      <Name>Shop.DataEntry</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shop.Model\Shop.Model.csproj">
       <Project>{bf480e4d-b041-4dec-ad44-73385e56c1c8}</Project>
       <Name>Shop.Model</Name>

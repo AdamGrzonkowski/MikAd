@@ -8,6 +8,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Shop.Model.Models;
 using System.Configuration;
+using Shop.DataEntry;
 
 namespace Shop
 {

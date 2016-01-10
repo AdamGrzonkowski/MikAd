@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
 using Microsoft.AspNet.Identity;
+using Shop.DataEntry;
 using Shop.Model.Models;
 using Review = Shop.Model.Models.Review;
 

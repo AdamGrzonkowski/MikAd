@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using Shop.DataEntry;
 using Shop.Model.Models;
 using Shop.Repository.Interfaces;
 
