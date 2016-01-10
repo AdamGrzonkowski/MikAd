@@ -38,7 +38,6 @@ app.controller("BasketController", function ($scope, $http, $localStorage, $sess
     }
 
     $scope.incrementProduct = function (id) {
-        console.log("dodawanie jednego produktu");
         var i = $scope.isProductInBasket(id);
         if (i >= 0) {
             if ($scope.$storage.products[i].Amount < $scope.$storage.products[i].Stock) {
@@ -48,15 +47,20 @@ app.controller("BasketController", function ($scope, $http, $localStorage, $sess
     }
 
     $scope.decrementProduct = function (id) {
-        console.log("usuwanie jednego produktu");
         var i = $scope.isProductInBasket(id);
         if (i >= 0) {
             $scope.$storage.products[i].Amount -= 1;
 
-            if ($scope.$storage.products[i].Amount < 1) {
-                $scope.$storage.products = $scope.$storage.products.splice(i, 1);
+            if ($scope.$storage.products[i].Amount <= 0) {
+                $scope.$storage.products.splice(i, 1);
             }
         }
+    }
+
+    $scope.clearBasket = function() {
+        $scope.$storage.$reset({
+            products: []
+        });
     }
 });
 
@@ -114,7 +118,7 @@ app.controller("OrdersController", function ($scope, $http, $localStorage, $sess
             $scope.$storage.products[i].Amount -= amount;
 
             if ($scope.$storage.products[i].Amount < 1) {
-                $scope.$storage.products = $scope.$storage.products.splice(i, 1);
+                $scope.$storage.products.splice(i, 1);
             }
         }
     }
