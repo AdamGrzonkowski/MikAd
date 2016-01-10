@@ -1,6 +1,6 @@
 ﻿var app = angular.module("shop", ["ngStorage"]);
 
-var productsUrl = "http://localhost:59583/products/data/";
+var productsUrl = "/products/data/";
 
 app.controller("BasketController", function ($scope, $http, $localStorage, $sessionStorage) {
 
@@ -35,8 +35,6 @@ app.controller("OrdersController", function ($scope, $http, $localStorage, $sess
     }
 
     $scope.getProduct = function (id, amount) {
-        console.log("amount type: " + typeof amount);
-        console.log("id type: " + typeof id);
         return $http({
             method: "get",
             url: productsUrl + id
@@ -65,5 +63,15 @@ app.controller("OrdersController", function ($scope, $http, $localStorage, $sess
     $scope.addProductToOrder = function (id, amount) {
         $scope.getProduct(id, amount, $scope.setCurrentProduct).then(function (data, status, headers, config) {
         });
+    }
+
+    $scope.confirmOrder = function() {
+        $http({
+            method: "post",
+            url: "/Orders/Confirm",
+            data: $scope.$storage.products
+        }).success(function(data) {
+            console.log("Success POST: " + data);
+        })
     }
 });

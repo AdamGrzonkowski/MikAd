@@ -214,6 +214,7 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -382,7 +383,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+<<<<<<< HEAD
     <Folder Include="Views\Reviews\" />
+=======
+    <Folder Include="Views\Default\" />
+    <Folder Include="Views\Orders\" />
+>>>>>>> 6a870627d4a0e7059352a1e5b23200719ed8e1e0
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
