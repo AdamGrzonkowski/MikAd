@@ -227,45 +227,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Shop.Api\Account.cs" />
-    <Compile Include="Shop.Api\AccountExtensions.cs" />
-    <Compile Include="Shop.Api\Categories.cs" />
-    <Compile Include="Shop.Api\CategoriesExtensions.cs" />
-    <Compile Include="Shop.Api\IAccount.cs" />
-    <Compile Include="Shop.Api\ICategories.cs" />
-    <Compile Include="Shop.Api\IImages.cs" />
-    <Compile Include="Shop.Api\Images.cs" />
-    <Compile Include="Shop.Api\ImagesExtensions.cs" />
-    <Compile Include="Shop.Api\IOrders.cs" />
-    <Compile Include="Shop.Api\IProducts.cs" />
-    <Compile Include="Shop.Api\IShopApi.cs" />
-    <Compile Include="Shop.Api\Models\AddExternalLoginBindingModel.cs" />
-    <Compile Include="Shop.Api\Models\Category.cs" />
-    <Compile Include="Shop.Api\Models\CategoryCollection.cs" />
-    <Compile Include="Shop.Api\Models\ChangePasswordBindingModel.cs" />
-    <Compile Include="Shop.Api\Models\ExternalLoginViewModel.cs" />
-    <Compile Include="Shop.Api\Models\ExternalLoginViewModelCollection.cs" />
-    <Compile Include="Shop.Api\Models\Image.cs" />
-    <Compile Include="Shop.Api\Models\ImageCollection.cs" />
-    <Compile Include="Shop.Api\Models\ImageViewModel.cs" />
-    <Compile Include="Shop.Api\Models\ManageInfoViewModel.cs" />
-    <Compile Include="Shop.Api\Models\OrderViewModel.cs" />
-    <Compile Include="Shop.Api\Models\Product.cs" />
-    <Compile Include="Shop.Api\Models\ProductCollection.cs" />
-    <Compile Include="Shop.Api\Models\RegisterBindingModel.cs" />
-    <Compile Include="Shop.Api\Models\RegisterExternalBindingModel.cs" />
-    <Compile Include="Shop.Api\Models\RemoveLoginBindingModel.cs" />
-    <Compile Include="Shop.Api\Models\Review.cs" />
-    <Compile Include="Shop.Api\Models\SetPasswordBindingModel.cs" />
-    <Compile Include="Shop.Api\Models\UserInfoViewModel.cs" />
-    <Compile Include="Shop.Api\Models\UserLoginInfoViewModel.cs" />
-    <Compile Include="Shop.Api\Orders.cs" />
-    <Compile Include="Shop.Api\OrdersExtensions.cs" />
-    <Compile Include="Shop.Api\Products.cs" />
-    <Compile Include="Shop.Api\ProductsExtensions.cs" />
-    <Compile Include="Shop.Api\ShopApi.cs" />
-    <Compile Include="Shop.Api\ShopApiAppServiceExtensions.cs" />
-    <Compile Include="Shop.Api\ShopApiExtensions.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -376,7 +337,6 @@
     <Content Include="Views\Products\Create.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
-    <Content Include="swagger.json" />
     <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Products\IndexAdmin.cshtml" />
     <Content Include="Views\Categories\Create.cshtml" />

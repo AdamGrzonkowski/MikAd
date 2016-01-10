@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Web.Http;
 using System.Web.Mvc;
 using Shop.Model.ViewModels;
-using Shop.Models;
 
 namespace Shop.Controllers
 {
