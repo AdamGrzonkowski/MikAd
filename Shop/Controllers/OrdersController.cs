@@ -1,5 +1,9 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Shop.DataEntry;
 using Shop.Helpers;
@@ -62,6 +66,90 @@ namespace Shop.Controllers
             orderRepository.Save();
             OrdersHelpers.SendOrderConfirmation(order);
             return Json(order);
+        }
+
+        [Authorize(Roles = "admin")]
+        public async Task<ActionResult> Index()
+        {
+            return View(await context.Orders.ToListAsync());
+        }
+
+        // GET: Categories/Details/5
+        [Authorize(Roles = "admin")]
+        public async Task<ActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Order order = await context.Orders.FindAsync(id);
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
+            return View(order);
+        }
+
+        // GET: Categories/Edit/5
+        [Authorize(Roles = "admin")]
+        public async Task<ActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Order order = await context.Orders.FindAsync(id);
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
+            return View(order);
+        }
+
+        // POST: Categories/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                context.Entry(order).State = EntityState.Modified;
+                order.ModifiedDate = DateTime.Now;
+                await context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(order);
+        }
+
+        // GET: Categories/Delete/5
+        [Authorize(Roles = "admin")]
+        public async Task<ActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Order order = await context.Orders.FindAsync(id);
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
+            return View(order);
+        }
+
+        // POST: Categories/Delete/5
+        [Authorize(Roles = "admin")]
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(int id)
+        {
+            Order order = await context.Orders.FindAsync(id);
+            context.Orders.Remove(order);
+            await context.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
 
 
