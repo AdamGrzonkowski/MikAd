@@ -23,18 +23,12 @@
     </table>
 
     <h2>Wybierz formę dostawy</h2>
-    <ul>
-        @foreach (var consignment in Model)
-        {
-            <p><input type="radio" name="consignmentChoice" ng-click="setConsignment()" ng-model="consignment" value="{ Id: @consignment.Id, Cost: @consignment.Cost}"/>@consignment.Name <br/>
-                Cena: <strong>@consignment.Cost</strong> złotych
-            </p>
-        }
-    </ul>
+    <p ng-repeat="cons in $storage.consignments track by $index">
+        <input type="radio" name="consignmentChoice" ng-model="consignment" value="{{cons.Id}}"/>{{cons.Name}}<br/>
+        Cena: <strong>{{cons.Cost}}</strong> złotych
+    </p>
     {{consignment}}
-    {{consignmentId}}
-    {{consignmentCost}}
-    <h2><strong>Całkowita kwota zamówienia: {{getTotalPrice() + consignment.Cost}} zł</strong></h2>
+    <h2><strong>Całkowita kwota zamówienia: {{getTotalPrice() + getShippingPrice(consignment)}} zł</strong></h2>
     <p>Dodatkowe uwagi dotyczące zamówienia</p>
     <p><textarea rows="5" cols="80" id="notes" ng_model="notes"></textarea></p>
 

@@ -61,9 +61,14 @@ namespace Shop.Controllers
             }
             orderRepository.Save();
             OrdersHelpers.SendOrderConfirmation(order);
-            return Json(order);
+            return Json(order.Id);
         }
 
+        public ActionResult Finish(int id)
+        {
+            var order = new OrderRepository(ShopContext.Create()).Get(id);
+            return View(order);
+        }
 
     }
 }

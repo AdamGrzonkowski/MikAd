@@ -5,18 +5,23 @@ var productsUrl = "/products/data/";
 app.controller("BasketController", function ($scope, $http, $localStorage, $sessionStorage) {
 
     $scope.$storage = $sessionStorage.$default({
-        products: []
+        products: [],
+        consignments : []
     });
 
-    $scope.consignment = { Id: 0, Cost: 0 };
-    $scope.consignmentId = 0;
-    $scope.consignmentCost = 0;
+    $scope.consignment = 0;
 
-    $scope.setConsignment = function() {
-        var cons = JSON.parse($scope.consignment);
-        alert(cons, cons.Id, cons.Cost);
-        $scope.consignmentId = cons.Id;
-        $scope.consignmentCost = cons.Cost;
+    $scope.getConsignments = function() {
+        $http({
+            method: "get",
+            url: "/consignments/data"
+        }).success(function(data, status, headers, config) {
+            $scope.$storage.consignments = data;
+        });
+    }
+
+    $scope.getShippingPrice = function (index) {
+        return 0 || $scope.$storage.consignments[index].Cost;
     }
 
     $scope.isProductInBasket = function (id) {
@@ -38,14 +43,14 @@ app.controller("BasketController", function ($scope, $http, $localStorage, $sess
     };
 
     $scope.createOrder = function () {
-
         $http({
             method: "post",
             url: "/Orders/Create",
-            data: { Basket: $scope.$storage.products, Notes: $scope.Notes, Consignment: $scope.consignmentId }
+            data: { Basket: $scope.$storage.products, Notes: $scope.Notes, Consignment: 1 }
         }).success(function (data) {
             console.log(data);
             $scope.clearBasket();
+            window.location.href = '/Order/Finish/' + data;
         });
     }
 
@@ -74,6 +79,8 @@ app.controller("BasketController", function ($scope, $http, $localStorage, $sess
             products: []
         });
     }
+
+    $scope.getConsignments();
 });
 
 app.controller("OrdersController", function ($scope, $http, $localStorage, $sessionStorage) {
