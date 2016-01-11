@@ -373,5 +373,21 @@ namespace Shop.Controllers
 
 
         #endregion
+
+        public async Task<ActionResult> DetailsAdmin(int? id)
+        {
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Product product = await db.Products.FindAsync(id);
+                if (product == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(product);
+            }
+        }
     }
 }

@@ -21,6 +21,10 @@ namespace Shop.Model.Models
         [DataMember]
         public Rate Rate { get; set; }
 
+        [Display(Name= "Twój nick")]
+        [DataMember]
+        public string AuthorName { get; set; }
+
         [DataMember]
         public int ProductId { get; set; }
 

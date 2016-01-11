@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -18,7 +19,6 @@ namespace Shop.Controllers
     public class ReviewsController : Controller
     {
         private ShopContext db = new ShopContext();
-        private ProductsController product = new ProductsController();
 
         public async Task<ActionResult> CreateReview(Review review)
         {
@@ -31,10 +31,11 @@ namespace Shop.Controllers
                 review.AuthorId = User.Identity.GetUserId();
                 review.ProductId = Convert.ToInt32(Request.UrlReferrer.PathAndQuery.Split('/').Last());
                 db.Reviews.Add(review);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
            
             return Redirect(Request.UrlReferrer.PathAndQuery);
         }
+
     }
 }
