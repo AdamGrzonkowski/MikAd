@@ -307,31 +307,6 @@ namespace Shop.Controllers
 
         #region Helpers
 
-        private async Task<string> SendOrderConfirmationAsync()
-        {
-            var msg = new MailMessage();
-            msg.To.Add("adam.grzonkowski@wp.pl");
-            
-            msg.Subject = "Potwierdzenie zamówienie nr -> wstawić nr zamówienia <- ";
-            msg.Body = "<h3>Drogi -> username <- </h3>" +
-                       "<p>Dziękujemy za zakupy w sklepie MikAd! </br>" +
-                       "Zakupiłeś następujące przedmioty -> wylistować przedmioty <- </p>" +
-                       "<p>Wpłaty za zakupy dokonaj na konto:</p>" +
-                       "<small>00 1111 2222 3333 4444 5555 6666 </br>" +
-                       "Tytuł przelewu: ->> wstawić numer zamówienia <-- </br>" +
-                       "Sklep MikAd, ul. Grudziądzka 5, 87-100 Toruń </small></br>" +
-                       "<p>Dziękujemy za zakupy, </br>" +
-                       "Sklep MikAd</p>";
-            msg.IsBodyHtml = true;
-            
-
-            var smtpClient = new SmtpClient();
-            smtpClient.Send(msg);
-
-            var callbackUrl = Url.Action("IndexAdmin", "Products");
-            return callbackUrl;
-        }
-
         private async Task<string> AddPhoto(Product productWithoutPhoto)
         {
             var validTypes = new[] { "image/jpeg", "image/pjpeg", "image/png", "image/gif" };

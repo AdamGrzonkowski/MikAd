@@ -4,9 +4,9 @@ using Shop.Repository.Interfaces;
 
 namespace Shop.Repository.Repositories
 {
-    public class OrderRepository : Repository<Order, int>, IOrderRepository
+    public class ConsignmentRepository : Repository<Consignment, int>, IConsignmentRepository
     {
-        public OrderRepository(ShopContext context) : base(context)
+        public ConsignmentRepository(ShopContext context) : base(context)
         {
         }
 

@@ -13,6 +13,7 @@ namespace Shop.DataEntry
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
+        public virtual DbSet<Consignment> Consignments { get; set; }
 
 
         public ShopContext()
@@ -64,7 +65,10 @@ namespace Shop.DataEntry
             modelBuilder.Entity<Order>()
                 .HasOptional(x => x.Payment)
                 .WithRequired(x => x.Order);
-
+            modelBuilder.Entity<Order>()
+                .HasRequired(x => x.Consignment)
+                .WithMany(x => x.Orders)
+                .HasForeignKey(x => x.ConsignmentId);
         }
 
         public static ShopContext Create()

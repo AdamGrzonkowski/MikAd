@@ -9,5 +9,6 @@ namespace Shop.Model.ViewModels
     {
         public List<ProductViewModel> Basket { get; set; }
         public string Notes { get; set; }
+        public int Consignment { get; set; }
     }
 }

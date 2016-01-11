@@ -8,6 +8,17 @@ app.controller("BasketController", function ($scope, $http, $localStorage, $sess
         products: []
     });
 
+    $scope.consignment = { Id: 0, Cost: 0 };
+    $scope.consignmentId = 0;
+    $scope.consignmentCost = 0;
+
+    $scope.setConsignment = function() {
+        var cons = JSON.parse($scope.consignment);
+        alert(cons, cons.Id, cons.Cost);
+        $scope.consignmentId = cons.Id;
+        $scope.consignmentCost = cons.Cost;
+    }
+
     $scope.isProductInBasket = function (id) {
         // jeśli produkt jest w bazie, zwraca jego indeks, w innym wypadku -1.
         for (var i in $scope.$storage.products) {
@@ -31,9 +42,10 @@ app.controller("BasketController", function ($scope, $http, $localStorage, $sess
         $http({
             method: "post",
             url: "/Orders/Create",
-            data: { Basket: $scope.$storage.products, Notes: $scope.Notes }
+            data: { Basket: $scope.$storage.products, Notes: $scope.Notes, Consignment: $scope.consignmentId }
         }).success(function (data) {
-            console.log("Success POST: " + data);
+            console.log(data);
+            $scope.clearBasket();
         });
     }
 

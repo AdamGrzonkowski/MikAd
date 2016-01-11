@@ -17,6 +17,9 @@ namespace Shop.Model.Models
         public int PaymentId { get; set; }
 
         [DataMember]
+        public int ConsignmentId { get; set; }
+
+        [DataMember]
         [NotMapped]
         public decimal TotalPrice {
             get
@@ -24,6 +27,9 @@ namespace Shop.Model.Models
                 return Details.Sum(detail => detail.Product.Price*detail.Amount);
             }
         }
+
+        [NotMapped]
+        public decimal PriceWithConsignment { get { return TotalPrice + Consignment.Cost; } }
 
         [DataMember]
         [NotMapped]
@@ -50,7 +56,10 @@ namespace Shop.Model.Models
 
         public User User { get; set; }
 
+        public Consignment Consignment { get; set; }
+
         [DataMember]
         public virtual ICollection<Detail> Details { get; set; }
+
     }
 }

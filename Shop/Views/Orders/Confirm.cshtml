@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Shop.Model.Models.Consignment>
 @{
     ViewBag.Title = "Podsumowanie zamówienia";
 }
@@ -21,10 +21,23 @@
         </tr>
         </tbody>
     </table>
-    <h3><strong>Całkowita kwota zamówienia: {{getTotalPrice()}} zł</strong></h3>
+
+    <h2>Wybierz formę dostawy</h2>
+    <ul>
+        @foreach (var consignment in Model)
+        {
+            <p><input type="radio" name="consignmentChoice" ng-click="setConsignment()" ng-model="consignment" value="{ Id: @consignment.Id, Cost: @consignment.Cost}"/>@consignment.Name <br/>
+                Cena: <strong>@consignment.Cost</strong> złotych
+            </p>
+        }
+    </ul>
+    {{consignment}}
+    {{consignmentId}}
+    {{consignmentCost}}
+    <h2><strong>Całkowita kwota zamówienia: {{getTotalPrice() + consignment.Cost}} zł</strong></h2>
     <p>Dodatkowe uwagi dotyczące zamówienia</p>
     <p><textarea rows="5" cols="80" id="notes" ng_model="notes"></textarea></p>
 
-    <button type="button" class="btn btn-success" ng-click="createOrder()">Złóż zamówienie</button>
+    <button type="button" class="btn btn-success" ng-click="createOrder()" ng-disabled="consignmentType == 0">Złóż zamówienie</button>
     <a class="btn btn-danger" href="/products" >Wróć do listy produktów</a>
 </div>

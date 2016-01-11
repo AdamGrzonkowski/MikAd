@@ -1,8 +1,8 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using Shop.DataEntry;
+using Shop.Helpers;
 using Shop.Model.Models;
 using Shop.Model.ViewModels;
 using Shop.Repository.Repositories;
@@ -11,26 +11,38 @@ namespace Shop.Controllers
 {
     public class OrdersController : Controller
     {
+        private ShopContext context;
+
+        public OrdersController()
+        {
+            context = ShopContext.Create();
+        }
+
         [Authorize]
         public ActionResult Confirm()
         {
-            return View();
+            var consignmentRepository = new ConsignmentRepository(context);
+            var consignments = consignmentRepository.GetAll();
+            return View(consignments);
         }
 
         [Authorize]
         [HttpPost]
         public ActionResult Create(OrderViewModel _order)
         {
-            var context = ShopContext.Create();
             var user = context.Users.SingleOrDefault(x => x.UserName == User.Identity.Name);
             var orderRepository = new OrderRepository(context);
             var detailRepository = new DetailRepository(context);
             var productRepository = new ProductRepository(context);
+            var consignmentRepository = new ConsignmentRepository(context);
+
+            var consignment = consignmentRepository.Get(_order.Consignment);
             var order = new Order
             {
                 User = user,
                 IP = Request.UserHostAddress,
                 Notes = _order.Notes,
+                Consignment = consignment
             };
             orderRepository.Add(order);
             Debug.WriteLine("order: " + order.AddedDate + " " + order.ModifiedDate);
@@ -48,7 +60,10 @@ namespace Shop.Controllers
                 Debug.WriteLine("detail: " + detail.AddedDate + " " + detail.ModifiedDate);
             }
             orderRepository.Save();
-            return Json("Utworzono zamówienie");
+            OrdersHelpers.SendOrderConfirmation(order);
+            return Json(order);
         }
+
+
     }
 }
