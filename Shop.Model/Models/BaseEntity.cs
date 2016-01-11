@@ -13,10 +13,10 @@ namespace Shop.Model.Models
         public int Id { get; set; }
 
         [Display(Name = "Data dodania")]
-        public DateTime AddedDate { get; set; }
+        public DateTime? AddedDate { get; set; }
 
         [Display(Name = "Data modyfikacji")]
-        public DateTime ModifiedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
 
         public string IP { get; set; } 
     }

@@ -27,7 +27,7 @@ namespace Shop.Model.Models
 
         [DataMember]
         [NotMapped]
-        public DateTime OrderDate { get { return AddedDate; } }
+        public DateTime? OrderDate { get { return AddedDate; } }
 
         [DataMember]
         public DateTime SendDate { get; set; }

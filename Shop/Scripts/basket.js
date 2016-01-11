@@ -26,12 +26,12 @@ app.controller("BasketController", function ($scope, $http, $localStorage, $sess
         return price;
     };
 
-    $scope.confirmOrder = function () {
+    $scope.createOrder = function () {
 
         $http({
             method: "post",
-            url: "/Orders/Confirm",
-            data: $scope.$storage.products
+            url: "/Orders/Create",
+            data: { Basket: $scope.$storage.products, Notes: $scope.Notes }
         }).success(function (data) {
             console.log("Success POST: " + data);
         });
@@ -70,6 +70,7 @@ app.controller("OrdersController", function ($scope, $http, $localStorage, $sess
         products: []
     });
     $scope.message = "";
+    $scope.notes = "";
 
     $scope.isProductInBasket = function (id) {
         // jeśli produkt jest w bazie, zwraca jego indeks, w innym wypadku -1.

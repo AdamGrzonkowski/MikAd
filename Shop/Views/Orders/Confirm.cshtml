@@ -1,10 +1,30 @@
 ﻿
 @{
-    ViewBag.Title = "Confirm";
+    ViewBag.Title = "Podsumowanie zamówienia";
 }
 
-<h2>Potwierdź zamówienie</h2>
-
 <div ng-controller="BasketController">
-    
+    <h2>Podsumowanie zamówienia</h2>
+    <table class="table table-hover table-striped">
+        <thead>
+        <tr>
+            <th>Nazwa produktu</th>
+            <th>Ilość</th>
+            <th>Cena (za sztukę)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="product in $storage.products">
+            <td><a href="/products/details/{{product.Id}}">{{product.Name}}</a></td>
+            <td>{{product.Amount}}</td>
+            <td>{{product.Price}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <h3><strong>Całkowita kwota zamówienia: {{getTotalPrice()}} zł</strong></h3>
+    <p>Dodatkowe uwagi dotyczące zamówienia</p>
+    <p><textarea rows="5" cols="80" id="notes" ng_model="notes"></textarea></p>
+
+    <button type="button" class="btn btn-success" ng-click="createOrder()">Złóż zamówienie</button>
+    <a class="btn btn-danger" href="/products" >Wróć do listy produktów</a>
 </div>

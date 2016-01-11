@@ -14,7 +14,7 @@
                         <tr>
                             <th>Nazwa</th>
                             <th>Ilość</th>
-                            <th>Cena</th>
+                            <th>Cena (za sztukę)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,7 +30,7 @@
                 <strong>Cena całkowita:</strong> {{getTotalPrice()}}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" ng-click="clearBasket()">Wyczyść koszyk</button>
+                <button type="button" class="btn btn-warning" ng-click="clearBasket()">Wyczyść koszyk</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Kontynuuj zakupy</button>
                 <a class="btn btn-info" href="/orders/confirm">Przejdź do podsumowania</a>
             </div>
