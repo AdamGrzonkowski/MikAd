@@ -30,7 +30,7 @@ namespace Shop.Model.Models
         public DateTime? OrderDate { get { return AddedDate; } }
 
         [DataMember]
-        public DateTime SendDate { get; set; }
+        public DateTime? SendDate { get; set; }
 
         [DataMember]
         [NotMapped]
@@ -40,7 +40,8 @@ namespace Shop.Model.Models
         public bool IsReadyToSend { get; set; }
 
         [DataMember]
-        public bool IsSent { get; set; }
+        [NotMapped]
+        public bool IsSent { get { return SendDate != null; } }
 
         [DataMember]
         public string Notes { get; set; }
