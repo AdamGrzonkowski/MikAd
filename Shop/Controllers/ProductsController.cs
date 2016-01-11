@@ -1,16 +1,17 @@
-﻿using System;
+﻿using PagedList;
+using Shop.DataEntry;
+using Shop.Model.Models;
+using Shop.Model.ViewModels;
+using Shop.Repository.Repositories;
+using System;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using Shop.Model.Models;
-using Shop.Repository.Repositories;
-using PagedList;
-using Shop.DataEntry;
-using Shop.Model.ViewModels;
+using PagedList.Mvc;
 
 namespace Shop.Controllers
 {
@@ -75,9 +76,10 @@ namespace Shop.Controllers
                     break;
             }
 
-            int pageSize = 12;
+            int pageSize = 9;         
             int pageNumber = (page ?? 1);
-            return View(products.ToPagedList(pageNumber, pageSize));
+
+            return View(products.ToPagedList(pageNumber,pageSize));
         }
 
         // GET: Products/Details/5
@@ -289,11 +291,24 @@ namespace Shop.Controllers
             return PartialView(recentProducts);
         }
 
+        public PartialViewResult _FeaturedProductsPartial()
+        {
+            var featuredProducts = db.Products.Where(x => x.Featured).OrderByDescending(x => x.ModifiedDate).Take(4);
+
+            return PartialView(featuredProducts);
+        }
+
         public PartialViewResult _ReviewsPartial()
         {
             var reviews = new Review();
 
             return PartialView(reviews);
+        }
+
+        public PartialViewResult _CategoriesPartial()
+        {
+            var categories = db.Categories;
+            return PartialView(categories);
         }
 
         protected override void Dispose(bool disposing)
@@ -331,6 +346,23 @@ namespace Shop.Controllers
             return productWithoutPhoto.Photo;
         }
 
+
         #endregion
+
+        public async Task<ActionResult> DetailsAdmin(int? id)
+        {
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Product product = await db.Products.FindAsync(id);
+                if (product == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(product);
+            }
+        }
     }
 }

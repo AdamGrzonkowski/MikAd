@@ -479,12 +479,20 @@ namespace Shop.Controllers
 
         //
         // GET: /Account/ExternalLoginFailure
+        /// <summary>
+        /// Odpowiada za zwrócenie widoku zewnętrznego serwisu logowania
+        /// </summary>
+        /// <returns>Widok błędu loginu zewnętrznego</returns>
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {
             return View();
         }
 
+        /// <summary>
+        /// Niszczy wszystkie zasoby obiektu
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -525,6 +533,11 @@ namespace Shop.Controllers
             }
         }
 
+        /// <summary>
+        /// Metoda odpowiadająca za powrót do danego widoku
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <returns>Zwraca widok głównej strony</returns>
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
@@ -563,6 +576,12 @@ namespace Shop.Controllers
             }
         }
 
+        /// <summary>
+        /// Wysyła maila z potwierdzeniem rejestracji
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="subject"></param>
+        /// <returns>Widok</returns>
         private async Task<string> SendEmailConfirmationTokenAsync(string userID, string subject)
         {
             string code = await UserManager.GenerateEmailConfirmationTokenAsync(userID);

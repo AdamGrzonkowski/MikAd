@@ -5,11 +5,11 @@
     Layout = "~/Views/AdminPanel/_LayoutAdminPanel.cshtml";
 }
 
-<h2>Delete</h2>
+<h2>Usuwanie</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Jesteś pewien, że chcesz usunąć tą kategorię?</h3>
 <div>
-    <h4>Category</h4>
+    <h4>Kategoria</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -66,8 +66,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Usuń" class="btn btn-warning" /> |
+            @Html.ActionLink("Wróć do listy kategorii", "Index")
         </div>
     }
 </div>

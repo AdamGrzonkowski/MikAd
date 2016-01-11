@@ -1,4 +1,6 @@
-﻿@using Shop.Model.Models
+﻿@using Microsoft.AspNet.Identity
+@using Shop.Controllers
+@using Shop.Model.Models
 @using Shop.Repository.Repositories
 @model Shop.Model.Models.Product
 
@@ -17,151 +19,132 @@
 <div class="shop-items">
     <div class="container">
         <div class="row">
-        <div class="col-md-9 col-md-push-3">
+            <div class="col-md-9 col-md-push-3">
 
-            <!-- Breadcrumb -->
-            <ul class="breadcrumb">
-                <li>@Html.ActionLink("MikAd", "Index", "Home") <span class="divider"></span></li>
-                <li> @Html.ActionLink("Produkty", "Index")<span class="divider"></span></li>
-                <li>
-                    @Html.ActionLink(Model.Category.Name, "Index", new {currentFilter = Model.Category.Name})
-                </li>
-                <li class="active">
-                    @Model.Name
-                </li>
-            </ul>
+                <!-- Breadcrumb -->
+                <ul class="breadcrumb">
+                    <li>@Html.ActionLink("MikAd", "Index", "Home") <span class="divider"></span></li>
+                    <li> @Html.ActionLink("Produkty", "Index")<span class="divider"></span></li>
+                    <li>
+                        @Html.ActionLink(Model.Category.Name, "Index", new { currentFilter = Model.Category.Name })
+                    </li>
+                    <li class="active">
+                        @Model.Name
+                    </li>
+                </ul>
 
-            <div class="single-item" ng-controller="OrdersController">
-                <div class="row">
-                    <div class="col-md-4 col-xs-5">
+                <div class="single-item" ng-controller="OrdersController">
+                    <div class="row">
+                        <div class="col-md-4 col-xs-5">
 
-                        <div class="item-image">
-                            <img src="@Url.Content(Model.Photo)" alt="ProductImage" style="float: left"/>
+                            <div class="item-image">
+                                <img src="@Url.Content(Model.Photo)" alt="ProductImage" style="float: left" />
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Tytuł i podstawowe info -->
-                    <div class="col-md-5 col-xs-7">
-                        <h4><strong>@Html.DisplayFor(model => model.Name)</strong></h4>
-                        <p><strong>@Html.DisplayNameFor(model => model.Price)</strong> : @Html.DisplayFor(model => model.Price)zł</p>
-                        <p><strong>@Html.DisplayNameFor(model => model.Amount)</strong> : @Html.DisplayFor(model => model.Amount)</p>
-                        @foreach (var property in Model.Properties)
-                        {
-                            <p><strong>@property.Key</strong> : @property.Value</p>
-                        }
+                        <!-- Tytuł i podstawowe info -->
+                        <div class="col-md-5 col-xs-7">
+                            <h4><strong>@Html.DisplayFor(model => model.Name)</strong></h4>
+                            <p><strong>@Html.DisplayNameFor(model => model.Price)</strong> : @Html.DisplayFor(model => model.Price)zł</p>
+                            <p><strong>@Html.DisplayNameFor(model => model.Amount)</strong> : @Html.DisplayFor(model => model.Amount)</p>
 
-                        <!-- Dodaj do koszyka -->
-                        <div class="input-group">
-                            <strong>{{message}}</strong>
-                            <input type="number" class="form-control" placeholder="Ile?" min="1" ng-init="amount = 1" ng-model="amount">
-                            <span class="input-group-btn">
+                            <!-- Dodaj do koszyka -->
+                            <div class="input-group">
+                                <strong>{{message}}</strong>
+                                <input type="number" class="form-control" placeholder="Ile?" min="1" ng-init="amount = 1" ng-model="amount">
+                                <span class="input-group-btn">
                                     <button class="btn btn-info" type="button" target="_self" ng-disabled="" ng-click="addProductToOrder(@Model.Id, amount)">Kup</button>
                                 </span>
-                        </div>
+                            </div>
 
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Opis, parametry, recenzje -->
+                <ul id="myTab" class="nav nav-tabs">
+                    <!-- Use uniqe name for "href" in below anchor tags -->
+                    <li class="active"><a href="#tab1" data-toggle="tab">Opis</a></li>
+                    <li><a href="#tab2" data-toggle="tab">Szczegóły</a></li>
+                    <li><a href="#tab3" data-toggle="tab">Recenzje</a></li>
+                </ul>
+
+                <!-- Zawartość taba -->
+                <div id="myTabContent" class="tab-content">
+                    <!-- Opis -->
+                    <div class="tab-pane fade in active" id="tab1">
+                        <h5><strong>@Html.DisplayFor(model => model.Name)</strong></h5>
+                        <p>
+                            @Html.DisplayFor(model => model.Description)
+                        </p>
+                    </div>
+
+                    <!-- Parametry -->
+                    <div class="tab-pane fade" id="tab2">
+
+                        <h5><strong>Parametry:</strong></h5>
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <td><strong>@Html.DisplayNameFor(model => model.Name)</strong></td>
+                                    <td>@Html.DisplayFor(model => model.Name)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>@Html.DisplayNameFor(model => model.Producer)</strong></td>
+                                    <td>@Html.DisplayFor(model => model.Producer)</td>
+                                </tr>
+                                @foreach (var property in Model.Properties)
+                                {
+                                    <tr>
+                                        <td><strong>@property.Key</strong></td>
+                                        <td>@property.Value</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    <!-- Recenzje -->
+                    <div class="tab-pane fade" id="tab3">
+                        <h5><strong>Recenzje :</strong></h5>
+                        <hr />
+                        @foreach (var item in Model.Reviews)
+                        {
+                            <div class="item-review">
+                                <h5>@Html.DisplayFor(modelItem => item.AuthorName) - <span class="color">@Html.DisplayFor(modelItem => item.Rate)</span></h5>
+                                <p class="rmeta">@Html.DisplayFor(modelItem => item.AddedDate)</p>
+                                <p>@Html.DisplayFor(modelItem => item.ReviewText)</p>
+                            </div>
+                        }
+                        <hr />
+                        @if (Request.IsAuthenticated)
+                        {
+                            Html.RenderAction("_ReviewsPartial");
+                        }
+                        else
+                        {
+                            <div>@Html.ActionLink("Zaloguj się", "Login", "Account"),  aby móc dodawać recenzje.</div>
+                        }
+                        <!-- Formularz dodawania recenzji-->
                     </div>
                 </div>
             </div>
-
-            <!-- Opis, parametry, recenzje -->
-            <ul id="myTab" class="nav nav-tabs">
-                <!-- Use uniqe name for "href" in below anchor tags -->
-                <li class="active"><a href="#tab1" data-toggle="tab">Opis</a></li>
-                <li><a href="#tab2" data-toggle="tab">Szczegóły</a></li>
-                <li><a href="#tab3" data-toggle="tab">Recenzje</a></li>
-            </ul>
-
-            <!-- Zawartość taba -->
-            <div id="myTabContent" class="tab-content">
-                <!-- Opis -->
-                <div class="tab-pane fade in active" id="tab1">
-                    <h5><strong>@Html.DisplayFor(model => model.Name)</strong></h5>
-                    <p>
-                    </p>
-                </div>
-
-                <!-- Parametry -->
-                <div class="tab-pane fade" id="tab2">
-
-                    <h5><strong>Parametry:</strong></h5>
-                    <table class="table table-striped">
-                        <tbody>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.Name)</strong></td>
-                            <td>@Html.DisplayFor(model => model.Name)</td>
-                        </tr>
-                            <tr>
-                                <td><strong>@Html.DisplayNameFor(model => model.Producer)</strong></td>
-                                <td>@Html.DisplayFor(model => model.Producer)</td>
-                            </tr>
-                        @foreach (var property in Model.Properties)
-                        {
-                            <tr>
-                                <td><strong>@property.Key</strong></td>
-                                <td>@property.Value</td>
-                            </tr>
-                        }
-                        </tbody>
-                    </table>
-
-                </div>
-
-                <!-- Recenzje -->
-                <div class="tab-pane fade" id="tab3">
-                    <h5><strong>Recenzje :</strong></h5>
-                    <hr/>
-                    @foreach (var item in Model.Reviews)
-                    {
-                        <div class="item-review">
-                            <h5>@Html.DisplayFor(modelItem => item.AuthorName) - <span class="color">@Html.DisplayFor(modelItem => item.Rate)</span></h5>
-                            <p class="rmeta">@Html.DisplayFor(modelItem => item.AddedDate)</p>
-                            <p>@Html.DisplayFor(modelItem => item.ReviewText)</p>
-                        </div>
-                    }
-                    <hr/>
-                    @{
-                        Html.RenderAction("_ReviewsPartial");
-                    }
-                    <!-- Formularz dodawania recenzji-->
-                </div>
-            </div>
-        </div>
 
             <!-- Menu kategorii-->
             <div class="col-md-3 col-md-pull-9">
                 <div class="sidey">
                     @{
-                        Html.RenderAction("_CategoriesPartial","Categories");
+                        Html.RenderAction("_CategoriesPartial", "Products");
                     }
                 </div>
 
-                <!-- Sidebar items (featured items)-->
-
-                <div class="sidebar-items">
-
-                    <h5>Polecane</h5>
-
-                    <!-- Item #1 -->
-                    <div class="sitem">
-                        <div class="onethree-left">
-                            <!-- Image -->
-                            <a href=""><img src="" alt="" class="img-responsive" /></a>
-                        </div>
-                        <div class="onethree-right">
-                            <!-- Title -->
-                            <a href="single-item.html">HTC One V</a>
-                            <!-- Para -->
-                            <p>Aenean ullamcorper justo tincidunt justo aliquet.</p>
-                            <!-- Price -->
-                            <p class="bold">$199</p>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-
-                </div>
+                <!-- Sidebar - polecane produkty -->
+                @{
+                    Html.RenderAction("_FeaturedProductsPartial", "Products");
+                }
             </div>
         </div>
     </div>
-        <div class="sep-bor"></div>
+    <div class="sep-bor"></div>
 </div>
-

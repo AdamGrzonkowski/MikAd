@@ -1,0 +1,28 @@
+﻿@using Shop.Model.Helpers
+@model System.Linq.IQueryable<Shop.Model.Models.Product>
+
+<!-- Sidebar items (featured items)-->
+
+<div class="sidebar-items">
+
+    <h5>Polecane produkty</h5>
+    @foreach (var item in Model)
+    {   
+    <!-- Item #1 -->
+    <div class="sitem">
+        <div class="onethree-left">
+            <!-- Image -->
+            @Html.ActionImage("Details", new { id = item.Id }, item.Photo, "Details")
+        </div>
+        <div class="onethree-right">
+            <!-- Title -->
+            @Html.ActionLink(item.Name, "Details", new { id = item.Id })
+            <!-- Para -->
+            <p class="featuredDescription">@Html.DisplayFor(modelItem => item.Description)</p>
+            <!-- Price -->
+            <p class="bold">@Html.DisplayFor(modelItem => item.Price)zł</p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    }
+</div>

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Web.Http.Cors;
-using Shop.Api.Classes;
+﻿using Shop.Api.Classes;
 using Shop.DataEntry;
 using Shop.Model.Models;
 using Shop.Repository.Repositories;
+using System.Collections.Generic;
+using System.Web.Http.Cors;
 
 namespace Shop.Api.Controllers
 {

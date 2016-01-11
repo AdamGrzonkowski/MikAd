@@ -21,7 +21,7 @@ namespace Shop.Model.Models
         [DataMember]
         public Rate Rate { get; set; }
 
-        [Display(Name = "Twoje imię")]
+        [Display(Name= "Twój nick")]
         [DataMember]
         public string AuthorName { get; set; }
 

@@ -70,25 +70,25 @@
                                         </li>
                                     }
                                 }
-                                
+
                                 <li>
                                     @Html.ActionLink("SKLEP", "Index", "Products")
                                 </li>
+                                @if (Request.IsAuthenticated)
+                                    {
+                                        <li>
+                                            <a href="#" rel="ddsubmenu1">Konto</a>
+                                            <ul id="ddsubmenu1" class="ddsubmenustyle">
+                                                <li>@Html.ActionLink("Moje konto", "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Manage"})</li>
+                                                <li><a href="#">Płatności</a></li>
+                                                <li><a href="#">Historia zamówień</a></li>
+                                            </ul>
+                                        </li>
+                                    }
                                 <li>
-                                    <a href="#" rel="ddsubmenu1">Konto</a>
-                                    <ul id="ddsubmenu1" class="ddsubmenustyle">
-                                        <li><a href="#">Moje konto</a></li>
-                                        <li><a href="#">Zobacz koszyk</a></li>
-                                        <li><a href="#">Płać</a></li>
-                                        <li><a href="#">Historia zamówień</a></li>
-                                        <li><a href="#">Edytuj profil</a></li>
-                                        <li><a href="#">Potwierdzenie</a></li>
-                                    </ul>
+                                   @Html.ActionLink("FAQ", "FAQ", "Home", routeValues: null, htmlAttributes: new {title = "FAQ"})
                                 </li>
-                                <li>
-                                    <a href="faq.html">FAQ</a>
-                                </li>
-                                <li><a href="~/Home/Contact">Kontakt</a></li>
+                                <li>@Html.ActionLink("Kontakt", "Contact", "Home", routeValues: null, htmlAttributes: new { title = "FAQ" })</li>
                             </ul>
                         </div>
                     </div>
@@ -131,7 +131,7 @@
 
                         <h4>O Nas</h4>
                         <hr />
-                        <p>O Nas</p>
+                        <p>MikAd powstało w celach nauki programowania w .NET / C# w ramach przedmiotu Pracownia Programowania Zespołowego.</p>
 
                         <div class="social">
                             <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
@@ -145,7 +145,7 @@
                         <h4>Instrukcja</h4>
                         <hr />
                         <div class="instruction">
-                        <p>Istrukcja</p>
+                        <p>Tutaj pojawi się jakaś krótka instrukcja dla użytkownika albo listing tagów produktów, gdy już się pojawią.</p>
                         </div>
                     </div>
                 </div>

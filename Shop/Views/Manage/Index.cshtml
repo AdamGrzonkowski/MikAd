@@ -1,32 +1,56 @@
-﻿@model Shop.Model.ViewModels.IndexViewModel
+﻿@using Microsoft.AspNet.Identity
+@model Shop.Model.ViewModels.IndexViewModel
 @{
     ViewBag.Title = "Zarządzanie profilem";
 }
 
-<h2>@ViewBag.Title.</h2>
 
-<p class="text-success">@ViewBag.StatusMessage</p>
+<!-- Tytuł -->
+<div class="page-title">
+    <div class="container">
+        <h2><i class="fa fa-desktop color"></i> Moje konto <small>zarządzaj swoim kontem </small></h2>
+        <hr />
+    </div>
+</div>
+<div class="account-content">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="sidey">
+                    <ul class="nav">
+                        <li>@Html.ActionLink("Zmień hasło", "ChangePassword")</li>
+                        <li>@Html.ActionLink("Zmień dane", "ChangeData")</li>
+                        <li><a href="">Historia zamówień</a></li>
+                        <li><a href="">Płatności</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <h3><i class="fa fa-user color"></i> &nbsp;Nazwa użytkownika</h3>
+                <!-- Detale -->
+                <div class="address">
+                    <address>
+                        <!-- Imię -->
+                        <strong>@User.Identity.Name </strong><br>
+                    </address>
+                </div>
+
+                <hr />
+            </div>
+        </div>
+
+        <div class="sep-bor"></div>
+    </div>
+</div>
+
 <div>
-    <h4>Zmień ustawienia swojego konta</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>Hasło:</dt>
+        <!--<dt>Logowanie z zewnętrznych usług:</dt>
         <dd>
-            [
-            @if (Model.HasPassword)
-            {
-                @Html.ActionLink("Zmień hasło", "ChangePassword")
-            }
-            else
-            {
-                @Html.ActionLink("Create", "SetPassword")
-            }
-            ]
-        </dd>
-        <dt>Logowanie z zewnętrznych usług:</dt>
-        <dd>
-            @Model.Logins.Count [
-            @Html.ActionLink("Zarządzaj", "ManageLogins") ]
+            @@Model.Logins.Count [
+            @@Html.ActionLink("Zarządzaj", "ManageLogins") ]
         </dd>
         @*
             Phone Numbers can used as a second factor of verification in a two-factor authentication system.
@@ -38,24 +62,20 @@
         *@ 
             <dt>Numer telefonu:</dt>
             <dd>
-                @(Model.PhoneNumber ?? "None") [
-                @if (Model.PhoneNumber != null)
+                @@(Model.PhoneNumber ?? "None") [
+                @@if (Model.PhoneNumber != null)
                 {
-                    @Html.ActionLink("Zmień", "AddPhoneNumber")
-                    @: &nbsp;|&nbsp;
-                    @Html.ActionLink("Usuń", "RemovePhoneNumber")
+                    @@Html.ActionLink("Zmień", "AddPhoneNumber")
+                    @@: &nbsp;|&nbsp;
+                    @@Html.ActionLink("Usuń", "RemovePhoneNumber")
                 }
                 else
                 {
-                    @Html.ActionLink("Dodaj", "AddPhoneNumber")
+                    @@Html.ActionLink("Dodaj", "AddPhoneNumber")
                 }
                 ]
             </dd>
-        
-            <dt>Zmiana danych:</dt>
-            <dd>
-                @Html.ActionLink("Zmień dane","ChangeData")
-            </dd>
+        -->
         <!--
         <dt>Dwustopniowa weryfikacja:</dt>
         <dd>
