@@ -70,25 +70,25 @@
                                         </li>
                                     }
                                 }
-                                
+
                                 <li>
                                     @Html.ActionLink("SKLEP", "Index", "Products")
                                 </li>
+                                @if (Request.IsAuthenticated)
+                                    {
+                                        <li>
+                                            <a href="#" rel="ddsubmenu1">Konto</a>
+                                            <ul id="ddsubmenu1" class="ddsubmenustyle">
+                                                <li>@Html.ActionLink("Moje konto", "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Manage"})</li>
+                                                <li><a href="#">Płatności</a></li>
+                                                <li><a href="#">Historia zamówień</a></li>
+                                            </ul>
+                                        </li>
+                                    }
                                 <li>
-                                    <a href="#" rel="ddsubmenu1">Konto</a>
-                                    <ul id="ddsubmenu1" class="ddsubmenustyle">
-                                        <li><a href="#">Moje konto</a></li>
-                                        <li><a href="#">Zobacz koszyk</a></li>
-                                        <li><a href="#">Płać</a></li>
-                                        <li><a href="#">Historia zamówień</a></li>
-                                        <li><a href="#">Edytuj profil</a></li>
-                                        <li><a href="#">Potwierdzenie</a></li>
-                                    </ul>
+                                   @Html.ActionLink("FAQ", "FAQ", "Home", routeValues: null, htmlAttributes: new {title = "FAQ"})
                                 </li>
-                                <li>
-                                    <a href="~/Home/FAQ">FAQ</a>
-                                </li>
-                                <li><a href="~/Home/Contact">Kontakt</a></li>
+                                <li>@Html.ActionLink("Kontakt", "Contact", "Home", routeValues: null, htmlAttributes: new { title = "FAQ" })</li>
                             </ul>
                         </div>
                     </div>
