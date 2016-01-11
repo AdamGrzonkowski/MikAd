@@ -378,6 +378,10 @@
     <Content Include="Views\Products\Delete.cshtml" />
     <Content Include="Views\Products\DetailsAdmin.cshtml" />
     <Content Include="Views\Orders\Finish.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
     <None Include="Views\Products\_CategoriesPartial.cshtml" />
     <Content Include="Views\Users\Create.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />

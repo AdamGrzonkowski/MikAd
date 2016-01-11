@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
 namespace Shop.Model.Models
@@ -10,9 +11,11 @@ namespace Shop.Model.Models
         [DataMember]
         public int OrderId { get; set; }
 
+        [Display(Name = "Data zapłaty")]
         [DataMember]
         public DateTime Date { get; set; }
 
+        [Display(Name = "Kwota zapłaty")]
         [DataMember]
         public Decimal Amount { get; set; }
 
