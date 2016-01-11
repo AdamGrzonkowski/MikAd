@@ -21,6 +21,9 @@ namespace Shop.Helpers
                        "<p>Dziękujemy za zakupy w sklepie MikAd! </br>" +
                        "Zakupiłeś następujące przedmioty: </p>" + 
                        orders +
+                       $"<p>Forma wysyłki: {order.Consignment.Name}</p>" +
+                       $"<p>Koszt wysyłki: {order.Consignment.Cost}</p>" +
+                       $"<p>Całkowita opłata za zamówienie: {order.PriceWithConsignment}</p>" +
                        "<p>Wpłaty za zakupy dokonaj na konto:</p>" +
                        "<small>00 1111 2222 3333 4444 5555 6666 </br>" +
                        $"Tytuł przelewu: {order.User.UserName} zamówienie nr {order.Id} </br>" +

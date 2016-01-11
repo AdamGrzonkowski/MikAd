@@ -10,6 +10,7 @@ app.controller("BasketController", function ($scope, $http, $localStorage, $sess
     });
 
     $scope.consignment = 0;
+    $scope.Notes = "";
 
     $scope.getConsignments = function() {
         $http({
@@ -50,7 +51,7 @@ app.controller("BasketController", function ($scope, $http, $localStorage, $sess
         }).success(function (data) {
             console.log(data);
             $scope.clearBasket();
-            window.location.href = '/Order/Finish/' + data;
+            window.location.href = '/Orders/Finish/';
         });
     }
 

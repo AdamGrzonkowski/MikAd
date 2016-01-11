@@ -64,10 +64,9 @@ namespace Shop.Controllers
             return Json(order.Id);
         }
 
-        public ActionResult Finish(int id)
+        public ActionResult Finish()
         {
-            var order = new OrderRepository(ShopContext.Create()).Get(id);
-            return View(order);
+            return View();
         }
 
     }

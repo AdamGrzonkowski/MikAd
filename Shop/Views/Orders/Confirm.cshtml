@@ -30,7 +30,7 @@
     {{consignment}}
     <h2><strong>Całkowita kwota zamówienia: {{getTotalPrice() + getShippingPrice(consignment)}} zł</strong></h2>
     <p>Dodatkowe uwagi dotyczące zamówienia</p>
-    <p><textarea rows="5" cols="80" id="notes" ng_model="notes"></textarea></p>
+    <p><textarea rows="5" cols="80" id="notes" ng_model="Notes"></textarea></p>
 
     <button type="button" class="btn btn-success" ng-click="createOrder()" ng-disabled="consignmentType == 0">Złóż zamówienie</button>
     <a class="btn btn-danger" href="/products" >Wróć do listy produktów</a>
